@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AtlasWarriorsGame;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static AtlasWarriorsGame.Dungeon;
@@ -28,6 +29,23 @@ namespace UiCommon
                     return '#';
                 default:
                     return 'X';
+            }
+        }
+
+
+        /// <summary>
+        /// Get the character to display a particular actor
+        /// </summary>
+        /// <param name="Actor"></param>
+        /// <returns></returns>
+        public static char ActorToChar(Actor Actor)
+        {
+            switch (Actor.SpriteId)
+            {
+                case "PLAYER":
+                    return '@';
+                default:
+                    return '?';
             }
         }
     }

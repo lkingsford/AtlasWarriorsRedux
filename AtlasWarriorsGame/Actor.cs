@@ -18,12 +18,18 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// ID for the sake of front end. Dunno if this is a good idea.
+        /// </summary>
+        public virtual String SpriteId { get {return "ACTOR";}}
+
+        /// <summary>
         /// Create Actor on given level
         /// </summary>
         /// <param name="Dungeon">Dungeon where actor is</param>
         public Actor(Dungeon Dungeon)
         {
             this.Dungeon = Dungeon;
+            Dungeon.Actors.Add(this);
             this.Location = Dungeon.StartLocation;
         }
 

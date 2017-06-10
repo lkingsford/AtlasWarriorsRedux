@@ -21,6 +21,7 @@ namespace AtlasWarriorsGame
         public Dungeon(int Width, int Height, Func<Dungeon, bool> Generator = null)
         {
             TileMap = new DungeonCell[Width, Height];
+            Actors = new List<Actor>();
             // Invoke generator, unless it's null which use default
             (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
         }

@@ -16,6 +16,7 @@ namespace AtlasWarriorsGame
         public Game()
         {
             _dungeon = new Dungeon(40, 20); 
+            Player = new Player(_dungeon);
         }
 
         /// <summary>
@@ -23,6 +24,11 @@ namespace AtlasWarriorsGame
         /// The dungeon
         /// </summary>
         Dungeon _dungeon;
+
+        /// <summary>
+        /// Main player of the game
+        /// </summary>
+        Player Player;
 
         /// <summary>
         /// Current dungeon being played

@@ -14,11 +14,18 @@ namespace AtlasWarriorsGame
         /// Constructor with initial dungeon
         /// </summary>
         /// <param name="Dungeon"></param>
-        public Player(Dungeon Dungeon)
+        public Player(Dungeon Dungeon) : base(Dungeon)
         {
-            this.Dungeon = Dungeon;
         }
-              
+
+        public override string SpriteId
+        {
+            get
+            {
+                return "PLAYER";
+            }
+        }
+
         /// <summary>
         /// Act, per NextMove
         /// </summary>

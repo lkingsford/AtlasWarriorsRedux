@@ -68,6 +68,9 @@ namespace GLGameApp
         {
             AppSpriteBatch.Begin();
 
+            // Get list of character locations not to draw
+            var actorLocations = G.CurrentDungeon.Actors.Select(i=>i.Location);
+
             // Draw map
             for (var ix = 0; ix < G.CurrentDungeon.Width; ++ix)
             {
@@ -75,11 +78,25 @@ namespace GLGameApp
                 {
                     // Tile to draw
                     var currentcell = G.CurrentDungeon.GetCell(new XY(ix, iy));
-                    var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                    var location = new Vector2 (ix * TileWidth, iy * TileHeight);
-                    var color = Color.White;
-                    AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
+                    if (!actorLocations.Any(i=>(i.X==ix) && (i.Y == iy)))
+                    {
+                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
+                        var location = new Vector2 (ix * TileWidth, iy * TileHeight);
+                        var color = Color.White;
+                        AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
+                    }
                 }
+            }
+
+            // Draw characters
+            foreach (var actor in G.CurrentDungeon.Actors)
+            {
+                // Tile to draw
+                var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
+                var location = new Vector2 (actor.Location.X * TileWidth,
+                    actor.Location.Y * TileHeight);
+                var color = Color.White;
+                AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
             }
 
             AppSpriteBatch.End();
