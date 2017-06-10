@@ -115,5 +115,10 @@ namespace AtlasWarriorsGame
         /// Where the player starts on this dungeon
         /// </summary>
         public XY StartLocation;
+
+        /// <summary>
+        /// All Actors, currently in this dungeon
+        /// </summary>
+        public List<Actor> Actors;
     }
 }

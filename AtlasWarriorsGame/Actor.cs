@@ -28,9 +28,17 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Act
+        /// </summary>
+        public virtual void DoTurn()
+        {
+
+        }
+
+        /// <summary>
         /// Dungeon which actor is in
         /// </summary>
-        public Dungeon Dungeon { get; private set; }
+        public Dungeon Dungeon { get; protected set; }
 
         /// <summary>
         /// Current location of the actor

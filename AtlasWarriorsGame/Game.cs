@@ -34,5 +34,16 @@ namespace AtlasWarriorsGame
                 return _dungeon;
             }
         }
+
+        /// <summary>
+        /// Do a turn in the game
+        /// </summary>
+        public void DoTurn()
+        {
+            foreach (var Actor in CurrentDungeon.Actors)
+            {
+                Actor.DoTurn();
+            }
+        }
     }
 }
