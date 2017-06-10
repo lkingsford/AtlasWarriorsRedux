@@ -48,5 +48,14 @@ namespace AtlasWarriorsGame
                 return _Y;
             }
         }
+
+        /// <summary>
+        /// Return coordinates as a string
+        /// </summary>
+        /// <returns>(X, Y)</returns>
+        public override string ToString()
+        {
+            return $"({X}, {Y})";
+        }
     }
 }

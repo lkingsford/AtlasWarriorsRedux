@@ -11,26 +11,42 @@ namespace AtlasWarriorsGame.Tests
     public class XYTests
     {
         /// <summary>
-        /// Data for Basic Constructor
+        /// Valid Points, with String Versions
         /// </summary>
-        static List<Tuple<int, int>> BasicConstructorData = new List<Tuple<int, int>>()
+        static object[] ValidPoints =
         {
-            new Tuple<int, int>(-1,-1),
-            new Tuple<int, int>(0,-1),
-            new Tuple<int, int>(100, 0),
-            new Tuple<int, int>(0, 0),
-            new Tuple<int, int>(100, 50)
+            new object[] {-1,-1, "(-1, -1)"},
+            new object[] {0,-1, "(0, -1)" },
+            new object[] {100, 0, "(100, 0)"},
+            new object[] {0, 0, "(0, 0)"},
+            new object[] {100, 50, "(100, 50)"}
         };
 
-        //[TestCase, TestCaseData("BasicConstructorData")]
+        /// <summary>
+        /// Test that basic constructor sets x/y correctly
+        /// </summary>
+        /// <param name="X">X coord</param>
+        /// <param name="Y">Y coord</param>
+        /// <param name="ToStringResult">Unused</param>
         [Test]
-        [TestCaseSource("BasicConstructorData")]
-        public void BasicConstructor(Tuple<int, int> TestXY)
+        [TestCaseSource("ValidPoints")]
+        public void BasicConstructor(int X, int Y, string ToStringResult)
         {
-            var xy = new  AtlasWarriorsGame.XY(TestXY.Item1, TestXY.Item2);
-            Assert.AreEqual(xy.X, TestXY.Item1, "X not set correctly");
-            Assert.AreEqual(xy.Y, TestXY.Item2, "Y not set correctly");
+            var xy = new  AtlasWarriorsGame.XY(X, Y);
+            Assert.AreEqual(xy.X, X, "X not set correctly");
+            Assert.AreEqual(xy.Y, Y, "Y not set correctly");
         }
 
+        /// <summary>
+        /// Test that XY.ToString() returns "(X, Y)"
+        /// </summary>
+        /// <param name="TestXY">XY to test</param>
+        /// <param name="TestXYString">Correct string of XY</param>
+        [Test]
+        [TestCaseSource("ValidPoints")]
+        public void ToStringTest(int X, int Y, string ToStringResult)
+        {
+            Assert.AreEqual(new XY(X, Y).ToString(), ToStringResult);
+        }
     }
 }
