@@ -3,16 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasWarriors", "AtlasWarriors\AtlasWarriors.csproj", "{76F18773-F8F7-4049-8724-A3F94A29425C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLGameApp", "AtlasWarriors\GLGameApp.csproj", "{76F18773-F8F7-4049-8724-A3F94A29425C}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AtlasWarriorsGame", "AtlasWarriorsGame\AtlasWarriorsGame.shproj", "{1D57A419-D529-4578-9672-662B4537BB1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasWarriorsGame.Tests", "AtlasWarriorsGame.Tests\AtlasWarriorsGame.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UICommon", "AtlasWarriorsUiCommon\UICommon.shproj", "{84879023-EFED-4195-BEBB-5C728F9F0D5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AB54F48-7B05-4353-9286-2CA797B1F14A}"
+	ProjectSection(SolutionItems) = preProject
+		LICENCE.md = LICENCE.md
+		Projects.md = Projects.md
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
+		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{84879023-efed-4195-bebb-5c728f9f0d5a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
