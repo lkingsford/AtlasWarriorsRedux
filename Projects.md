@@ -6,6 +6,9 @@ platforms in mind. As such, we don't necessarily have access to dlls - and
 everything will have to be recompiled. It was that or shared source files - which
 seemed uglier and more maintenance heavy to me.
 
+I haven't used the shared monogame library stuff either, as I'm hoping to be able
+to make a non-monogame UI that is accessible to the vision impaired.
+
 The projects are as follows:
 
   - GLGameApp

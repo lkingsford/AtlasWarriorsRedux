@@ -9,5 +9,6 @@
     <Import_RootNamespace>AtlasWarriorsUiCommon</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CellToScreen.cs" />
   </ItemGroup>
 </Project>

@@ -75,7 +75,7 @@ namespace GLGameApp
                 {
                     // Tile to draw
                     var currentcell = G.CurrentDungeon.GetCell(new XY(ix, iy));
-                    var drawChar = CellScreenChar(currentcell);
+                    var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
                     var location = new Vector2 (ix * TileWidth, iy * TileHeight);
                     var color = Color.White;
                     AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
@@ -85,28 +85,5 @@ namespace GLGameApp
             AppSpriteBatch.End();
         }
 
-        /// <summary>
-        /// Get the character used to display a particular type of cell
-        /// </summary>
-        /// <param name="Cell">Cell to check</param>
-        /// <returns>Character to display on screen for cell</returns>
-        static char CellScreenChar(DungeonCell Cell)
-        {
-            switch (Cell)
-            {
-                case DungeonCell.EMPTY:
-                    return ' ';
-                case DungeonCell.FLOOR:
-                    return '.';
-                case DungeonCell.CLOSED_DOOR:
-                    return '+';
-                case DungeonCell.OPEN_DOOR:
-                    return '-';
-                case DungeonCell.WALL:
-                    return '#';
-                default:
-                    return 'X';
-            }
-        }
     }
 }
