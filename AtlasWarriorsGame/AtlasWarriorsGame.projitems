@@ -9,5 +9,7 @@
     <Import_RootNamespace>AtlasWarriorsGame</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Dungeon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
   </ItemGroup>
 </Project>

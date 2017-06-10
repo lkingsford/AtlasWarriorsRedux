@@ -13,7 +13,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Default constructor
         /// </summary>
-        public void Game()
+        public Game()
         {
             
         }
