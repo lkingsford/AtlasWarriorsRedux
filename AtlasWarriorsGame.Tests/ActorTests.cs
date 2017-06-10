@@ -61,5 +61,20 @@ namespace AtlasWarriorsGame.Tests
             Assert.AreEqual(startLocation.X + DxDy.X, actor.Location.X, "X movement incorrect");
             Assert.AreEqual(startLocation.Y + DxDy.Y, actor.Location.Y, "Y movement incorrect");
         }
+
+        /// <summary>
+        /// Verify that can't move if can't move
+        /// </summary>
+        /// <param name="DxDy"></param>
+        [Test]
+        [TestCaseSource("MoveDirections")]
+        public void TestBlockedMove(XY DxDy)
+        {
+            var actor = new Actor(ClosedDungeon);
+            var startLocation = actor.Location;
+            actor.Move(DxDy);
+            Assert.AreEqual(startLocation.X, actor.Location.X, "X failed to block");
+            Assert.AreEqual(startLocation.Y, actor.Location.Y, "Y failed to block");
+        }
     }
 }

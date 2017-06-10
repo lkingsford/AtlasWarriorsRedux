@@ -24,6 +24,7 @@ namespace AtlasWarriorsGame
         public Actor(Dungeon Dungeon)
         {
             this.Dungeon = Dungeon;
+            this.Location = Dungeon.StartLocation;
         }
 
         /// <summary>
@@ -42,7 +43,11 @@ namespace AtlasWarriorsGame
         /// <param name="dxDy">Amount to move</param>
         public void Move(XY dxDy)
         {
-            
+            var newLocation = Location + dxDy;
+            if (Dungeon.Walkable(newLocation))
+            {
+                Location = newLocation;
+            }
         }
     }
 }
