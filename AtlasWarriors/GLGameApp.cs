@@ -38,6 +38,8 @@ namespace GLGameApp
         public GLGameApp()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
         }
 
@@ -104,7 +106,7 @@ namespace GLGameApp
         /// <param name="GameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime GameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             CurrentState?.Draw(GameTime);
 
