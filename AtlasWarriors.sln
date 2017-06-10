@@ -12,6 +12,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
+		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

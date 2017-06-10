@@ -55,6 +55,9 @@ namespace GLGameApp
             State.AppContentManager = Content;
             State.AppGraphicsDevice = GraphicsDevice;
             State.AppSpriteBatch = spriteBatch;
+
+            // Create a new game, and make the UI on top of the stack
+            States.Add(new GameMapState(new AtlasWarriorsGame.Game()));
         }
 
         /// <summary>

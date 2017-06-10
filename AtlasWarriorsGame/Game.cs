@@ -15,7 +15,24 @@ namespace AtlasWarriorsGame
         /// </summary>
         public Game()
         {
-            
+            _dungeon = new Dungeon(40, 20); 
+        }
+
+        /// <summary>
+        /// TEMPORARY - Will be replaced by complete store of dungeons
+        /// The dungeon
+        /// </summary>
+        Dungeon _dungeon;
+
+        /// <summary>
+        /// Current dungeon being played
+        /// </summary>
+        public Dungeon CurrentDungeon
+        {
+            get
+            {
+                return _dungeon;
+            }
         }
     }
 }
