@@ -40,6 +40,9 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 Dungeon.SetCell(new XY(Dungeon.Width - 1, iy), DungeonCell.WALL);
             }
 
+            // Set start to middle of room
+            Dungeon.StartLocation = new XY(Dungeon.Width / 2, Dungeon.Height / 2);
+
             return true;
         }
     }

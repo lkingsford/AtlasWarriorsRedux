@@ -110,5 +110,10 @@ namespace AtlasWarriorsGame
                 return TileMap.GetLength(1);
             }
         }
+
+        /// <summary>
+        /// Where the player starts on this dungeon
+        /// </summary>
+        public XY StartLocation;
     }
 }
