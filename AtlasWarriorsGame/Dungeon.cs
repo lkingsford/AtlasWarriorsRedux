@@ -10,17 +10,19 @@ namespace AtlasWarriorsGame
     class Dungeon
     {
         /// <summary>
-        /// Default constructor
+        /// Create instance of dungeon with given size
         /// </summary>
-        public Dungeon()
+        public Dungeon(int Width, int Height)
         {
+            TileMap = new DungeonCell[Width, Height];
         }
 
         /// <summary>
         /// Types of dungeon cells in the map
         /// </summary>
-        public enum DungeonCellTypes 
+        public enum DungeonCell 
         {
+            EMPTY,
             FLOOR,
             WALL,
             OPEN_DOOR,
@@ -33,9 +35,72 @@ namespace AtlasWarriorsGame
         /// <param name="x">X coord to check</param>
         /// <param name="y">Y coord to check</param>
         /// <returns></returns>
-        bool Walkable(int x, int y)
+        public bool Walkable(XY Coord)
         {
-            return false;
+            switch (GetCell(Coord))
+            {
+                case DungeonCell.FLOOR:
+                case DungeonCell.OPEN_DOOR:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Array of dungeon cells that forms the map 
+        /// </summary>
+        protected DungeonCell[,] TileMap;
+
+        /// <summary>
+        /// Change part of the map
+        /// </summary>
+        /// <param name="Coord">Point to change</param>
+        /// <param name="NewValue">Value to change point to</param>
+        public void SetCell(XY Coord, DungeonCell NewValue)
+        {
+            TileMap[Coord.X, Coord.Y] = NewValue;
+        }
+
+        /// <summary>
+        /// Get tile on map
+        /// </summary>
+        /// <param name="Coord">Point to get</param>
+        /// <returns></returns>
+        public DungeonCell GetCell(XY Coord)
+        {
+            // If in bounds, return TileMap
+            if (Coord.X > 0 &&
+                Coord.X < Width &&
+                Coord.Y > 0 &&
+                Coord.Y < Height)
+            {
+                return TileMap[Coord.X, Coord.Y];
+            }
+            // Otherwise, return empty
+            return DungeonCell.EMPTY;
+        }
+
+        /// <summary>
+        /// Width of the map
+        /// </summary>
+        public int Width
+        {
+            get
+            {
+                return TileMap.GetLength(0);
+            }
+        }
+
+        /// <summary>
+        /// Height of the map
+        /// </summary>
+        public int Height
+        {
+            get
+            {
+                return TileMap.GetLength(1);
+            }
         }
     }
 }
