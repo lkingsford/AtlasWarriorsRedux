@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GLGameApp
 {
@@ -11,7 +13,28 @@ namespace GLGameApp
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// Current stack of states. 
+        /// Front of stack is the current state.
+        /// </summary>
+        List<State> States = new List<State>();
+
+        /// <summary>
+        /// Current state
+        /// </summary>
+        State CurrentState
+        {
+            get
+            {
+                // Supposedly, .Last is optimized for List<>... I hope that LastOrDefault is too
+                return States.LastOrDefault();
+            }
+        }
         
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public GLGameApp()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -62,10 +85,12 @@ namespace GLGameApp
         /// <param name="GameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime GameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            // If the stack is empty, then it's quittin time
+            if (CurrentState == null)
                 Exit();
 
-            // TODO: Add your update logic here
+            // Otherwise, that's the thing we're doing
+            CurrentState?.Update(GameTime);
 
             base.Update(GameTime);
         }
@@ -78,7 +103,7 @@ namespace GLGameApp
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            CurrentState?.Draw(GameTime);
 
             base.Draw(GameTime);
         }
