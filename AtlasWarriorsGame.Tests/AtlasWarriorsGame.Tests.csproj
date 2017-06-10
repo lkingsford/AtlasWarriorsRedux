@@ -37,6 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonTests.cs" />
     <Compile Include="XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

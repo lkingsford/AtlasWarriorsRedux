@@ -25,6 +25,7 @@ namespace AtlasWarriorsGame.Tests
             Dungeon2 = new AtlasWarriorsGame.Dungeon(20, 10);
             Dungeon3 = new AtlasWarriorsGame.Dungeon(10, 20);
             Dungeon4 = new AtlasWarriorsGame.Dungeon(10, 10);
+            Dungeon4.SetCell(new XY(2,1), DungeonCell.EMPTY);
             Dungeon4.SetCell(new XY(2,2), DungeonCell.WALL);
             Dungeon4.SetCell(new XY(2,3), DungeonCell.CLOSED_DOOR);
             Dungeon4.SetCell(new XY(2,4), DungeonCell.OPEN_DOOR);
@@ -83,13 +84,33 @@ namespace AtlasWarriorsGame.Tests
         }
 
         /// <summary>
+        /// Valid points for the GetSetCellTest
+        /// </summary>
+        static object[] GetSetValidPoints =
+        {
+            new object[] {0, 0 },
+            new object[] {5, 5 },
+            new object[] {9, 0 },
+            new object[] {0, 9 }
+        };
+
+        /// <summary>
         /// Test that Get/Set of cell works in ordinary circumstances
         /// </summary>
+        /// <param name="X">X coord to test</param>
+        /// <param name="Y">Y coord to test</param>
         [Test]
-        public void GetSetCellTest()
+        [TestCaseSource("GetSetValidPoints")]
+        public void GetSetCellTest(int X, int Y)
         {
-            Dungeon1.SetCell(new XY(6, 3), Dungeon.DungeonCell.WALL);
-            Assert.AreEqual(Dungeon1.GetCell(new XY(6, 3)), Dungeon.DungeonCell.WALL,
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.WALL);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.WALL,
+                "Dungeon cell not correctly read or set");
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.EMPTY);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.EMPTY,
+                "Dungeon cell not correctly read or set");
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.FLOOR);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.FLOOR,
                 "Dungeon cell not correctly read or set");
         }
 

@@ -12,9 +12,17 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Create instance of dungeon with given size
         /// </summary>
-        public Dungeon(int Width, int Height)
+        /// <param name="Width">Width of the dungeon</param>
+        /// <param name="Height">Height of the dungeon</param>
+        /// <param name="Generator">
+        /// Generator to use to build the dungeon.
+        /// Defaults to DefaultGenerator
+        /// </param>
+        public Dungeon(int Width, int Height, Func<Dungeon, bool> Generator = null)
         {
             TileMap = new DungeonCell[Width, Height];
+            // Invoke generator, unless it's null which use default
+            (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
         }
 
         /// <summary>
@@ -70,9 +78,9 @@ namespace AtlasWarriorsGame
         public DungeonCell GetCell(XY Coord)
         {
             // If in bounds, return TileMap
-            if (Coord.X > 0 &&
+            if (Coord.X >= 0 &&
                 Coord.X < Width &&
-                Coord.Y > 0 &&
+                Coord.Y >= 0 &&
                 Coord.Y < Height)
             {
                 return TileMap[Coord.X, Coord.Y];
