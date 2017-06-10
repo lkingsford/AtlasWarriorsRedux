@@ -39,7 +39,7 @@ namespace GLGameApp
         /// <summary>
         /// Create a game interface from a given game
         /// </summary>
-        /// <param name="Game"></param>
+        /// <param name="Game">Game object that is being played</param>
         public GameMapState(AtlasWarriorsGame.Game Game)
         {
             this.G = Game;
