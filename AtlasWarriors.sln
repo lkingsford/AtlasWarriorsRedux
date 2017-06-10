@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasWarriors", "AtlasWarriors\AtlasWarriors.csproj", "{76F18773-F8F7-4049-8724-A3F94A29425C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AtlasWarriorsGame", "AtlasWarriorsGame\AtlasWarriorsGame.shproj", "{1D57A419-D529-4578-9672-662B4537BB1A}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76F18773-F8F7-4049-8724-A3F94A29425C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F18773-F8F7-4049-8724-A3F94A29425C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F18773-F8F7-4049-8724-A3F94A29425C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F18773-F8F7-4049-8724-A3F94A29425C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
