@@ -61,6 +61,7 @@ namespace AtlasWarriorsGame
                 default:
                     break;
             }
+            NextMove = Instruction.NOT_SET;
         }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace AtlasWarriorsGame
         /// </summary>
         public enum Instruction
         {
+            NOT_SET,
             MOVE_NW,
             MOVE_N,
             MOVE_NE,

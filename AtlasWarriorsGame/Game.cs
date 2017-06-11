@@ -28,7 +28,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Main player of the game
         /// </summary>
-        Player Player;
+        public Player Player;
 
         /// <summary>
         /// Current dungeon being played
