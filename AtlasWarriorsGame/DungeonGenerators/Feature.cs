@@ -25,7 +25,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <summary>
         /// Elements of the map
         /// </summary>
-        protected DungeonCell[,] FeatureMap;
+        protected DungeonCell[,] FeatureMap; 
 
         /// <summary>
         /// Set cell at coord to be value
@@ -45,6 +45,31 @@ namespace AtlasWarriorsGame.DungeonGenerators
         public DungeonCell GetCell(XY coord)
         {
             return FeatureMap[coord.X, coord.Y];
+        }
+
+        /// <summary>
+        /// Underlying value for PossibleDoors
+        /// </summary>
+        private List<XY> _PossibleDoors = new List<XY>();
+
+        /// <summary>
+        /// Places where a door can be placed to connect to another feature
+        /// </summary>
+        public IReadOnlyCollection<XY> PossibleDoors
+        {
+            get
+            {
+                return _PossibleDoors.AsReadOnly();
+            }
+        }
+
+        /// <summary>
+        /// Add coordinate where door could be added
+        /// </summary>
+        /// <param name="coord"></param>
+        public void AddPossibleDoor(XY coord)
+        {
+            _PossibleDoors.Add(coord);
         }
     }
 }

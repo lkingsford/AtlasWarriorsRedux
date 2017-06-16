@@ -52,5 +52,17 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             Feature.SetCell(coord, value);
             Assert.AreEqual(Feature.GetCell(coord), value, "Get or set didn't work");
         }
+
+        /// <summary>
+        /// Test that doors that are added are returned
+        /// </summary>
+        [Test]
+        public void AddDoorTest()
+        {
+            Feature.AddPossibleDoor(new XY(5, 1));
+            Feature.AddPossibleDoor(new XY(5, 7));
+            Assert.IsTrue(Feature.PossibleDoors.Contains(new XY(5, 1)));
+            Assert.IsTrue(Feature.PossibleDoors.Contains(new XY(5, 7)));
+        }
     }
 }
