@@ -142,5 +142,32 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
                 "PossibleDoors lists weren't copied and share a reference" );
         }
 
+        /// <summary>
+        /// Dimension test data
+        /// </summary>
+        static object[] DimensionTestSource =
+        {
+            new object[] {1, 1},
+            new object[] {0, 0},
+            new object[] {10, 1},
+            new object[] {10, 10},
+            new object[] {1, 10},
+        };
+
+        /// <summary>
+        /// Test width and height return correct data
+        /// </summary>
+        /// <param name="W"></param>
+        /// <param name="H"></param>
+        [TestCaseSource("DimensionTestSource")]
+        [Test]
+        public void WidthHeightTest(int W, int H)
+        {
+            var f = new AtlasWarriorsGame.DungeonGenerators.Feature(W, H);
+            Assert.AreEqual(W, f.Width);
+            Assert.AreEqual(H, f.Height);
+        }
+
+
     }
 }

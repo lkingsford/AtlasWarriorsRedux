@@ -17,7 +17,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// </summary>
         /// <param name="width">Width of Feature</param>
         /// <param name="height">Height of Feature</param>
-        public Feature(uint width, uint height)
+        public Feature(int width, int height)
         {
             FeatureMap = new DungeonCell[width, height];
         }
@@ -47,7 +47,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <summary>
         /// Elements of the map
         /// </summary>
-        protected DungeonCell[,] FeatureMap; 
+        protected DungeonCell[,] FeatureMap;
 
         /// <summary>
         /// Set cell at coord to be value
@@ -92,6 +92,28 @@ namespace AtlasWarriorsGame.DungeonGenerators
         public void AddPossibleDoor(XY Coord)
         {
             _PossibleDoors.Add(Coord);
+        }
+
+        /// <summary>
+        /// Return width of feature map
+        /// </summary>
+        public int Width
+        {
+            get
+            {
+                return FeatureMap.GetLength(0);
+            }
+        }
+
+        /// <summary>
+        /// Return height of feature map
+        /// </summary>
+        public int Height
+        {
+            get
+            {
+                return FeatureMap.GetLength(1);
+            }
         }
     }
 }
