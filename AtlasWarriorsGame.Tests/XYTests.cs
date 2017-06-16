@@ -192,5 +192,24 @@ namespace AtlasWarriorsGame.Tests
         {
             Assert.AreEqual(Op1, Op1);
         }
+
+        /// <summary>
+        /// Test that all hash codes from value with x between 0 to 150 and y between 0 to 150 
+        /// are different. This is all percieved coordinates for Atlas Warriors + more.
+        /// </summary>
+        [Test]
+        public void HashTest()
+        {
+            var used = new HashSet<int>(); 
+            for (int ix = 0; ix < 150; ++ix)
+            {
+                for (int iy = 0; ix < 150; ++ix)
+                {
+                    Assert.IsFalse(used.Contains(new XY(ix, iy).GetHashCode()), 
+                        $"Collision found - {ix}, {iy}");
+                    used.Add(new XY(ix, iy).GetHashCode());
+                }
+            }
+        }
     }
 }

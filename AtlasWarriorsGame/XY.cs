@@ -110,14 +110,23 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
-        /// Equality operator for XY
+        /// Return if value equal to this
         /// </summary>
-        /// <param name="first">First operand</param>
-        /// <param name="second">Second operand</param>
+        /// <param name="value">First operand</param>
         /// <returns></returns>
-        public static bool Equals(XY first, XY second)
+        public override bool Equals(object value)
         {
-            return first == second;
+            return this == (XY)value;
+        }
+
+        /// <summary>
+        /// Return hash code of object.
+        /// Uses X + Y bitshifted 16 left
+        /// </summary>
+        /// <returns>Hash code of object</returns>
+        public override int GetHashCode()
+        {
+            return _X + _Y << 16;
         }
 
         /// <summary>
