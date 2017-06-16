@@ -119,6 +119,7 @@ namespace AtlasWarriorsGame
         {
             return first == second;
         }
+
         /// <summary>
         /// Inequality operator for XY
         /// </summary>

@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
+    <Compile Include="DungeonGenerators\FeatureTests.cs" />
     <Compile Include="DungeonTests.cs" />
     <Compile Include="ActorTests.cs" />
     <Compile Include="XYTests.cs" />

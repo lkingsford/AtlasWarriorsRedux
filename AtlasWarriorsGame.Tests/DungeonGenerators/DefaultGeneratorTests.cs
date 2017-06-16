@@ -22,7 +22,8 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void BasicTest()
         {
-            var D = new Dungeon(5, 4, DungeonGenerators.DefaultGenerator.Generate);
+            var D = new Dungeon(5, 4, 
+                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
 
             for (int ix = 0; ix < 5; ++ix)
             {

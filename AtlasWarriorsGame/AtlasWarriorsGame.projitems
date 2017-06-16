@@ -12,6 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dungeon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\DefaultGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\Feature.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\RoomsGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XY.cs" />
