@@ -138,11 +138,11 @@ namespace AtlasWarriorsGame.DungeonGenerators
             switch(Angle)
             {
                 case Rotation.RIGHT:
-                    return new XY(Height - Point.Y, Point.X);
+                    return new XY(Height - Point.Y - 1, Point.X);
                 case Rotation.DOWN:
-                    return new XY(Width - Point.X, Height - Point.Y);
+                    return new XY(Width - Point.X - 1, Height - Point.Y - 1);
                 case Rotation.LEFT:
-                    return new XY(Point.Y, Width - Point.X);
+                    return new XY(Point.Y, Width - Point.X - 1);
                 default:
                     // Doing up like this 'cause VS didn't think it returned a value
                     return Point;
