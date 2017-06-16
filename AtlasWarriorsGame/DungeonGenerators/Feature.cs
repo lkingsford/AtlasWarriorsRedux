@@ -23,6 +23,28 @@ namespace AtlasWarriorsGame.DungeonGenerators
         }
 
         /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="Feature">Feature to copy</param>
+        public Feature(Feature Feature)
+        {
+            // Create new map to avoid clone
+            this.FeatureMap = new DungeonCell[Feature.FeatureMap.GetLength(0),
+                Feature.FeatureMap.GetLength(1)];
+            // ... and make it identical
+            for (int ix = 0; ix < Feature.FeatureMap.GetLength(0); ++ix)
+            {
+                for (int iy = 0; ix < Feature.FeatureMap.GetLength(1); ++iy)
+                {
+                    this.FeatureMap[ix, iy] = Feature.FeatureMap[ix, iy];
+                }
+            }
+
+            // Copy door list
+            _PossibleDoors = new List<XY>(Feature._PossibleDoors);
+        }
+
+        /// <summary>
         /// Elements of the map
         /// </summary>
         protected DungeonCell[,] FeatureMap; 
@@ -67,9 +89,9 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// Add coordinate where door could be added
         /// </summary>
         /// <param name="coord"></param>
-        public void AddPossibleDoor(XY coord)
+        public void AddPossibleDoor(XY Coord)
         {
-            _PossibleDoors.Add(coord);
+            _PossibleDoors.Add(Coord);
         }
     }
 }
