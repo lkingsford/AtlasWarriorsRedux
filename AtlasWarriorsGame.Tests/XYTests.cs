@@ -32,9 +32,75 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("ValidPoints")]
         public void BasicConstructor(int X, int Y, string ToStringResult)
         {
-            var xy = new  AtlasWarriorsGame.XY(X, Y);
+            var xy = new AtlasWarriorsGame.XY(X, Y);
             Assert.AreEqual(xy.X, X, "X not set correctly");
             Assert.AreEqual(xy.Y, Y, "Y not set correctly");
+        }
+
+
+        /// <summary>
+        /// Valid values, with result, for Contains tests
+        /// </summary>
+        static object[] ContainsValues =
+        {
+            new object[] {new XY(0,0), 0, 0, 0, 0, true},
+            new object[] {new XY(0,0), -1, -1, 1, 1, true},
+            new object[] {new XY(-3, -3), -5, -3, 3, 1, true},
+            new object[] {new XY(3, -3), -5, -3, 3, 1, true},
+            new object[] {new XY(3, 5), -5, -3, 3, 5, true},
+            new object[] {new XY(3, 5), -5, -3, 3, 4, false},
+            new object[] {new XY(-3, -5), -1, -3, 3, 4, false},
+            new object[] {new XY(0, 0), 1, -3, 3, 4, false}
+        };
+
+        /// <summary>
+        /// Test that contains returns correct results for correct input
+        /// </summary>
+        /// <param name="coord">Coord to test</param>
+        /// <param name="left">MinX bound</param>
+        /// <param name="top">MinY bound</param>
+        /// <param name="right">MaxX bound</param>
+        /// <param name="bottom">MaxY bound</param>
+        /// <param name="result">Desired result</param>
+        [Test]
+        [TestCaseSource("ContainsValues")]
+        public void ContainsTest(XY coord,
+                                 int left,
+                                 int top,
+                                 int right,
+                                 int bottom,
+                                 bool result)
+        {
+            Assert.AreEqual(coord.ContainedBy(left, top, right, bottom), result);
+        }
+
+        /// <summary>
+        /// Invalid values for contains that should raise argument exception
+        /// </summary>
+        static object[] ContainsInvalidValues =
+        {
+            new object[] {new XY(0,0), -1, -2, -3, -4},
+            new object[] {new XY(0,0), 4, 2, 0, 2},
+            new object[] {new XY(0,0), 0, 4, 0, 2},
+        };
+
+        /// <summary>
+        /// Test that invalid parameters raise argument exceptions
+        /// </summary>
+        /// <param name="coord">Coord to test</param>
+        /// <param name="left">MinX bound</param>
+        /// <param name="top">MinY bound</param>
+        /// <param name="right">MaxX bound</param>
+        /// <param name="bottom">MaxY bound</param>
+        [Test]
+        [TestCaseSource("ContainsInvalidValues")]
+        public void ContainsArgumentExceptionTest(XY coord,
+                                                  int left,
+                                                  int top,
+                                                  int right,
+                                                  int bottom)
+        {
+            Assert.Throws(typeof(ArgumentException), delegate { coord.ContainedBy(left, top, right, bottom); });
         }
 
         /// <summary>

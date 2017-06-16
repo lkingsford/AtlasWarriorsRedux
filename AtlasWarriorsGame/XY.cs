@@ -50,6 +50,24 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Determine if XY is inclusively within given bounds
+        /// </summary>
+        /// <param name="MinX">Minimum allowed x</param>
+        /// <param name="MinY">Minimum allowed y</param>
+        /// <param name="MaxX">Maximum allowed x</param>
+        /// <param name="MaxY">Maximum allowed y</param>
+        /// <returns>True, if XY within the given bounds</returns>
+        public bool ContainedBy(int MinX, int MinY, int MaxX, int MaxY)
+        {
+            if ((MinX > MaxX) || (MinY > MaxY))
+            {
+                throw new ArgumentException("Min must be greater than max");
+            }
+
+            return _X >= MinX && MaxX >= _X && _Y >= MinY && MaxY >= _Y;
+        }
+
+        /// <summary>
         /// Return coordinates as a string
         /// </summary>
         /// <returns>(X, Y)</returns>
