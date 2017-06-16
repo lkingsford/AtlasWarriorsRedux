@@ -34,7 +34,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             // ... and make it identical
             for (int ix = 0; ix < Feature.FeatureMap.GetLength(0); ++ix)
             {
-                for (int iy = 0; ix < Feature.FeatureMap.GetLength(1); ++iy)
+                for (int iy = 0; iy < Feature.FeatureMap.GetLength(1); ++iy)
                 {
                     this.FeatureMap[ix, iy] = Feature.FeatureMap[ix, iy];
                 }
