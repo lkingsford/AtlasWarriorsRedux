@@ -115,5 +115,73 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 return FeatureMap.GetLength(1);
             }
         }
+
+        /// <summary>
+        /// Right angle rotations
+        /// </summary>
+        public enum Rotation
+        {
+            UP = 0,
+            RIGHT = 1,
+            DOWN = 2,
+            LEFT = 3
+        }
+
+        /// <summary>
+        /// Return point in this feature after moved
+        /// </summary>
+        /// <param name="Point">Point to rotate</param>
+        /// <param name="Angle">Amount to rotate</param>
+        /// <returns></returns>
+        protected XY RotatePoint(XY Point, Rotation Angle)
+        {
+            switch(Angle)
+            {
+                case Rotation.RIGHT:
+                    return new XY(Height - Point.Y, Point.X);
+                case Rotation.DOWN:
+                    return new XY(Width - Point.X, Height - Point.Y);
+                case Rotation.LEFT:
+                    return new XY(Point.Y, Width - Point.X);
+                default:
+                    // Doing up like this 'cause VS didn't think it returned a value
+                    return Point;
+            }
+        }
+
+        /// <summary>
+        /// Create a copy of this feature rotated
+        /// </summary>
+        /// <param name="Angle">Angle to rotate to</param>
+        /// <returns>New feature, rotated</returns>
+        public Feature Rotate(Rotation Angle)
+        {
+            // Short circuit if same using copy constructor
+            if (Angle == Rotation.UP)
+            {
+                return new Feature(this);
+            }
+
+            // Unsure if this is best way to handle this - but readable, and simple
+            Feature f = Angle == Rotation.DOWN ?
+                new Feature(Width, Height) : new Feature(Height, Width);
+
+            // Set rotated map
+            for (int ix = 0; ix < Width; ++ix)
+            {
+                for (int iy = 0; iy < Height; ++iy)
+                {
+                    f.SetCell(RotatePoint(new XY(ix, iy), Angle), FeatureMap[ix, iy]);
+                }
+            }
+
+            // Add rotated doors
+            foreach (var i in PossibleDoors)
+            {
+                f.AddPossibleDoor(RotatePoint(i, Angle));
+            }
+
+            return f;
+        }
     }
 }
