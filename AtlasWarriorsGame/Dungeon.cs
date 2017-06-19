@@ -57,6 +57,25 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Return true if any cell is empty
+        /// </summary>
+        /// <returns>Return true if any cell is empty</returns>
+        public bool AnyEmpty()
+        {
+            for (var ix = 0; ix < Width; ++ix)
+            {
+                for (var iy = 0; iy < Height; ++iy)
+                {
+                    if (TileMap[ix, iy] == DungeonCell.EMPTY)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Array of dungeon cells that forms the map 
         /// </summary>
         protected DungeonCell[,] TileMap;

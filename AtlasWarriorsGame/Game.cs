@@ -15,7 +15,7 @@ namespace AtlasWarriorsGame
         /// </summary>
         public Game()
         {
-            _dungeon = new Dungeon(40, 20); 
+            _dungeon = new Dungeon(40, 20, DungeonGenerators.RoomsGenerator.Generate); 
             Player = new Player(_dungeon);
         }
 

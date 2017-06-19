@@ -41,7 +41,7 @@ namespace AtlasWarriorsGame.Tests
             }
             for (int ix = 1; ix < 4; ++ix)
             {
-                for (int iy = 1; ix < 4; ++ix)
+                for (int iy = 1; iy < 3; ++iy)
                 {
                     Assert.AreEqual(D.GetCell(new XY(ix, iy)), DungeonCell.FLOOR,
                         "Floor not correct");

@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\RoomsGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XY.cs" />
   </ItemGroup>
 </Project>
