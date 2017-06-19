@@ -14,6 +14,9 @@ The projects are as follows:
   - GLGameApp
     The 'Game' application for desktop users
 
+  - Screen reader app
+	The 'Game' application for screen reader players    
+
   - AtlasWarriorsGame
     Shared project that contains the actual game objects and logic.  The models
 	and controllers to GLGameApp's view.
