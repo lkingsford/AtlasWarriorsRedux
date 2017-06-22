@@ -43,9 +43,54 @@ namespace ScreenReaderApp
             //Tolk.Unload();
 
             //Console.WriteLine("Done!");
-            var g = new AtlasWarriorsGame.Game();
-            DrawMap(g.CurrentDungeon);
-            Console.ReadKey();
+            var G = new AtlasWarriorsGame.Game();
+            bool quit = false;
+            while (!quit)
+            {
+                DrawMap(G.CurrentDungeon);
+                Console.Write("\n>");
+                var input = Console.ReadKey();
+                switch (input.Key)
+                {
+                    case ConsoleKey.H:
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.NumPad4:
+                        G.Player.NextMove = Player.Instruction.MOVE_W;
+                        break;
+                    case ConsoleKey.K:
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.NumPad8:
+                        G.Player.NextMove = Player.Instruction.MOVE_N;
+                        break;
+                    case ConsoleKey.L:
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.NumPad6:
+                        G.Player.NextMove = Player.Instruction.MOVE_E;
+                        break;
+                    case ConsoleKey.J:
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.NumPad2:
+                        G.Player.NextMove = Player.Instruction.MOVE_S;
+                        break;
+                    case ConsoleKey.Y:
+                    case ConsoleKey.NumPad7:
+                        G.Player.NextMove = Player.Instruction.MOVE_NW;
+                        break;
+                    case ConsoleKey.U:
+                    case ConsoleKey.NumPad9:
+                        G.Player.NextMove = Player.Instruction.MOVE_NE;
+                        break;
+                    case ConsoleKey.B:
+                    case ConsoleKey.NumPad1:
+                        G.Player.NextMove = Player.Instruction.MOVE_SW;
+                        break;
+                    case ConsoleKey.N:
+                    case ConsoleKey.NumPad3:
+                        G.Player.NextMove = Player.Instruction.MOVE_SE;
+                        break;
+                }
+                G.DoTurn();
+            }
         }
 
         static void DrawMap(AtlasWarriorsGame.Dungeon Dungeon)
@@ -57,6 +102,11 @@ namespace ScreenReaderApp
                 {
                     var tileChar = UiCommon.CellToScreen.CellScreenChar(
                         Dungeon.GetCell(new XY(ix, iy)));
+                    var tileActors = (Dungeon.Actors.Where(i => i.Location == (new XY(ix, iy))));
+                    if (tileActors.Count() > 0) 
+                    {
+                        tileChar = UiCommon.CellToScreen.ActorToChar(tileActors.First());
+                    }
                     Console.Write(tileChar);
                 }
             }
