@@ -211,6 +211,10 @@ namespace AndroidGameApp
             // Get list of character locations not to draw
             var actorLocations = G.CurrentDungeon.Actors.Select(i => i.Location);
 
+            // Scale, in case high DPI
+            float scale = AppGraphicsDevice.DisplayMode.Width /
+                (TileWidth * (float)(G.CurrentDungeon.Width + 2));
+
             // Draw map
             for (var ix = 0; ix < G.CurrentDungeon.Width; ++ix)
             {
@@ -221,9 +225,19 @@ namespace AndroidGameApp
                     if (!actorLocations.Any(i => (i.X == ix) && (i.Y == iy)))
                     {
                         var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                        var location = new Vector2(ix * TileWidth, iy * TileHeight);
+                        var location = new Vector2(scale * ix * TileWidth, 
+                            scale * iy * TileHeight);
                         var color = Color.White;
-                        AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
+                        AppSpriteBatch.DrawString(
+                            MapFont,
+                            drawChar.ToString(),
+                            location,
+                            color, 
+                            0,
+                            new Vector2(0, 0),
+                            scale,
+                            SpriteEffects.None,
+                            1);
                     }
                 }
             }
@@ -233,10 +247,19 @@ namespace AndroidGameApp
             {
                 // Tile to draw
                 var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
-                var location = new Vector2(actor.Location.X * TileWidth,
-                    actor.Location.Y * TileHeight);
+                var location = new Vector2(scale * actor.Location.X * TileWidth,
+                    scale * actor.Location.Y * TileHeight);
                 var color = Color.White;
-                AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
+                AppSpriteBatch.DrawString(
+                    MapFont, 
+                    drawChar.ToString(), 
+                    location, 
+                    color,
+                    0,
+                    new Vector2(0,0),
+                    scale,
+                    SpriteEffects.None,
+                    1);
             }
 
             AppSpriteBatch.End();
