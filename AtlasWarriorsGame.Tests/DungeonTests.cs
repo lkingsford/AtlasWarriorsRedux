@@ -27,8 +27,8 @@ namespace AtlasWarriorsGame.Tests
             Dungeon4 = new AtlasWarriorsGame.Dungeon(10, 10);
             Dungeon4.SetCell(new XY(2,1), DungeonCell.EMPTY);
             Dungeon4.SetCell(new XY(2,2), DungeonCell.WALL);
-            Dungeon4.SetCell(new XY(2,3), DungeonCell.CLOSED_DOOR);
-            Dungeon4.SetCell(new XY(2,4), DungeonCell.OPEN_DOOR);
+            Dungeon4.SetCell(new XY(2,3), DungeonCell.DOOR);
+            Dungeon4.SetCell(new XY(2,4), DungeonCell.DOOR);
             Dungeon4.SetCell(new XY(2,5), DungeonCell.FLOOR);
         }
 
@@ -130,6 +130,7 @@ namespace AtlasWarriorsGame.Tests
         [Test]
         public void GetWalkableTests()
         {
+            Assert.IsTrue(Dungeon4.Walkable(new XY(2, 3)), "Door not walkable");
             Assert.IsTrue(Dungeon4.Walkable(new XY(2, 4)), "Open door not walkable");
             Assert.IsTrue(Dungeon4.Walkable(new XY(2, 5)), "Floor not walkable");
         }
@@ -142,7 +143,6 @@ namespace AtlasWarriorsGame.Tests
         {
             Assert.IsFalse(Dungeon4.Walkable(new XY(2, 1)), "Empty is walkable");
             Assert.IsFalse(Dungeon4.Walkable(new XY(2, 2)), "Wall is walkable");
-            Assert.IsFalse(Dungeon4.Walkable(new XY(2, 3)), "Closed door is walkable");
         }
 
         /// <summary>

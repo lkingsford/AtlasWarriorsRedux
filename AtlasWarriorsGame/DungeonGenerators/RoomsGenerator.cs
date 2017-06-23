@@ -112,7 +112,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             // Make doors doors
             foreach (var door in successfulDoors)
             {
-                Dungeon.SetCell(door, DungeonCell.CLOSED_DOOR);
+                Dungeon.SetCell(door, DungeonCell.DOOR);
             }
 
             return true;

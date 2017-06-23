@@ -36,7 +36,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             new object[] { new XY(1, 1), DungeonCell.EMPTY },
             new object[] { new XY(1, 2), DungeonCell.FLOOR },
             new object[] { new XY(2, 1), DungeonCell.WALL },
-            new object[] { new XY(3, 1), DungeonCell.OPEN_DOOR },
+            new object[] { new XY(3, 1), DungeonCell.DOOR },
         };
 
         /// <summary>
@@ -83,22 +83,19 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <returns></returns>
         static object[] CopyConstructorCopiesMapValues = 
         {
-            new object[] { new XY(0,0), DungeonCell.CLOSED_DOOR },
-            new object[] { new XY(0,1), DungeonCell.OPEN_DOOR },
+            new object[] { new XY(0,0), DungeonCell.DOOR },
             new object[] { new XY(0,2), DungeonCell.FLOOR },
             new object[] { new XY(0,3), DungeonCell.WALL },
             new object[] { new XY(1,0), DungeonCell.EMPTY },
-            new object[] { new XY(1,1), DungeonCell.CLOSED_DOOR },
-            new object[] { new XY(1,2), DungeonCell.OPEN_DOOR},
+            new object[] { new XY(1,2), DungeonCell.DOOR},
             new object[] { new XY(1,3), DungeonCell.FLOOR },
             new object[] { new XY(2,0), DungeonCell.WALL },
             new object[] { new XY(2,1), DungeonCell.EMPTY },
-            new object[] { new XY(2,2), DungeonCell.CLOSED_DOOR},
-            new object[] { new XY(2,3), DungeonCell.OPEN_DOOR },
+            new object[] { new XY(2,3), DungeonCell.DOOR },
             new object[] { new XY(3,0), DungeonCell.FLOOR },
             new object[] { new XY(3,1), DungeonCell.WALL },
             new object[] { new XY(3,2), DungeonCell.EMPTY},
-            new object[] { new XY(3,3), DungeonCell.CLOSED_DOOR },
+            new object[] { new XY(3,3), DungeonCell.DOOR },
         };
 
         /// <summary>
@@ -186,37 +183,37 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Define initial one
             var f1 = new AtlasWarriorsGame.DungeonGenerators.Feature(3, 4);
             f1.SetCell(new XY(0, 0), DungeonCell.WALL);
-            f1.SetCell(new XY(0, 1), DungeonCell.CLOSED_DOOR);
+            f1.SetCell(new XY(0, 1), DungeonCell.DOOR);
             f1.SetCell(new XY(1, 2), DungeonCell.WALL);
-            f1.SetCell(new XY(2, 3), DungeonCell.OPEN_DOOR);
+            f1.SetCell(new XY(2, 3), DungeonCell.DOOR);
 
             // Test up
             var fUp = f1.Rotate(AtlasWarriorsGame.DungeonGenerators.Feature.Rotation.UP);
             Assert.AreEqual(fUp.GetCell(new XY(0, 0)), DungeonCell.WALL);
-            Assert.AreEqual(fUp.GetCell(new XY(0, 1)), DungeonCell.CLOSED_DOOR);
+            Assert.AreEqual(fUp.GetCell(new XY(0, 1)), DungeonCell.DOOR);
             Assert.AreEqual(fUp.GetCell(new XY(1, 2)), DungeonCell.WALL);
-            Assert.AreEqual(fUp.GetCell(new XY(2, 3)), DungeonCell.OPEN_DOOR);
+            Assert.AreEqual(fUp.GetCell(new XY(2, 3)), DungeonCell.DOOR);
 
             // Test right
             var fRight = f1.Rotate(AtlasWarriorsGame.DungeonGenerators.Feature.Rotation.RIGHT);
             Assert.AreEqual(fRight.GetCell(new XY(3, 0)), DungeonCell.WALL);
-            Assert.AreEqual(fRight.GetCell(new XY(2, 0)), DungeonCell.CLOSED_DOOR);
+            Assert.AreEqual(fRight.GetCell(new XY(2, 0)), DungeonCell.DOOR);
             Assert.AreEqual(fRight.GetCell(new XY(1, 1)), DungeonCell.WALL);
-            Assert.AreEqual(fRight.GetCell(new XY(0, 2)), DungeonCell.OPEN_DOOR);
+            Assert.AreEqual(fRight.GetCell(new XY(0, 2)), DungeonCell.DOOR);
 
             // Test down
             var fDown = f1.Rotate(AtlasWarriorsGame.DungeonGenerators.Feature.Rotation.DOWN);
             Assert.AreEqual(fDown.GetCell(new XY(2, 3)), DungeonCell.WALL);
-            Assert.AreEqual(fDown.GetCell(new XY(2, 2)), DungeonCell.CLOSED_DOOR);
+            Assert.AreEqual(fDown.GetCell(new XY(2, 2)), DungeonCell.DOOR);
             Assert.AreEqual(fDown.GetCell(new XY(1, 1)), DungeonCell.WALL);
-            Assert.AreEqual(fDown.GetCell(new XY(0, 0)), DungeonCell.OPEN_DOOR);
+            Assert.AreEqual(fDown.GetCell(new XY(0, 0)), DungeonCell.DOOR);
 
             // Test left
             var fLeft = f1.Rotate(AtlasWarriorsGame.DungeonGenerators.Feature.Rotation.LEFT);
             Assert.AreEqual(fLeft.GetCell(new XY(0, 2)), DungeonCell.WALL);
-            Assert.AreEqual(fLeft.GetCell(new XY(1, 2)), DungeonCell.CLOSED_DOOR);
+            Assert.AreEqual(fLeft.GetCell(new XY(1, 2)), DungeonCell.DOOR);
             Assert.AreEqual(fLeft.GetCell(new XY(2, 1)), DungeonCell.WALL);
-            Assert.AreEqual(fLeft.GetCell(new XY(3, 0)), DungeonCell.OPEN_DOOR);
+            Assert.AreEqual(fLeft.GetCell(new XY(3, 0)), DungeonCell.DOOR);
         }
     }
 }

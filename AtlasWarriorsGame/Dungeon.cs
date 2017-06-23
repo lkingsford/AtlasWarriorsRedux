@@ -34,8 +34,7 @@ namespace AtlasWarriorsGame
             EMPTY,
             FLOOR,
             WALL,
-            OPEN_DOOR,
-            CLOSED_DOOR
+            DOOR
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace AtlasWarriorsGame
             switch (GetCell(Coord))
             {
                 case DungeonCell.FLOOR:
-                case DungeonCell.OPEN_DOOR:
+                case DungeonCell.DOOR:
                     return true;
                 default:
                     return false;

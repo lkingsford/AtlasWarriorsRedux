@@ -120,11 +120,8 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
                             f.SetCell(new XY(ix, iy), DungeonCell.EMPTY);
                             break;
                         case '+':
-                            f.SetCell(new XY(ix, iy), DungeonCell.CLOSED_DOOR);
+                            f.SetCell(new XY(ix, iy), DungeonCell.DOOR);
                             f.AddPossibleDoor(new XY(ix, iy));
-                            break;
-                        case '-':
-                            f.SetCell(new XY(ix, iy), DungeonCell.OPEN_DOOR);
                             break;
                         case '#':
                             f.SetCell(new XY(ix, iy), DungeonCell.WALL);
@@ -161,10 +158,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
                             d.SetCell(new XY(ix, iy), DungeonCell.EMPTY);
                             break;
                         case '+':
-                            d.SetCell(new XY(ix, iy), DungeonCell.CLOSED_DOOR);
-                            break;
-                        case '-':
-                            d.SetCell(new XY(ix, iy), DungeonCell.OPEN_DOOR);
+                            d.SetCell(new XY(ix, iy), DungeonCell.DOOR);
                             break;
                         case '#':
                             d.SetCell(new XY(ix, iy), DungeonCell.WALL);

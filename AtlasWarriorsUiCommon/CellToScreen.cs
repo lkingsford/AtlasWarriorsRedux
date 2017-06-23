@@ -21,10 +21,8 @@ namespace UiCommon
                     return ' ';
                 case DungeonCell.FLOOR:
                     return '.';
-                case DungeonCell.CLOSED_DOOR:
+                case DungeonCell.DOOR:
                     return '+';
-                case DungeonCell.OPEN_DOOR:
-                    return '-';
                 case DungeonCell.WALL:
                     return '#';
                 default:
