@@ -81,11 +81,75 @@ namespace AndroidGameApp
             }
             LastState = currentState;
 
+            // Get touch state
+            var touchState = TouchPanel.GetState();
+
+            // Iterate through. Move the dude if in the 9 spaces.
+            foreach (var touch in touchState)
+            {
+                if (touch.State == TouchLocationState.Pressed)
+                {
+                    ProcessTouch(touch.Position);
+                }
+            }
+
             // Do turn, if player next move is set
             if (G.Player.NextMove != Player.Instruction.NOT_SET)
             {
                 G.DoTurn();
             }
+        }
+
+        /// <summary>
+        /// Act upon a pressed screen
+        /// </summary>
+        /// <param name="position"></param>
+        private void ProcessTouch(Vector2 position)
+        {
+            // We divide the screen into 3x4 regions
+            float regionWidth = AppGraphicsDevice.DisplayMode.Width / 3;
+            float regionHeight = AppGraphicsDevice.DisplayMode.Height / 4;
+
+            // Get the touched region
+            int xRegion = (int)(position.X / regionWidth);
+            int yRegion = (int)(position.Y / regionHeight);
+
+            if (xRegion == 0 && yRegion == 0)
+            {
+                G.Player.NextMove = Player.Instruction.MOVE_NW;
+            }
+            else if (xRegion == 1 && yRegion == 0)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_N;
+            }
+            else if (xRegion == 2 && yRegion == 0)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_NE;
+            }
+            else if (xRegion == 0 && yRegion == 1)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_W;
+            }
+            else if (xRegion == 1 && yRegion == 1)
+            { 
+            }
+            else if (xRegion == 2 && yRegion == 1)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_E;
+            }
+            else if (xRegion == 0 && yRegion == 2)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_SW;
+            }
+            else if (xRegion == 1 && yRegion == 2)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_S;
+            }
+            else if (xRegion == 2 && yRegion == 2)
+            { 
+                G.Player.NextMove = Player.Instruction.MOVE_SE;
+            }
+
         }
 
         /// <summary>
