@@ -12,7 +12,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
     static partial class RoomsGenerator
     {
         const int MAX_ROOM_SIZE = 10;
-        const int MAX_FAILURES = 10000;
+        const int MAX_FAILURES = 100;
 
         /// <summary>
         /// Generate a 'normal' dungeon

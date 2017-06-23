@@ -20,11 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenReaderApp", "ScreenReaderApp\ScreenReaderApp.csproj", "{065D1455-77FE-4863-A034-E13124004778}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGameApp", "AndroidGameApp\AndroidGameApp.csproj", "{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
 		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
+		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
+		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{84879023-efed-4195-bebb-5c728f9f0d5a}*SharedItemsImports = 13
@@ -47,6 +51,12 @@ Global
 		{065D1455-77FE-4863-A034-E13124004778}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{065D1455-77FE-4863-A034-E13124004778}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{065D1455-77FE-4863-A034-E13124004778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
