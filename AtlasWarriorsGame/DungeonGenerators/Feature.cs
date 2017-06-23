@@ -135,7 +135,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <returns></returns>
         protected XY RotatePoint(XY Point, Rotation Angle)
         {
-            switch(Angle)
+            switch (Angle)
             {
                 case Rotation.RIGHT:
                     return new XY(Height - Point.Y - 1, Point.X);
@@ -182,6 +182,28 @@ namespace AtlasWarriorsGame.DungeonGenerators
             }
 
             return f;
+        }
+
+        /// <summary>
+        /// Amount of floor in the room
+        /// </summary>
+        public int FloorSpace
+        {
+            get
+            {
+                var result = 0;
+                for (int ix = 0; ix < Width; ++ix)
+                {
+                    for (int iy = 0; iy < Height; ++iy)
+                    {
+                        if (GetCell(new XY(ix, iy)) == DungeonCell.FLOOR)
+                        {
+                            ++result;
+                        }
+                    }
+                }
+                return result;
+            }
         }
     }
 }

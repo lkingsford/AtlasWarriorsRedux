@@ -409,6 +409,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Basic shape, no translation
             new object[]
             {
+                "Basic, no translation",
                 new XY(0, 0),
                 GetDungeon(
                     "..........",
@@ -424,6 +425,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Basic shape, translation
             new object[]
             {
+                "Basic, translation",
                 new XY(0, 4),
                 GetDungeon(
                     "..........",
@@ -439,6 +441,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Basic shape, translation, mostly blank except one
             new object[]
             {
+                "Basic, translation, mostly blank",
                 new XY(1, 1),
                 GetDungeon(
                     "          ",
@@ -456,6 +459,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Basic shape, translation, partly out of bounds
             new object[]
             {
+                "Basic, translation, out of bounds",
                 new XY(1, 4),
                 GetDungeon(
                     "          ",
@@ -469,17 +473,37 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
                     "#..#",
                     "####")
             },
+
+            // Entire shape overlaps
+            new object[]
+            {
+                "Entire shape overlap",
+                new XY(1, 1),
+                GetDungeon(
+                    "          ",
+                    " ####     ",
+                    " #..#     ",
+                    " #..#     ",
+                    " ####     "),
+                GetFeature(
+                    "####",
+                    "#..#",
+                    "#..#",
+                    "####")
+            },
+
         };
 
         /// <summary>
         /// Tests that feature fits returns false when a feature fits
         /// </summary>
+        /// <param name="Description">Unused description for Test Explorer</param>
         /// <param name="Translate">Translate parameter for FeatureFits</param>
         /// <param name="Dungeon">Dungeon parameter for FeatureFits</param>
         /// <param name="Feature">Feature parameter for FeatureFits</param>
         [Test]
         [TestCaseSource("FeatureFitsFailedTestCases")]
-        public void FeatureFitsTestFailed(XY Translate, Dungeon Dungeon, Feature Feature)
+        public void FeatureFitsTestFailed(String Description, XY Translate, Dungeon Dungeon, Feature Feature)
         {
             Assert.IsFalse(RoomsGenerator.FeatureFits(Translate, Dungeon, Feature));
         }

@@ -77,39 +77,32 @@ namespace AtlasWarriorsGame.DungeonGenerators
                         possibleDoors.AddRange(nextFeature.PossibleDoors.Select(
                             i=>(i + translate)));
 
-
+                        // Clear any doors that are no longer usable
+                        possibleDoors = possibleDoors.Where(door =>
                         {
-                            // Clear any doors that are no longer usable
-                            possibleDoors = possibleDoors.Where(door =>
-                            {
-                                return
-                                    // If in boundaries...
-                                    (door.X > 1) &&
-                                    (door.X < (Dungeon.Width - 1)) &&
-                                    (door.Y > 1) &&
-                                    (door.Y < (Dungeon.Height - 1)) &&
-                                    // And at least one part there is free
-                                    (
-                                        Dungeon.GetCell(new XY(door.X - 1, door.Y)) == DungeonCell.EMPTY ||
-                                        Dungeon.GetCell(new XY(door.X + 1, door.Y)) == DungeonCell.EMPTY ||
-                                        Dungeon.GetCell(new XY(door.X, door.Y - 1)) == DungeonCell.EMPTY ||
-                                        Dungeon.GetCell(new XY(door.X, door.Y + 1)) == DungeonCell.EMPTY
-                                    );
-                            }).ToList();
-                        }
+                            return
+                                // If in boundaries...
+                                (door.X > 1) &&
+                                (door.X < (Dungeon.Width - 1)) &&
+                                (door.Y > 1) &&
+                                (door.Y < (Dungeon.Height - 1)) &&
+                                // And at least one part there is free
+                                (
+                                    Dungeon.GetCell(new XY(door.X - 1, door.Y)) == DungeonCell.EMPTY ||
+                                    Dungeon.GetCell(new XY(door.X + 1, door.Y)) == DungeonCell.EMPTY ||
+                                    Dungeon.GetCell(new XY(door.X, door.Y - 1)) == DungeonCell.EMPTY ||
+                                    Dungeon.GetCell(new XY(door.X, door.Y + 1)) == DungeonCell.EMPTY
+                                );
+                        }).ToList();
 
                         // And go try a new feature
                         placed = true;
+                        successfulDoors.Add(baseDoor);
                         break;
                     }
                 }
 
-                if (placed)
-                {
-                    // That door was part of it!
-                    successfulDoors.Add(baseDoor);
-                }
-                else 
+                if (!placed)
                 {
                     // We failed. If we fail too often, we're done.
                     failures += 1;
@@ -151,7 +144,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
 
         /// <summary>
         /// Check if a feature will fit in the dungeon - meaning that any non-empty (on either) 
-        /// cells must be the same.
+        /// cells must be the same. Will also fail if every single cell the same.
         /// Used by the generator
         /// </summary>
         /// <param name="Translate">Translation to add to feature to be global coordinates</param>
@@ -161,6 +154,10 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <returns>True if feature will fit</returns>
         public static bool FeatureFits(XY Translate, Dungeon Dungeon, Feature Feature)
         {
+            // Progress variable for checking if every cell is the same - which
+            // is a failure too
+            bool allSame = true;
+
             for (int ix = 0; ix < Feature.Width; ++ix)
             {
                 for (int iy = 0; iy < Feature.Height; ++iy)
@@ -184,9 +181,13 @@ namespace AtlasWarriorsGame.DungeonGenerators
                     {
                         return false;
                     }
+
+                    allSame = allSame && (featureCell == dungeonCell);
                 }
             };
-            return true;
+
+            // Return true if we're here, and they're not all the same
+            return !allSame;
         }
 
         /// <summary>
