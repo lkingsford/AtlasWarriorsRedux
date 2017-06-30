@@ -1,4 +1,5 @@
 ﻿using AtlasWarriorsGame; 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+
+using MonoGame.Extended;
 
 namespace AndroidGameApp
 {
@@ -43,6 +46,11 @@ namespace AndroidGameApp
         /// Height of a tile
         /// </summary>
         private float TileHeight;
+
+        /// <summary>
+        /// Whether to show the lines on the screen indicating touch markers
+        /// </summary>
+        private bool ShowGuides = true;
 
         /// <summary>
         /// Create a game interface from a given game
@@ -103,16 +111,16 @@ namespace AndroidGameApp
         /// <summary>
         /// Act upon a pressed screen
         /// </summary>
-        /// <param name="position"></param>
-        private void ProcessTouch(Vector2 position)
+        /// <param name="Position"></param>
+        private void ProcessTouch(Vector2 Position)
         {
             // We divide the screen into 3x4 regions
             float regionWidth = AppGraphicsDevice.DisplayMode.Width / 3;
             float regionHeight = AppGraphicsDevice.DisplayMode.Height / 4;
 
             // Get the touched region
-            int xRegion = (int)(position.X / regionWidth);
-            int yRegion = (int)(position.Y / regionHeight);
+            int xRegion = (int)(Position.X / regionWidth);
+            int yRegion = (int)(Position.Y / regionHeight);
 
             if (xRegion == 0 && yRegion == 0)
             {
@@ -260,6 +268,27 @@ namespace AndroidGameApp
                     scale,
                     SpriteEffects.None,
                     1);
+            }
+
+            // Draw guides
+            if (ShowGuides)
+            {
+                float screenWidth = AppGraphicsDevice.DisplayMode.Width;
+                float regionWidth = screenWidth / 3;
+                float screenHeight = AppGraphicsDevice.DisplayMode.Height;
+                float regionHeight = screenHeight / 4;
+
+                for (int ix = 0; ix < 3; ix++)
+                {
+                    AppSpriteBatch.DrawLine(new Vector2(ix * regionWidth, 0), 
+                        new Vector2(ix * regionWidth, screenHeight), Color.Gray);
+                }
+
+                for (int iy = 0; iy < 4; iy++)
+                {
+                    AppSpriteBatch.DrawLine(new Vector2(0, iy * regionHeight),
+                        new Vector2(screenWidth, iy * regionHeight), Color.Gray);
+                }
             }
 
             AppSpriteBatch.End();

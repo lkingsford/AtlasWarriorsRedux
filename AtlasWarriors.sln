@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenReaderApp", "ScreenRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGameApp", "AndroidGameApp\AndroidGameApp.csproj", "{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MgUiCommon", "MgUiCommon\MgUiCommon.shproj", "{9EBDEE64-6FC9-468B-B93E-468B324F9C58}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
@@ -33,6 +35,7 @@ Global
 		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{84879023-efed-4195-bebb-5c728f9f0d5a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
+		MgUiCommon\MgUiCommon.projitems*{9ebdee64-6fc9-468b-b93e-468b324f9c58}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

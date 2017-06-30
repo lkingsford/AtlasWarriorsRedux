@@ -24,6 +24,9 @@ The projects are as follows:
   - AtlasWarriorsGame.Tests
     NUnit test project for AtlasWarriorsGame.
 
-  - UI Common
+  - UiCommon
     Stuff that multiple interfaces need, but that I still want to keep
 	seperated.
+
+  - MgUiCommon
+    Common code between graphical user interfaces, including Map Drawing (for instance)
