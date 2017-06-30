@@ -7,7 +7,7 @@ namespace AtlasWarriorsGame
     /// <summary>
     /// Play-field area - a specific dungeon level
     /// </summary>
-    class Dungeon
+    public class Dungeon
     {
         /// <summary>
         /// Create instance of dungeon with given size

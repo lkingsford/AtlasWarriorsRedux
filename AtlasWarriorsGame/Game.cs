@@ -8,7 +8,7 @@ namespace AtlasWarriorsGame
     /// Main game class
     /// Initialise again for each new game
     /// </summary>
-    class Game
+    public class Game
     {
         /// <summary>
         /// Default constructor

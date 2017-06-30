@@ -8,7 +8,7 @@ namespace AtlasWarriorsGame
     /// The actual protaganist of the game
     /// The Actor controlled by the player
     /// </summary>
-    class Player : Actor
+    public class Player : Actor
     {
         /// <summary>
         /// Constructor with initial dungeon

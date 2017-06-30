@@ -7,7 +7,7 @@ namespace AtlasWarriorsGame
     /// <summary>
     /// Anything that can act. Most likely player, or monsters.
     /// </summary>
-    class Actor
+    public class Actor
     {
         /// <summary>
         /// Create Actor without dungeon
