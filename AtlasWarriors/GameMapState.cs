@@ -24,19 +24,9 @@ namespace GLGameApp
         protected AtlasWarriorsGame.Game G;
 
         /// <summary>
-        /// Font that the map is drawn with
+        /// Object that draws the map part to the screen
         /// </summary>
-        private SpriteFont MapFont;
-
-        /// <summary>
-        /// Width of a tile
-        /// </summary>
-        private float TileWidth;
-
-        /// <summary>
-        /// Height of a tile
-        /// </summary>
-        private float TileHeight;
+        private MgUiCommon.MapViewElement MapView;
 
         /// <summary>
         /// Create a game interface from a given game
@@ -46,11 +36,7 @@ namespace GLGameApp
         {
             this.G = Game;
 
-            MapFont = AppContentManager.Load<SpriteFont>("GameMapState/MapFont");
-            // W tends to be widest - hence, if not monospace -  will still be OK
-            TileWidth = MapFont.MeasureString("W").X;
-            // f tends to be tallest - hence, if not monospace -  will still be OK
-            TileHeight = MapFont.MeasureString("f").Y;
+            MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
         }
 
         /// <summary>
@@ -136,39 +122,9 @@ namespace GLGameApp
         /// <param name="GameTime">Snapshot of timing</param>
         public override void Draw(GameTime GameTime)
         {
+            var MapTexture = MapView.DrawMap(GameTime, AppSpriteBatch);
             AppSpriteBatch.Begin();
-
-            // Get list of character locations not to draw
-            var actorLocations = G.CurrentDungeon.Actors.Select(i=>i.Location);
-
-            // Draw map
-            for (var ix = 0; ix < G.CurrentDungeon.Width; ++ix)
-            {
-                for (var iy = 0; iy < G.CurrentDungeon.Height; ++iy)
-                {
-                    // Tile to draw
-                    var currentcell = G.CurrentDungeon.GetCell(new XY(ix, iy));
-                    if (!actorLocations.Any(i=>(i.X==ix) && (i.Y == iy)))
-                    {
-                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                        var location = new Vector2 (ix * TileWidth, iy * TileHeight);
-                        var color = Color.White;
-                        AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
-                    }
-                }
-            }
-
-            // Draw characters
-            foreach (var actor in G.CurrentDungeon.Actors)
-            {
-                // Tile to draw
-                var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
-                var location = new Vector2 (actor.Location.X * TileWidth,
-                    actor.Location.Y * TileHeight);
-                var color = Color.White;
-                AppSpriteBatch.DrawString(MapFont, drawChar.ToString(), location, color);
-            }
-
+            AppSpriteBatch.Draw(MapTexture, new Vector2(0.0f, 0.0f), Color.White);
             AppSpriteBatch.End();
         }
 
