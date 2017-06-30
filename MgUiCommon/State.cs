@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLGameApp
+namespace MgUiCommon
 {
     /// <summary>
     /// UI State of the application
@@ -30,12 +30,22 @@ namespace GLGameApp
         static public GraphicsDevice AppGraphicsDevice;
 
         /// <summary>
+        /// Width of the screen, per Monogame.Game
+        /// </summary>
+        static public int ScreenWidth;
+
+        /// <summary>
+        /// Height of the screen, per Monogame.Game
+        /// </summary>
+        static public int ScreenHeight;
+
+        /// <summary>
         /// Run logic for this state - including input
         /// </summary>
         /// <param name="GameTime">Snapshot of timing</param>
         public virtual void Update(GameTime GameTime)
         {
-            
+
         }
 
         /// <summary>

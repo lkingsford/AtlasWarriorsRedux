@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)MapViewElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State.cs" />
   </ItemGroup>
 </Project>

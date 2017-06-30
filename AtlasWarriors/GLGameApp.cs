@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
+using MgUiCommon;
 
 namespace GLGameApp
 {
@@ -57,6 +58,8 @@ namespace GLGameApp
             State.AppContentManager = Content;
             State.AppGraphicsDevice = GraphicsDevice;
             State.AppSpriteBatch = spriteBatch;
+            State.ScreenWidth = GraphicsDevice.DisplayMode.Width;
+            State.ScreenHeight = GraphicsDevice.DisplayMode.Height;
 
             // Create a new game, and make the UI on top of the stack
             States.Add(new GameMapState(new AtlasWarriorsGame.Game()));
