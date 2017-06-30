@@ -33,21 +33,6 @@ namespace AndroidGameApp
         protected AtlasWarriorsGame.Game G;
 
         /// <summary>
-        /// Font that the map is drawn with
-        /// </summary>
-        private SpriteFont MapFont;
-
-        /// <summary>
-        /// Width of a tile
-        /// </summary>
-        private float TileWidth;
-
-        /// <summary>
-        /// Height of a tile
-        /// </summary>
-        private float TileHeight;
-
-        /// <summary>
         /// Whether to show the lines on the screen indicating touch markers
         /// </summary>
         private bool ShowGuides = true;
@@ -116,8 +101,8 @@ namespace AndroidGameApp
         private void ProcessTouch(Vector2 Position)
         {
             // We divide the screen into 3x4 regions
-            float regionWidth = AppGraphicsDevice.DisplayMode.Width / 3;
-            float regionHeight = AppGraphicsDevice.DisplayMode.Height / 4;
+            float regionWidth = ScreenWidth / 3;
+            float regionHeight = ScreenHeight / 4;
 
             // Get the touched region
             int xRegion = (int)(Position.X / regionWidth);
@@ -215,39 +200,40 @@ namespace AndroidGameApp
         /// <param name="GameTime">Snapshot of timing</param>
         public override void Draw(GameTime GameTime)
         {
-
-            // Scale, in case high DPI
-            float scale = AppGraphicsDevice.DisplayMode.Width /
-                (TileWidth * (float)(G.CurrentDungeon.Width + 2));
-
             // Draw map to texture
             // Needs to happen before sprite batch begins, as it needs to begin it itself with a
             // different RenderTarget
             var MapTexture = MapView.DrawMap(GameTime, AppSpriteBatch);
 
+            // Scale, in case high DPI
+            float scale = (float)ScreenWidth / (float)MapTexture.Width;
+
             AppSpriteBatch.Begin();
 
             // Draw map texture to screen
-            AppSpriteBatch.Draw(MapTexture, new Vector2(0, 0), Color.White);
+            AppSpriteBatch.Draw(MapTexture,
+                // VS's clam that (float) is redundant is a lie. If it's not cast - no right side
+                // off
+                new Rectangle(0, 0, (int)((float)MapTexture.Width * scale),
+                    (int)((float)MapTexture.Height * scale)),
+                Color.White);                
 
             // Draw guides
             if (ShowGuides)
             {
-                float screenWidth = AppGraphicsDevice.DisplayMode.Width;
-                float regionWidth = screenWidth / 3;
-                float screenHeight = AppGraphicsDevice.DisplayMode.Height;
-                float regionHeight = screenHeight / 4;
+                float regionWidth = ScreenWidth / 3;
+                float regionHeight = ScreenHeight / 4;
 
                 for (int ix = 0; ix < 3; ix++)
                 {
                     AppSpriteBatch.DrawLine(new Vector2(ix * regionWidth, 0), 
-                        new Vector2(ix * regionWidth, screenHeight), Color.Gray);
+                        new Vector2(ix * regionWidth, ScreenHeight), Color.Gray);
                 }
 
                 for (int iy = 0; iy < 4; iy++)
                 {
                     AppSpriteBatch.DrawLine(new Vector2(0, iy * regionHeight),
-                        new Vector2(screenWidth, iy * regionHeight), Color.Gray);
+                        new Vector2(ScreenWidth, iy * regionHeight), Color.Gray);
                 }
             }
             AppSpriteBatch.End();

@@ -55,6 +55,14 @@ namespace AndroidGameApp
             State.AppContentManager = Content;
             State.AppGraphicsDevice = GraphicsDevice;
             State.AppSpriteBatch = spriteBatch;
+            State.ScreenWidth = GraphicsDevice.DisplayMode.Width;
+            State.ScreenHeight = GraphicsDevice.DisplayMode.Height;
+
+            // Set up GPU
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+            graphics.ApplyChanges();
 
             // Create a new game, and make the UI on top of the stack
             States.Add(new GameMapState(new AtlasWarriorsGame.Game()));
