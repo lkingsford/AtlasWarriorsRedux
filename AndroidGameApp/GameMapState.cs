@@ -53,6 +53,11 @@ namespace AndroidGameApp
         private bool ShowGuides = true;
 
         /// <summary>
+        /// Object that draws the map part to the screen
+        /// </summary>
+        private MgUiCommon.MapViewElement MapView;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
         /// <param name="Game">Game object that is being played</param>
@@ -60,11 +65,7 @@ namespace AndroidGameApp
         {
             this.G = Game;
 
-            MapFont = AppContentManager.Load<SpriteFont>("GameMapState/MapFont");
-            // W tends to be widest - hence, if not monospace -  will still be OK
-            TileWidth = MapFont.MeasureString("W").X;
-            // f tends to be tallest - hence, if not monospace -  will still be OK
-            TileHeight = MapFont.MeasureString("f").Y;
+            MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
         }
 
         /// <summary>
@@ -214,61 +215,20 @@ namespace AndroidGameApp
         /// <param name="GameTime">Snapshot of timing</param>
         public override void Draw(GameTime GameTime)
         {
-            AppSpriteBatch.Begin();
-
-            // Get list of character locations not to draw
-            var actorLocations = G.CurrentDungeon.Actors.Select(i => i.Location);
 
             // Scale, in case high DPI
             float scale = AppGraphicsDevice.DisplayMode.Width /
                 (TileWidth * (float)(G.CurrentDungeon.Width + 2));
 
-            // Draw map
-            for (var ix = 0; ix < G.CurrentDungeon.Width; ++ix)
-            {
-                for (var iy = 0; iy < G.CurrentDungeon.Height; ++iy)
-                {
-                    // Tile to draw
-                    var currentcell = G.CurrentDungeon.GetCell(new XY(ix, iy));
-                    if (!actorLocations.Any(i => (i.X == ix) && (i.Y == iy)))
-                    {
-                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                        var location = new Vector2(scale * ix * TileWidth, 
-                            scale * iy * TileHeight);
-                        var color = Color.White;
-                        AppSpriteBatch.DrawString(
-                            MapFont,
-                            drawChar.ToString(),
-                            location,
-                            color, 
-                            0,
-                            new Vector2(0, 0),
-                            scale,
-                            SpriteEffects.None,
-                            1);
-                    }
-                }
-            }
+            // Draw map to texture
+            // Needs to happen before sprite batch begins, as it needs to begin it itself with a
+            // different RenderTarget
+            var MapTexture = MapView.DrawMap(GameTime, AppSpriteBatch);
 
-            // Draw characters
-            foreach (var actor in G.CurrentDungeon.Actors)
-            {
-                // Tile to draw
-                var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
-                var location = new Vector2(scale * actor.Location.X * TileWidth,
-                    scale * actor.Location.Y * TileHeight);
-                var color = Color.White;
-                AppSpriteBatch.DrawString(
-                    MapFont, 
-                    drawChar.ToString(), 
-                    location, 
-                    color,
-                    0,
-                    new Vector2(0,0),
-                    scale,
-                    SpriteEffects.None,
-                    1);
-            }
+            AppSpriteBatch.Begin();
+
+            // Draw map texture to screen
+            AppSpriteBatch.Draw(MapTexture, new Vector2(0, 0), Color.White);
 
             // Draw guides
             if (ShowGuides)
@@ -290,7 +250,6 @@ namespace AndroidGameApp
                         new Vector2(screenWidth, iy * regionHeight), Color.Gray);
                 }
             }
-
             AppSpriteBatch.End();
         }
 

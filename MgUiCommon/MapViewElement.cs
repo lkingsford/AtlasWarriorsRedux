@@ -91,6 +91,7 @@ namespace MgUiCommon
 
         /// <summary>
         /// Draw the current game map to a buffer
+        /// Requires that sprite batch be ended
         /// </summary>
         /// <param name="GameTime">Elapsed time since last frame</param>
         /// <param name="SpriteBatch">Sprite batch to draw with</param>
@@ -106,6 +107,9 @@ namespace MgUiCommon
 
             // Draw to texture, not screen
             Device.SetRenderTarget(RenderTarget);
+
+            // Start a new spritebatch - needed for RenderTarget
+            SpriteBatch.Begin();
 
             // Clear texture
             Device.Clear(Color.Black);
@@ -151,6 +155,8 @@ namespace MgUiCommon
                     location,
                     color);
             }
+
+            SpriteBatch.End();
 
             // And draw to screen again
             Device.SetRenderTarget(null);
