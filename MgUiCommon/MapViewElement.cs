@@ -126,12 +126,31 @@ namespace MgUiCommon
                 {
                     // Tile to draw
                     var currentcell = Game.CurrentDungeon.GetCell(new XY(ix, iy));
-                    if (!actorLocations.Any(i => (i.X == ix) && (i.Y == iy)))
+
+                    var visibility = Game.CurrentDungeon.GetVisibility(new XY(ix, iy));
+
+                    // Repeating, as show even if actor there where SEEN
+                    if (visibility == Dungeon.CellVisibility.VISIBLE)
+                    {
+                        if (!actorLocations.Any(i => (i.X == ix) && (i.Y == iy)))
+                        {
+                            var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
+                            var location = new Vector2(ix * TileWidth,
+                                iy * TileHeight);
+                            var color = Color.White;
+                            SpriteBatch.DrawString(
+                                MapFont,
+                                drawChar.ToString(),
+                                location,
+                                color);
+                        }
+                    }
+                    else if (visibility == Dungeon.CellVisibility.SEEN)
                     {
                         var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
                         var location = new Vector2(ix * TileWidth,
                             iy * TileHeight);
-                        var color = Color.White;
+                        var color = Color.DimGray;
                         SpriteBatch.DrawString(
                             MapFont,
                             drawChar.ToString(),
@@ -148,12 +167,17 @@ namespace MgUiCommon
                 var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
                 var location = new Vector2(actor.Location.X * TileWidth,
                     actor.Location.Y * TileHeight);
-                var color = Color.White;
-                SpriteBatch.DrawString(
-                    MapFont,
-                    drawChar.ToString(),
-                    location,
-                    color);
+                // Only show character if visible
+                if (Game.CurrentDungeon.GetVisibility(actor.Location) == 
+                    Dungeon.CellVisibility.VISIBLE)
+                {
+                    var color = Color.White;
+                    SpriteBatch.DrawString(
+                        MapFont,
+                        drawChar.ToString(),
+                        location,
+                        color);
+                }
             }
 
             SpriteBatch.End();
