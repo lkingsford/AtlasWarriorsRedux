@@ -16,6 +16,8 @@ namespace AtlasWarriorsGame
         /// <param name="Dungeon"></param>
         public Player(Dungeon Dungeon) : base(Dungeon)
         {
+            // Initialise FOV
+            Dungeon.PcMoved(Location);
         }
 
         public override string SpriteId
@@ -62,6 +64,9 @@ namespace AtlasWarriorsGame
                     break;
             }
             NextMove = Instruction.NOT_SET;
+
+            // Update FOV
+            Dungeon.PcMoved(Location);
         }
 
         /// <summary>
