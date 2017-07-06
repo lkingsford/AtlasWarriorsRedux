@@ -13,6 +13,18 @@ namespace ScreenReaderApp
     /// </summary>
     class Program
     {
+        enum DisplayMode
+        {
+            REFRESH_ONLY,
+            ROOM,
+            ALL
+        }
+
+        /// <summary>
+        /// What to show
+        /// </summary>
+        static DisplayMode displayMode;
+
         static void Main(string[] args)
         {
             Tolk.TrySAPI(true);
@@ -45,9 +57,22 @@ namespace ScreenReaderApp
             //Console.WriteLine("Done!");
             var G = new AtlasWarriorsGame.Game();
             bool quit = false;
+            displayMode = DisplayMode.ROOM;
+            bool skipDraw = false;
             while (!quit)
             {
-                DrawMap(G.CurrentDungeon);
+                // If not skipping draw, draw map. If so - reset skipDraw to draw map next time.
+                if (!skipDraw)
+                {
+                    if (displayMode != DisplayMode.REFRESH_ONLY)
+                    {
+                        DrawMap(G.CurrentDungeon);
+                    }
+                }
+                else
+                {
+                    skipDraw = false;
+                }
                 Console.Write("\n>");
                 var input = Console.ReadKey();
                 switch (input.Key)
@@ -88,20 +113,74 @@ namespace ScreenReaderApp
                     case ConsoleKey.NumPad3:
                         G.Player.NextMove = Player.Instruction.MOVE_SE;
                         break;
+
+                    // Non move options
+                    // Refresh screen
+                    case ConsoleKey.Spacebar:
+                        DrawMap(G.CurrentDungeon, true);
+                        skipDraw = true;
+                        break;
+
+                    // Change draw mode - F1, F2, F3
+                    case ConsoleKey.F1:
+                        displayMode = DisplayMode.ALL;
+                        Console.Write("Display mode set to show all");
+                        break;
+                    case ConsoleKey.F2:
+                        displayMode = DisplayMode.ROOM;
+                        Console.Write("Display mode set to show current visible area only");
+                        break;
+                    case ConsoleKey.F3:
+                        displayMode = DisplayMode.REFRESH_ONLY;
+                        Console.Write("Display mode set to only show on refresh (Space)");
+                        break;
                 }
                 G.DoTurn();
             }
         }
 
-        static void DrawMap(AtlasWarriorsGame.Dungeon Dungeon)
+        /// <summary>
+        /// Draw the map to the console
+        /// </summary>
+        /// <param name="Dungeon">Dungeon to draw</param>
+        /// <param name="ForceDrawAll">Whether to force drawing whole map</param>
+        static void DrawMap(AtlasWarriorsGame.Dungeon Dungeon, bool ForceDrawAll = false)
         {
+            // Get the furthest on each edge that's visible
+            // Initialising with max/min possible for min/max respectively
+            int leftToShow = Dungeon.Width;
+            int rightToShow = 0;
+            int topToShow = Dungeon.Height;
+            int bottomToShow = 0;
+
             for (int iy = 0; iy < Dungeon.Height; ++iy)
             {
-                Console.WriteLine();
                 for (int ix = 0; ix < Dungeon.Width; ++ix)
                 {
-                    var tileChar = UiCommon.CellToScreen.CellScreenChar(
-                        Dungeon.GetCell(new XY(ix, iy)));
+                    // If in room mode and visible, or if seen
+                    if (ForceDrawAll ||
+                        ((displayMode == DisplayMode.ROOM) &&
+                        (Dungeon.GetVisibility(new XY(ix, iy)) == Dungeon.CellVisibility.VISIBLE)) ||
+                        ((displayMode == DisplayMode.ALL) &&
+                        (Dungeon.GetVisibility(new XY(ix, iy)) != Dungeon.CellVisibility.UNSEEN)))
+                    {
+                        leftToShow = Math.Min(leftToShow, ix);
+                        rightToShow = Math.Max(rightToShow, ix);
+                        topToShow = Math.Min(topToShow, iy);
+                        bottomToShow = Math.Max(bottomToShow, iy);
+                    }
+                }
+            }
+
+            for (int iy = topToShow; iy <= bottomToShow; ++iy)
+            {
+                Console.WriteLine();
+                for (int ix = leftToShow; ix <= rightToShow; ++ix)
+                {
+                    // Get character, unless unseen in which get space
+                    var tileChar = Dungeon.GetVisibility(new XY(ix, iy))
+                        != Dungeon.CellVisibility.UNSEEN ?
+                        UiCommon.CellToScreen.CellScreenChar(Dungeon.GetCell(new XY(ix, iy))) : ' ';
                     var tileActors = (Dungeon.Actors.Where(i => i.Location == (new XY(ix, iy))));
                     if (tileActors.Count() > 0) 
                     {
