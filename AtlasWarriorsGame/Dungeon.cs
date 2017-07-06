@@ -21,6 +21,7 @@ namespace AtlasWarriorsGame
         public Dungeon(int Width, int Height, Func<Dungeon, bool> Generator = null)
         {
             TileMap = new DungeonCell[Width, Height];
+            VisibilityMap = new CellVisibility[Width, Height];
             Actors = new List<Actor>();
             // Invoke generator, unless it's null which use default
             (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
@@ -35,6 +36,19 @@ namespace AtlasWarriorsGame
             FLOOR,
             WALL,
             DOOR
+        }
+
+        /// <summary>
+        /// What is currently known/seen
+        /// </summary>
+        public enum CellVisibility
+        {
+            // Never seen
+            UNSEEN,
+            // Seen, but not now
+            SEEN,
+            // Visible now
+            VISIBLE
         }
 
         /// <summary>
@@ -80,6 +94,12 @@ namespace AtlasWarriorsGame
         protected DungeonCell[,] TileMap;
 
         /// <summary>
+        /// Array containing whether each part of the map is visible
+        /// </summary>
+        /// <remarks>I really dunno if this should be here or in player character...</remarks>
+        protected CellVisibility[,] VisibilityMap;
+
+        /// <summary>
         /// Change part of the map
         /// </summary>
         /// <param name="Coord">Point to change</param>
@@ -106,6 +126,67 @@ namespace AtlasWarriorsGame
             }
             // Otherwise, return empty
             return DungeonCell.EMPTY;
+        }
+
+        /// <summary>
+        /// Return visibility of cell
+        /// </summary>
+        /// <param name="Coord">Coordinates to look up</param>
+        /// <returns>Visibility of requested cell</returns>
+        public CellVisibility GetVisibility(XY Coord)
+        {
+            return VisibilityMap[Coord.X, Coord.Y];
+        }
+
+        /// <summary>
+        /// Recalculate visibility with new PC coordinates
+        /// </summary>
+        /// <param name="Coord">Coordinate where PC has moved</param>
+        public void PcMoved(XY Coord)
+        {
+            // Reset all visible to seen
+            for (int ix = 0; ix < Width; ++ix)
+            {
+                for (int iy = 0; iy < Height; ++iy)
+                {
+                    if (VisibilityMap[ix, iy] == CellVisibility.VISIBLE)
+                    {
+                        VisibilityMap[ix, iy] = CellVisibility.SEEN;
+                    }
+                }
+            }
+            VisibleFill(Coord, true);
+        }
+
+        /// <summary>
+        /// Fill current visible with SEEN. Recursive flood fill algorithm.
+        /// </summary>
+        /// <param name="Coord">Coordinate to mark as seen</param>
+        /// <param name="Force">Force to continue, even if would normally block</param>
+        protected void VisibleFill(XY Coord, bool Force = false)
+        {
+            var cell = GetCell(Coord);
+            bool alreadyVisible = VisibilityMap[Coord.X, Coord.Y] == CellVisibility.VISIBLE;
+            // EMPTY might be out of bounds. Should never be where player is.
+            if (cell != DungeonCell.EMPTY)
+            {
+                VisibilityMap[Coord.X, Coord.Y] = CellVisibility.VISIBLE;
+            }
+            bool blocksSight =
+                (cell == DungeonCell.WALL) || 
+                (cell == DungeonCell.DOOR) ||
+                (cell == DungeonCell.EMPTY);
+            if (Force || (!alreadyVisible && !blocksSight))
+            {
+                VisibleFill(Coord + new XY(-1, 0), false);
+                VisibleFill(Coord + new XY(1, 0), false);
+                VisibleFill(Coord + new XY(0, -1), false);
+                VisibleFill(Coord + new XY(0, 1), false);
+                VisibleFill(Coord + new XY(-1, -1), false);
+                VisibleFill(Coord + new XY(1, 1), false);
+                VisibleFill(Coord + new XY(1, -1), false);
+                VisibleFill(Coord + new XY(-1, 1), false); ;
+            }
         }
 
         /// <summary>
