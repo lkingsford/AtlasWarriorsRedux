@@ -42,6 +42,7 @@
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
     <Compile Include="DungeonTests.cs" />
     <Compile Include="ActorTests.cs" />
+    <Compile Include="TestUtils.cs" />
     <Compile Include="XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
