@@ -23,6 +23,9 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 for (int iy = 0; iy < Dungeon.Height; ++iy)
                 {
                     Dungeon.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+
+                    // Create new spawn area for each cell
+                    Dungeon.SpawnAreas.Add(new SpawnArea(new XY(ix, iy)));
                 }
             } 
 

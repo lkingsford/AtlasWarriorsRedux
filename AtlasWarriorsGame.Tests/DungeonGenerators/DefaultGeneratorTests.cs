@@ -48,5 +48,25 @@ namespace AtlasWarriorsGame.Tests
                 }
             }
         }
+
+        /// <summary>
+        /// Check that 5x4 DefaultGenerator generates a spawn area for every point
+        /// </summary>
+        [Test]
+        [Category("DungeonGenerators/DefaultGenerator")]
+        public void SpawnAreaTest()
+        {
+            var D = new Dungeon(5, 4,
+                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
+
+            for (int ix = 1; ix < 5; ++ix)
+            {
+                for (int iy = 1; iy < 3; ++iy)
+                {
+                    Assert.IsTrue(D.SpawnAreas.Any(i => i.Area.Contains(new XY(ix, iy))),
+                        "Spawn area not found");
+                }
+            }
+        }
     }
 }

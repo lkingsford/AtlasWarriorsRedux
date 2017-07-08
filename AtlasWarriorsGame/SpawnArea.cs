@@ -10,17 +10,24 @@ namespace AtlasWarriorsGame
     public class SpawnArea
     {
         /// <summary>
-        /// Default constructor. Initialised list of points only.
+        /// Default constructor.
         /// </summary>
         public SpawnArea()
         {
-            Area = new List<XY>();
+        }
+
+        /// <summary>
+        /// Create a spawn area with just the given point
+        /// </summary>
+        public SpawnArea(XY point)
+        {
+            Area.Add(point);
         }
 
         /// <summary>
         /// Locations where can spawn
         /// </summary>
-        public List<XY> Area;
+        public List<XY> Area = new List<XY>();
 
         /// <summary>
         /// Special ID if required by particular dungeon generator to place something particular

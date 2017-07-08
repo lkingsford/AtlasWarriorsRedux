@@ -37,7 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DungeonGenerators\RoomsGeneratorFeatureTests.cs" />
+    <Compile Include="DungeonGenerators\RoomsGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
     <Compile Include="DungeonTests.cs" />
