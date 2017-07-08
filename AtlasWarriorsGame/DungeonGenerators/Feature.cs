@@ -36,7 +36,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             {
                 for (int iy = 0; iy < Feature.FeatureMap.GetLength(1); ++iy)
                 {
-                    this.FeatureMap[ix, iy] = Feature.FeatureMap[ix, iy];
+                    SetCell(new XY(ix, iy), Feature.FeatureMap[ix, iy]);
                 }
             }
 
@@ -57,6 +57,29 @@ namespace AtlasWarriorsGame.DungeonGenerators
         public void SetCell(XY coord, DungeonCell value)
         {
             FeatureMap[coord.X, coord.Y] = value;
+        }
+
+        /// <summary>
+        /// Get the current parts of the feature where bad dudes can spawn.
+        /// At the moment, all floor bits
+        /// </summary>
+        virtual public SpawnArea SpawnArea
+        {
+            get
+            {
+                var spawnArea = new SpawnArea();
+                for (int ix = 0; ix < Width; ++ix)
+                {
+                    for (int iy = 0; iy < Height; ++iy)
+                    {
+                        if (GetCell(new XY(ix, iy)) == DungeonCell.FLOOR)
+                        {
+                            spawnArea.Area.Add(new XY(ix, iy));
+                        }
+                    }
+                }
+                return spawnArea;
+            }
         }
 
         /// <summary>

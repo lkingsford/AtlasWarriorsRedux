@@ -25,6 +25,22 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Create a new spawn area, translated by a certain amount
+        /// </summary>
+        /// <param name="translation">Translation amount</param>
+        /// <returns></returns>
+        public SpawnArea Translate(XY translation)
+        {
+            var spawnArea = new SpawnArea();
+            foreach (var point in Area)
+            {
+                spawnArea.Area.Add(point + translation);
+            }
+            spawnArea.SpecialID = SpecialID;
+            return spawnArea;
+        }
+
+        /// <summary>
         /// Locations where can spawn
         /// </summary>
         public List<XY> Area = new List<XY>();
