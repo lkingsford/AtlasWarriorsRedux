@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Monster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dungeon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\DefaultGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\Feature.cs" />

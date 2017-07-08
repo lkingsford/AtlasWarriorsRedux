@@ -42,6 +42,9 @@ namespace UiCommon
             {
                 case "PLAYER":
                     return '@';
+                // Generic monster
+                case "MONSTER":
+                    return 'M';
                 default:
                     return '?';
             }
