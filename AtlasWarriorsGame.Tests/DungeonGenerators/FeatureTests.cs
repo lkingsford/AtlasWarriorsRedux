@@ -215,5 +215,25 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             Assert.AreEqual(fLeft.GetCell(new XY(2, 1)), DungeonCell.WALL);
             Assert.AreEqual(fLeft.GetCell(new XY(3, 0)), DungeonCell.DOOR);
         }
+
+        /// <summary>
+        /// Test that a spawn area is created containing all floors in the feature
+        /// </summary>
+        [Test]
+        public void SpawnAreaTest()
+        {
+            // Build an empty room
+            Feature = AtlasWarriorsGame.DungeonGenerators.RoomsGenerator.CreateFeature(5, 10);
+
+            // Test all correct
+            for (int ix = 1; ix < (Feature.Width - 1); ++ix)
+            {
+                for (int iy = 1; iy < (Feature.Height - 1); ++iy)
+                {
+                    Assert.IsTrue(Feature.SpawnArea.Area.Contains(new XY(ix, iy)),
+                        $"Part of spawn area new found at {ix}, {iy}");
+                }
+            }
+        }
     }
 }
