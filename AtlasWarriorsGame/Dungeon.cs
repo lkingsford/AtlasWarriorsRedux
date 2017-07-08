@@ -212,6 +212,11 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Places where enemies can be spawned
+        /// </summary>
+        public List<SpawnArea> SpawnAreas;
+
+        /// <summary>
         /// Where the player starts on this dungeon
         /// </summary>
         public XY StartLocation;
