@@ -11,8 +11,18 @@ namespace AtlasWarriorsGame
     class Monster: Actor
     {
         /// <summary>
+        /// Create monster in dungeon in location
+        /// </summary>
+        /// <param name="dungeon">Dungeon monster in</param>
+        /// <param name="location">Location monster in</param>
+        public Monster(Dungeon dungeon, XY location) : base(dungeon)
+        {
+            Location = location;
+        }
+
+        /// <summary>
         /// ID for the sake of front end. Still dunno if this is a good idea.
         /// </summary>
-        public virtual String SpriteId { get { return "MONSTER"; } }
+        public override String SpriteId { get { return "MONSTER"; } }
     }
 }
