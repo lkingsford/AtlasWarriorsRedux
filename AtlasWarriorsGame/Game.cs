@@ -15,8 +15,9 @@ namespace AtlasWarriorsGame
         /// </summary>
         public Game()
         {
-            _dungeon = new Dungeon(40, 20, DungeonGenerators.RoomsGenerator.Generate); 
+            _dungeon = new Dungeon(40, 20, DungeonGenerators.RoomsGenerator.Generate);
             Player = new Player(_dungeon);
+            Populate(_dungeon);
         }
 
         /// <summary>
@@ -49,6 +50,21 @@ namespace AtlasWarriorsGame
             foreach (var Actor in CurrentDungeon.Actors)
             {
                 Actor.DoTurn();
+            }
+        }
+
+        /// <summary>
+        /// Populate a dungeon with bad guys
+        /// </summary>
+        /// <remarks>This will likely be moved</remarks>
+        public void Populate(Dungeon d)
+        {
+            foreach (SpawnArea a in d.SpawnAreas)
+            {
+                // Randomly pick a point in the spawn area
+                var monsterPoint = a.Area.RandomItem();
+                // Not sure if this is silly, but add the monster to the point. It adds itself.
+                new Monster(d, monsterPoint); 
             }
         }
     }
