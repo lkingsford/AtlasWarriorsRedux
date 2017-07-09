@@ -49,7 +49,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Current location of the actor
         /// </summary>
-        public XY Location {get; private set; }
+        public XY Location {get; protected set; }
 
         /// <summary>
         /// Move the actor, if the dungeon allows it

@@ -22,7 +22,6 @@ namespace AtlasWarriorsGame
         {
             TileMap = new DungeonCell[Width, Height];
             VisibilityMap = new CellVisibility[Width, Height];
-            Actors = new List<Actor>();
             // Invoke generator, unless it's null which use default
             (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
         }
@@ -212,6 +211,11 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Places where enemies can be spawned
+        /// </summary>
+        public List<SpawnArea> SpawnAreas = new List<SpawnArea>();
+
+        /// <summary>
         /// Where the player starts on this dungeon
         /// </summary>
         public XY StartLocation;
@@ -219,6 +223,6 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// All Actors, currently in this dungeon
         /// </summary>
-        public List<Actor> Actors;
+        public List<Actor> Actors = new List<Actor>();
     }
 }

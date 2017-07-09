@@ -140,6 +140,9 @@ namespace AtlasWarriorsGame.DungeonGenerators
                     }
                 }
             }
+
+            // Add spawn area to dungeon
+            Dungeon.SpawnAreas.Add(Feature.SpawnArea.Translate(Translate));
         }
 
         /// <summary>

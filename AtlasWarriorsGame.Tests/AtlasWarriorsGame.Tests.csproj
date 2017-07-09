@@ -37,12 +37,13 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DungeonGenerators\RoomsGeneratorFeatureTests.cs" />
+    <Compile Include="DungeonGenerators\RoomsGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
     <Compile Include="DungeonTests.cs" />
     <Compile Include="ActorTests.cs" />
     <Compile Include="DungeonTests.Fov.cs" />
+    <Compile Include="GlobalRandom.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

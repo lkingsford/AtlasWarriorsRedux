@@ -206,8 +206,8 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// </param>
         [Test]
         [TestCaseSource("AddFeatureTestCases")]
-        public void AddFeatureTest(XY Translate, 
-                                   Dungeon Dungeon, 
+        public void AddFeatureTest(XY Translate,
+                                   Dungeon Dungeon,
                                    Feature Feature,
                                    Dungeon DesiredDungeon)
         {
@@ -428,6 +428,41 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         {
             Assert.IsFalse(RoomsGenerator.FeatureFits(Translate, Dungeon, Feature));
         }
-                                   
+
+
+        /// <summary>
+        /// Test that adding a feature adds to the spawn areas
+        /// </summary>
+        [Test]
+        public void AddFeatureAddsSpawnArea()
+        {
+            // Build an empty room
+            var feature = AtlasWarriorsGame.DungeonGenerators.RoomsGenerator.CreateFeature(4, 3);
+            var D = GetDungeon(
+                "          ",
+                "          ",
+                "          ",
+                "          ",
+                "          "
+            );
+
+            // Clear spawn areas to be fresh
+            D.SpawnAreas.RemoveAll(i=>true);
+
+            // Add feature, with translation
+            RoomsGenerator.AddFeature(new XY(2, 1), D, feature);
+
+            // Check spawn area added
+            Assert.AreEqual(1, D.SpawnAreas.Count, "No spawn area added");
+            var area = D.SpawnAreas.First();
+
+            // Test all correct
+            for (int ix = 3; ix < 5; ++ix)
+            {
+                int iy = 2;
+                Assert.IsTrue(area.Area.Contains(new XY(ix, iy)),
+                    $"Part of spawn area new found at {ix}, {iy}");
+            }
+        }
     }
 }
