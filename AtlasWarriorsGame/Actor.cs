@@ -113,6 +113,15 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Set health to desired values. For tests, and a couple of specific things. Not always.
+        /// </summary>
+        /// <param name="health">Value to set it to</param>
+        virtual public void SetHealth(int health)
+        {
+            Health = health;
+        }
+
+        /// <summary>
         /// Maximum allowed health
         /// </summary>
         /// <remarks>Default of 10</remarks>
