@@ -63,5 +63,59 @@ namespace AtlasWarriorsGame
                 Location = newLocation;
             }
         }
+
+        /// <summary>
+        /// Health of player underlying variable
+        /// </summary>
+        protected int Health = 10;
+
+        /// <summary>
+        /// Health of player
+        /// Read only, as needs to be set in specific ways (healing, injuring, resetting to value)
+        /// which will have gameplay ramifications (such as death)
+        /// </summary>
+        /// <remarks>Default of 10</remarks>
+        public int CurrentHealth
+        {
+            get
+            {
+                return Health; 
+            }
+        }
+
+        /// <summary>
+        /// Reduce health due to attack
+        /// </summary>
+        /// <param name="injury">Amount to reduce</param>
+        /// <returns>New health</returns>
+        virtual public int Injure(int injury)
+        {
+            // Allowed to go <0 in this game - but needs to (TODO) trigger Kill Or Be Killed for
+            // player, or kill the monster in other circumstance
+            Health -= injury;
+
+            return Health;
+        }
+
+        /// <summary>
+        /// Increase health
+        /// </summary>
+        /// <param name="healing">Amount to increase</param>
+        /// <returns>New health</returns>
+        virtual public int Heal(int healing)
+        {
+            Health += healing;
+
+            // Can't go above max health
+            Health = Math.Min(Health, MaxHealth);
+
+            return Health;
+        }
+
+        /// <summary>
+        /// Maximum allowed health
+        /// </summary>
+        /// <remarks>Default of 10</remarks>
+        public int MaxHealth = 10;
     }
 }
