@@ -164,14 +164,14 @@ namespace MgUiCommon
                     // Repeating, as show even if actor there where SEEN
                     if (visibility == Dungeon.CellVisibility.VISIBLE)
                     {
-                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
+                        var drawChar = CellToScreen.CellScreenChar(currentcell);
                         var color = Color.White;
                         ConsoleBuffer[ix, iy].DrawChar = drawChar;
                         ConsoleBuffer[ix, iy].ForeColor = color;
                     }
                     else if (visibility == Dungeon.CellVisibility.SEEN)
                     {
-                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
+                        var drawChar = CellToScreen.CellScreenChar(currentcell);
                         var color = Color.DimGray;
                         ConsoleBuffer[ix, iy].DrawChar = drawChar;
                         ConsoleBuffer[ix, iy].ForeColor = color;
@@ -189,7 +189,7 @@ namespace MgUiCommon
             foreach (var actor in Game.CurrentDungeon.Actors)
             {
                 // Tile to draw
-                var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
+                var drawChar = CellToScreen.ActorToChar(actor);
                 // Only show character if visible
                 if (Game.CurrentDungeon.GetVisibility(actor.Location) == 
                     Dungeon.CellVisibility.VISIBLE)

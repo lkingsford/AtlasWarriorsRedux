@@ -9,6 +9,7 @@
     <Import_RootNamespace>MgUiCommon</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CellToScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapViewElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State.cs" />
   </ItemGroup>

@@ -1,11 +1,11 @@
 ﻿using AtlasWarriorsGame;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static AtlasWarriorsGame.Dungeon;
 
-namespace UiCommon
+namespace MgUiCommon
 {
+    /// <summary>
+    /// Classes used to get characters for elements
+    /// </summary>
     static class CellToScreen
     {
         /// <summary>
@@ -29,7 +29,6 @@ namespace UiCommon
                     return 'X';
             }
         }
-
 
         /// <summary>
         /// Get the character to display a particular actor

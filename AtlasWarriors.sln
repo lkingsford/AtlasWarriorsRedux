@@ -9,8 +9,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AtlasWarriorsGame", "AtlasW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasWarriorsGame.Tests", "AtlasWarriorsGame.Tests\AtlasWarriorsGame.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiCommon", "AtlasWarriorsUiCommon\UiCommon.shproj", "{84879023-EFED-4195-BEBB-5C728F9F0D5A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AB54F48-7B05-4353-9286-2CA797B1F14A}"
 	ProjectSection(SolutionItems) = preProject
 		LICENCE.md = LICENCE.md
@@ -27,15 +25,11 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
-		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
-		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
-		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
-		AtlasWarriorsUiCommon\AtlasWarriorsUiCommon.projitems*{84879023-efed-4195-bebb-5c728f9f0d5a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{9ebdee64-6fc9-468b-b93e-468b324f9c58}*SharedItemsImports = 13
 	EndGlobalSection
