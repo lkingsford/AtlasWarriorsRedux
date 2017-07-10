@@ -180,11 +180,11 @@ namespace ScreenReaderApp
                     // Get character, unless unseen in which get space
                     var tileChar = Dungeon.GetVisibility(new XY(ix, iy))
                         != Dungeon.CellVisibility.UNSEEN ?
-                        UiCommon.CellToScreen.CellScreenChar(Dungeon.GetCell(new XY(ix, iy))) : ' ';
+                        CellToScreen.CellScreenChar(Dungeon.GetCell(new XY(ix, iy))) : ' ';
                     var tileActors = (Dungeon.Actors.Where(i => i.Location == (new XY(ix, iy))));
                     if (tileActors.Count() > 0) 
                     {
-                        tileChar = UiCommon.CellToScreen.ActorToChar(tileActors.First());
+                        tileChar = CellToScreen.ActorToChar(tileActors.First());
                     }
                     Console.Write(tileChar);
                 }

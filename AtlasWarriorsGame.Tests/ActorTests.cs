@@ -76,5 +76,34 @@ namespace AtlasWarriorsGame.Tests
             Assert.AreEqual(startLocation.X, actor.Location.X, "X failed to block");
             Assert.AreEqual(startLocation.Y, actor.Location.Y, "Y failed to block");
         }
+
+        /// <summary>
+        /// Heal values for the heal test. They're current, max, amount of healing, and desired 
+        /// result
+        /// </summary>
+        static object[] HealValues =
+        {
+            new object[] {10, 10, 2, 10 },
+            new object[] {5, 10, 2, 7},
+            new object[] {-1, 10, 1, 0},
+            new object[] {9, 10, 2, 10}
+        };
+
+        /// <summary>
+        /// Test that heal works - taking max into account
+        /// </summary>
+        /// <param name="current">Current health</param>
+        /// <param name="maxHealth">Maximum health of actor</param>
+        /// <param name="healAmount">Amount to heal</param>
+        /// <param name="result">Desired result</param>
+        [Test]
+        [TestCaseSource("HealValues")]
+        public void Heal(int current, int maxHealth, int healAmount, int result)
+        {
+            var a = new Actor();
+            a.SetHealth(current);
+            a.MaxHealth = maxHealth;
+            Assert.AreEqual(result, a.Heal(healAmount), "Healed to incorrect value");
+        }
     }
 }
