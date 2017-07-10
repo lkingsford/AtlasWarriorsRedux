@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CellToScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConsoleCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapViewElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State.cs" />
   </ItemGroup>
