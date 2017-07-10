@@ -35,14 +35,15 @@ namespace MgUiCommon
             // Initialise last dungeon to initial dungeon
             LastTurnDungeon = Game.CurrentDungeon;
 
-            ResetRenderTarget();
+            ResetRenderTargetAndConsole();
         }
 
         /// <summary>
         /// Set the render target to a new render target for the current map
         /// </summary>
-        private void ResetRenderTarget()
+        private void ResetRenderTargetAndConsole()
         {
+            ConsoleBuffer = new ConsoleCell[Game.CurrentDungeon.Width, Game.CurrentDungeon.Height];
             RenderTarget = new RenderTarget2D(Device, (int)(TileWidth * Game.CurrentDungeon.Width),
                 (int)(TileHeight * Game.CurrentDungeon.Height));
         }
@@ -90,6 +91,32 @@ namespace MgUiCommon
         private Dungeon LastTurnDungeon;
 
         /// <summary>
+        /// Cell in the console display
+        /// </summary>
+        public struct ConsoleCell
+        {
+            /// <summary>
+            /// Character that will be drawn
+            /// </summary>
+            public char DrawChar;
+
+            /// <summary>
+            /// Color in the background of the cell
+            /// </summary>
+            public Color BackColor;
+
+            /// <summary>
+            /// Color in the foreground of the cell
+            /// </summary>
+            public Color ForeColor;
+        }
+
+        /// <summary>
+        /// Text console that will be drawn
+        /// </summary>
+        public ConsoleCell[,] ConsoleBuffer;
+
+        /// <summary>
         /// Draw the current game map to a buffer
         /// Requires that sprite batch be ended
         /// </summary>
@@ -102,24 +129,29 @@ namespace MgUiCommon
             // Create a new texture if new map
             if (LastTurnDungeon != Game.CurrentDungeon)
             {
-                ResetRenderTarget();
+                ResetRenderTargetAndConsole();
             }
 
             // Draw to texture, not screen
             Device.SetRenderTarget(RenderTarget);
 
-            // Start a new spritebatch - needed for RenderTarget
-            SpriteBatch.Begin();
+            // Draw game part
+            DrawMapToConsole();
+            DrawActorsToConsole();
+            DrawConsoleBuffer(SpriteBatch);
 
-            // Clear texture
-            Device.Clear(Color.Black);
+            // And draw to screen again
+            Device.SetRenderTarget(null);
 
-            // Draw map
+            return RenderTarget;
+        }
 
-            // Get list of character locations not to draw
-            var actorLocations = Game.CurrentDungeon.Actors.Select(i => i.Location);
-
-            // Draw map
+        /// <summary>
+        /// Draw the current map to the console buffer
+        /// </summary>
+        protected void DrawMapToConsole()
+        {
+            // Draw map to Console Buffer
             for (var ix = 0; ix < Game.CurrentDungeon.Width; ++ix)
             {
                 for (var iy = 0; iy < Game.CurrentDungeon.Height; ++iy)
@@ -132,60 +164,76 @@ namespace MgUiCommon
                     // Repeating, as show even if actor there where SEEN
                     if (visibility == Dungeon.CellVisibility.VISIBLE)
                     {
-                        if (!actorLocations.Any(i => (i.X == ix) && (i.Y == iy)))
-                        {
-                            var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                            var location = new Vector2(ix * TileWidth,
-                                iy * TileHeight);
-                            var color = Color.White;
-                            SpriteBatch.DrawString(
-                                MapFont,
-                                drawChar.ToString(),
-                                location,
-                                color);
-                        }
+                        var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
+                        var color = Color.White;
+                        ConsoleBuffer[ix, iy].DrawChar = drawChar;
+                        ConsoleBuffer[ix, iy].ForeColor = color;
                     }
                     else if (visibility == Dungeon.CellVisibility.SEEN)
                     {
                         var drawChar = UiCommon.CellToScreen.CellScreenChar(currentcell);
-                        var location = new Vector2(ix * TileWidth,
-                            iy * TileHeight);
                         var color = Color.DimGray;
-                        SpriteBatch.DrawString(
-                            MapFont,
-                            drawChar.ToString(),
-                            location,
-                            color);
+                        ConsoleBuffer[ix, iy].DrawChar = drawChar;
+                        ConsoleBuffer[ix, iy].ForeColor = color;
                     }
                 }
             }
+        }
 
-            // Draw characters
+        /// <summary>
+        /// Draw the actors on the current map to the console buffer
+        /// </summary>
+        protected void DrawActorsToConsole()
+        {
+            // Draw characters to Console Buffer
             foreach (var actor in Game.CurrentDungeon.Actors)
             {
                 // Tile to draw
                 var drawChar = UiCommon.CellToScreen.ActorToChar(actor);
-                var location = new Vector2(actor.Location.X * TileWidth,
-                    actor.Location.Y * TileHeight);
                 // Only show character if visible
                 if (Game.CurrentDungeon.GetVisibility(actor.Location) == 
                     Dungeon.CellVisibility.VISIBLE)
                 {
                     var color = Color.White;
-                    SpriteBatch.DrawString(
-                        MapFont,
-                        drawChar.ToString(),
-                        location,
-                        color);
+                    ConsoleBuffer[actor.Location.X, actor.Location.Y].DrawChar = drawChar;
+                    ConsoleBuffer[actor.Location.X, actor.Location.Y].ForeColor = color;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw the console buffer to the screen
+        /// </summary>
+        /// <param name="SpriteBatch">SpriteBatch to draw to</param>
+        protected void DrawConsoleBuffer(SpriteBatch SpriteBatch)
+        {
+            // Start a new spritebatch - needed for RenderTarget
+            SpriteBatch.Begin();
+
+            // Draw console to screen
+            for (var ix = 0; ix < Game.CurrentDungeon.Width; ++ix)
+            {
+                for (var iy = 0; iy < Game.CurrentDungeon.Height; ++iy)
+                {
+                    var cell = ConsoleBuffer[ix, iy];
+                    var location = new Vector2(ix * TileWidth, iy * TileHeight);
+                    var character = cell.DrawChar;
+                    if (MapFont.Characters.Contains(character))
+                    {
+                        SpriteBatch.DrawString(
+                            MapFont,
+                            cell.DrawChar.ToString(),
+                            location,
+                            cell.ForeColor);
+                    }
                 }
             }
 
+            // Clear texture
+            Device.Clear(Color.Black);
+
             SpriteBatch.End();
 
-            // And draw to screen again
-            Device.SetRenderTarget(null);
-
-            return RenderTarget;
         }
     }
 }
