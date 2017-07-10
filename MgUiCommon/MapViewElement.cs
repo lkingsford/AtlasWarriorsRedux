@@ -140,20 +140,13 @@ namespace MgUiCommon
 
                     var visibility = Game.CurrentDungeon.GetVisibility(new XY(ix, iy));
 
-                    // Repeating, as show even if actor there where SEEN
-                    if (visibility == Dungeon.CellVisibility.VISIBLE)
+                    // If visible or seen, we're drawing. 
+                    // Check for visible and pass to GetTileCell.
+                    if ((visibility == Dungeon.CellVisibility.VISIBLE) || 
+                        (visibility == Dungeon.CellVisibility.SEEN))
                     {
-                        var drawChar = CellToScreen.CellScreenChar(currentcell);
-                        var color = Color.White;
-                        ConsoleBuffer[ix, iy].DrawChar = drawChar;
-                        ConsoleBuffer[ix, iy].ForeColor = color;
-                    }
-                    else if (visibility == Dungeon.CellVisibility.SEEN)
-                    {
-                        var drawChar = CellToScreen.CellScreenChar(currentcell);
-                        var color = Color.DimGray;
-                        ConsoleBuffer[ix, iy].DrawChar = drawChar;
-                        ConsoleBuffer[ix, iy].ForeColor = color;
+                        ConsoleBuffer[ix, iy] = CellToScreen.GetTileCell(currentcell, 
+                            visibility == Dungeon.CellVisibility.VISIBLE);
                     }
                 }
             }
@@ -168,14 +161,13 @@ namespace MgUiCommon
             foreach (var actor in Game.CurrentDungeon.Actors)
             {
                 // Tile to draw
-                var drawChar = CellToScreen.ActorToChar(actor);
+                var drawCell = CellToScreen.GetActorCell(actor);
+
                 // Only show character if visible
                 if (Game.CurrentDungeon.GetVisibility(actor.Location) == 
                     Dungeon.CellVisibility.VISIBLE)
                 {
-                    var color = Color.White;
-                    ConsoleBuffer[actor.Location.X, actor.Location.Y].DrawChar = drawChar;
-                    ConsoleBuffer[actor.Location.X, actor.Location.Y].ForeColor = color;
+                    ConsoleBuffer[actor.Location.X, actor.Location.Y] = drawCell;
                 }
             }
         }
@@ -189,6 +181,12 @@ namespace MgUiCommon
             // Start a new spritebatch - needed for RenderTarget
             SpriteBatch.Begin();
 
+            // Create a texture to draw as a rectangle
+            // This seems a bit rubbish
+            // If there's a better way... I'll do it later
+            Texture2D rect = new Texture2D(Device, 1, 1);
+            rect.SetData( new[] { Color.White } );
+
             // Draw console to screen
             for (var ix = 0; ix < Game.CurrentDungeon.Width; ++ix)
             {
@@ -196,6 +194,16 @@ namespace MgUiCommon
                 {
                     var cell = ConsoleBuffer[ix, iy];
                     var location = new Vector2(ix * TileWidth, iy * TileHeight);
+
+                    // Draw background
+                    SpriteBatch.Draw(rect, new Rectangle(
+                        (int)(ix * TileWidth),
+                        (int)(iy * TileHeight),
+                        (int)((ix + 1) * TileWidth),
+                        (int)((iy + 1) * TileHeight)),
+                        null,
+                        cell.BackColor);
+
                     var character = cell.DrawChar;
                     if (MapFont.Characters.Contains(character))
                     {
