@@ -105,5 +105,33 @@ namespace AtlasWarriorsGame.Tests
             a.MaxHealth = maxHealth;
             Assert.AreEqual(result, a.Heal(healAmount), "Healed to incorrect value");
         }
+
+        /// <summary>
+        /// Attack values. They're current, amount of injury, after health
+        /// </summary>
+        static object[] InjureValues =
+        {
+            new object[] {10, 1, 9},
+            new object[] {5, 5, 0 },
+            new object[] {1, 10, -9},
+            new object[] {-1, 1, -2}
+        };
+
+        /// <summary>
+        /// Test that injure reduces health - past 0 too
+        /// </summary>
+        /// <param name="current">Start/Max HP</param>
+        /// <param name="damage">Amount to injure</param>
+        /// <param name="after">After attack HP</param>
+        [Test]
+        [TestCaseSource("InjureValues")]
+        public void Injure(int current, int damage, int after)
+        {
+            var a = new Actor();
+            a.SetHealth(current);
+            a.MaxHealth = current;
+            a.Injure(damage);
+            Assert.AreEqual(after, a.CurrentHealth, "Injured to incorrect value");
+        }
     }
 }
