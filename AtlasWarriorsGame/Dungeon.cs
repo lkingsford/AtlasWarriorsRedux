@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AtlasWarriorsGame
@@ -38,6 +39,14 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Clean out the dead bodies
+        /// </summary>
+        public void Clean()
+        {
+            Actors.RemoveAll(i => i.Dead);
+        }
+
+        /// <summary>
         /// What is currently known/seen
         /// </summary>
         public enum CellVisibility
@@ -66,6 +75,16 @@ namespace AtlasWarriorsGame
                 default:
                     return false;
             }
+        }
+
+        /// <summary>
+        /// Get if there's an actor on a tile
+        /// </summary>
+        /// <param name="Coord">Coordinate to check</param>
+        /// <returns>Actor on the tile. Null if none.</returns>
+        public Actor Occupant(XY Coord)
+        {
+            return Actors.FirstOrDefault(i=>i.Location == Coord);
         }
 
         /// <summary>

@@ -53,14 +53,37 @@ namespace AtlasWarriorsGame
 
         /// <summary>
         /// Move the actor, if the dungeon allows it
+        /// Attack, if there's somebody there
         /// </summary>
         /// <param name="dxDy">Amount to move</param>
         public void Move(XY dxDy)
         {
             var newLocation = Location + dxDy;
-            if (Dungeon.Walkable(newLocation))
+            var occupant = Dungeon.Occupant(newLocation);
+
+            if (occupant != null)
+            {
+                Attack(occupant);
+            }
+            else if (Dungeon.Walkable(newLocation))
             {
                 Location = newLocation;
+            }
+        }
+
+        /// <summary>
+        /// Attack a given opponent
+        /// </summary>
+        /// <param name="opponent">Opponent to attack</param>
+        virtual protected void Attack(Actor opponent)
+        {
+            // Do attack roll
+            int roll = 1 + GlobalRandom.R.Next(20);
+
+            // Check if attack
+            if ((roll + Atk) >= opponent.Def)
+            {
+                opponent.Injure(Dmg);
             }
         }
 
@@ -126,5 +149,52 @@ namespace AtlasWarriorsGame
         /// </summary>
         /// <remarks>Default of 10</remarks>
         public int MaxHealth = 10;
+
+        /// <summary>
+        /// Current defence statistic
+        /// Attack roll + Attack > Defence == Successful attack
+        /// </summary>
+        virtual public int Def
+        {
+            get
+            {
+                return 10;
+            }
+        }
+
+        /// <summary>
+        /// Current attack statistic
+        /// Attack roll + Attack > Defence == Successful attack
+        /// </summary>
+        virtual public int Atk
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Current damage statistic
+        /// </summary>
+        virtual public int Dmg
+        {
+            get
+            {
+                return 10;
+            }
+        }
+
+        /// <summary>
+        /// Whether the Actor is Dead (Health less than 0 by default)
+        /// </summary>
+        virtual public bool Dead
+        {
+            get
+            {
+                return Health <= 0;
+            }
+        }
+
     }
 }

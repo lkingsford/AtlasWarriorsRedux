@@ -51,6 +51,7 @@ namespace AtlasWarriorsGame
             {
                 Actor.DoTurn();
             }
+            CurrentDungeon.Clean();
         }
 
         /// <summary>
