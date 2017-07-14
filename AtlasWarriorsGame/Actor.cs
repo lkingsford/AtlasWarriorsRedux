@@ -75,7 +75,7 @@ namespace AtlasWarriorsGame
         /// Attack a given opponent
         /// </summary>
         /// <param name="opponent">Opponent to attack</param>
-        virtual protected void Attack(Actor opponent)
+        virtual public void Attack(Actor opponent)
         {
             // Do attack roll
             int roll = 1 + GlobalRandom.Next(20);
@@ -151,6 +151,21 @@ namespace AtlasWarriorsGame
         public int MaxHealth = 10;
 
         /// <summary>
+        /// Default atk before skills and inv
+        /// </summary>
+        public int BaseAtk = 10;
+
+        /// <summary>
+        /// Default def before skills and inv
+        /// </summary>
+        public int BaseDef = 10;
+
+        /// <summary>
+        /// Default damage before skills and inv
+        /// </summary>
+        public int BaseDmg = 10;
+
+        /// <summary>
         /// Current defence statistic
         /// Attack roll + Attack > Defence == Successful attack
         /// </summary>
@@ -158,7 +173,7 @@ namespace AtlasWarriorsGame
         {
             get
             {
-                return 10;
+                return BaseDef;
             }
         }
 
@@ -170,7 +185,7 @@ namespace AtlasWarriorsGame
         {
             get
             {
-                return 0;
+                return BaseAtk;
             }
         }
 
@@ -181,7 +196,7 @@ namespace AtlasWarriorsGame
         {
             get
             {
-                return 10;
+                return BaseDmg;
             }
         }
 
