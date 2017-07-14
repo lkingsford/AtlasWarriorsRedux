@@ -133,5 +133,30 @@ namespace AtlasWarriorsGame.Tests
             a.Injure(damage);
             Assert.AreEqual(after, a.CurrentHealth, "Injured to incorrect value");
         }
+
+        /// <summary>
+        /// Tests that for dead
+        /// </summary>
+        static object[] DeadValues =
+        {
+            new object[] {1, false},
+            new object[] {0, true},
+            new object[] {-1, true}
+        };
+
+        /// <summary>
+        /// Test that below 1 is dead
+        /// </summary>
+        /// <param name="current">Start/Max HP</param>
+        /// <param name="deadResult">Whether dead should be true</param>
+        [Test]
+        [TestCaseSource("DeadValues")]
+        public void Dead(int current, bool deadResult)
+        {
+            var a = new Actor();
+            a.SetHealth(current);
+            a.MaxHealth = 10;
+            Assert.AreEqual(deadResult, a.Dead);
+        }
     }
 }
