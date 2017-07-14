@@ -47,7 +47,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
 
         [Test]
         [TestCaseSource("FeatureDoorCases")]
-        public void CreateFeatureDoorTest(int ix, int iy)
+        public void CreateFeatureDoor(int ix, int iy)
         {
             Assert.IsTrue(Feature7by10.PossibleDoors.Contains(new XY(ix, iy)));
         }
@@ -63,7 +63,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
 
         [Test]
         [TestCaseSource("BadFeatureDoorCases")]
-        public void CreateFeatureDoorFailTest(int ix, int iy)
+        public void CreateFeatureDoorFail(int ix, int iy)
         {
             Assert.IsFalse(Feature7by10.PossibleDoors.Contains(new XY(ix, iy)));
         }
@@ -206,10 +206,10 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// </param>
         [Test]
         [TestCaseSource("AddFeatureTestCases")]
-        public void AddFeatureTest(XY Translate,
-                                   Dungeon Dungeon,
-                                   Feature Feature,
-                                   Dungeon DesiredDungeon)
+        public void AddFeature(XY Translate,
+                               Dungeon Dungeon,
+                               Feature Feature,
+                               Dungeon DesiredDungeon)
         {
             RoomsGenerator.AddFeature(Translate, Dungeon, Feature);
 
@@ -225,7 +225,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <summary>
         /// Slightly complicated test cases for feature fits returning true
         /// </summary>
-        static object[] FeatureFitsSuccessfulTestCases =
+        static object[] FeatureFitsSuccessfulTases =
         {
             // Basic shape, no translation
             new object[]
@@ -316,7 +316,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <param name="Dungeon">Dungeon parameter for FeatureFits</param>
         /// <param name="Feature">Feature parameter for FeatureFits</param>
         [Test]
-        [TestCaseSource("FeatureFitsSuccessfulTestCases")]
+        [TestCaseSource("FeatureFitsSuccessfulCases")]
         public void FeatureFitsTestSuccessful(XY Translate, Dungeon Dungeon, Feature Feature)
         {
             Assert.IsTrue(RoomsGenerator.FeatureFits(Translate, Dungeon, Feature));
@@ -325,7 +325,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <summary>
         /// Slightly complicated test cases for feature fits returning false
         /// </summary>
-        static object[] FeatureFitsFailedTestCases =
+        static object[] FeatureFitsFailedCases =
         {
             // Basic shape, no translation
             new object[]
@@ -423,8 +423,8 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <param name="Dungeon">Dungeon parameter for FeatureFits</param>
         /// <param name="Feature">Feature parameter for FeatureFits</param>
         [Test]
-        [TestCaseSource("FeatureFitsFailedTestCases")]
-        public void FeatureFitsTestFailed(String Description, XY Translate, Dungeon Dungeon, Feature Feature)
+        [TestCaseSource("FeatureFitsFailedCases")]
+        public void FeatureFitsFailed(String Description, XY Translate, Dungeon Dungeon, Feature Feature)
         {
             Assert.IsFalse(RoomsGenerator.FeatureFits(Translate, Dungeon, Feature));
         }

@@ -18,7 +18,7 @@ namespace AtlasWarriorsGame.Tests
         /// Test that R.RandomItem returns an element from its list
         /// </summary>
         [Test]
-        public void TestListRandom()
+        public void ListRandom()
         {
             var list = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
             var random = list.RandomItem();

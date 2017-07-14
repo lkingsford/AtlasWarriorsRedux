@@ -79,7 +79,7 @@ namespace AtlasWarriorsGame.Tests
         /// When in door, both rooms are seen
         /// </summary>
         [Test]
-        public void TestRoomVisibleInDoor()
+        public void RoomVisibleInDoor()
         {
             TestDungeon.PcMoved(new XY(3, 2));
 
@@ -117,7 +117,7 @@ namespace AtlasWarriorsGame.Tests
         /// When moved out of room, old area is "Seen" and new area is "Visible"
         /// </summary>
         [Test]
-        public void TestSeenPreviouslyVisible()
+        public void SeenPreviouslyVisible()
         {
             TestDungeon.PcMoved(new XY(3, 2));
             TestDungeon.PcMoved(new XY(4, 2));

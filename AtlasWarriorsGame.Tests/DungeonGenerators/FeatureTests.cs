@@ -31,7 +31,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <summary>
         /// Values to test getter/setter
         /// </summary>
-        static object[] GetSetTestValues =
+        static object[] GetSetValues =
         {
             new object[] { new XY(1, 1), DungeonCell.EMPTY },
             new object[] { new XY(1, 2), DungeonCell.FLOOR },
@@ -45,8 +45,8 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <param name="coord">Coordinate to set</param>
         /// <param name="value">Value to retrieve</param>
         [Test]
-        [TestCaseSource("GetSetTestValues")]
-        public void GetSetTest(XY coord, DungeonCell value)
+        [TestCaseSource("GetSetValues")]
+        public void GetSet(XY coord, DungeonCell value)
         {
             // Set it, then get it
             Feature.SetCell(coord, value);
@@ -57,7 +57,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// Test that doors that are added are returned
         /// </summary>
         [Test]
-        public void AddDoorTest()
+        public void AddDoor()
         {
             Feature.AddPossibleDoor(new XY(5, 1));
             Feature.AddPossibleDoor(new XY(5, 7));
@@ -142,7 +142,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// <summary>
         /// Dimension test data
         /// </summary>
-        static object[] DimensionTestSource =
+        static object[] DimensionSource =
         {
             new object[] {1, 1},
             new object[] {0, 0},
@@ -156,9 +156,9 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// </summary>
         /// <param name="W"></param>
         /// <param name="H"></param>
-        [TestCaseSource("DimensionTestSource")]
+        [TestCaseSource("DimensionSource")]
         [Test]
-        public void WidthHeightTest(int W, int H)
+        public void WidthHeight(int W, int H)
         {
             var f = new AtlasWarriorsGame.DungeonGenerators.Feature(W, H);
             Assert.AreEqual(W, f.Width);
@@ -178,7 +178,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// </summary>
         /// <remarks>Can anybody think a better way to test?</remarks>
         [Test]
-        public void RotateTest()
+        public void Rotate()
         {
             // Define initial one
             var f1 = new AtlasWarriorsGame.DungeonGenerators.Feature(3, 4);
@@ -220,7 +220,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
         /// Test that a spawn area is created containing all floors in the feature
         /// </summary>
         [Test]
-        public void SpawnAreaTest()
+        public void SpawnArea()
         {
             // Build an empty room
             Feature = AtlasWarriorsGame.DungeonGenerators.RoomsGenerator.CreateFeature(5, 10);

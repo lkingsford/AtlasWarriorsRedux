@@ -53,7 +53,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="DxDy">Amount to move</param>
         [Test]
         [TestCaseSource("MoveDirections")]
-        public void TestOpenMove(XY DxDy)
+        public void OpenMove(XY DxDy)
         {
             var actor = new Actor(OpenDungeon);
             var startLocation = actor.Location;
@@ -68,7 +68,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="DxDy"></param>
         [Test]
         [TestCaseSource("MoveDirections")]
-        public void TestBlockedMove(XY DxDy)
+        public void BlockedMove(XY DxDy)
         {
             var actor = new Actor(ClosedDungeon);
             var startLocation = actor.Location;

@@ -65,7 +65,7 @@ namespace AtlasWarriorsGame.Tests
         /// Test that Width returns correctly
         /// </summary>
         [Test]
-        public void WidthTest()
+        public void Width()
         {
             Assert.AreEqual(Dungeon1.Width, 10, "Width not reported correctly");
             Assert.AreEqual(Dungeon2.Width, 20, "Width not reported correctly");
@@ -76,7 +76,7 @@ namespace AtlasWarriorsGame.Tests
         /// Test that Height returns correctly
         /// </summary>
         [Test]
-        public void HeightTest()
+        public void Height()
         {
             Assert.AreEqual(Dungeon1.Height, 10, "Height not reported correctly");
             Assert.AreEqual(Dungeon2.Height, 10, "Height not reported correctly");
@@ -101,7 +101,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="Y">Y coord to test</param>
         [Test]
         [TestCaseSource("GetSetValidPoints")]
-        public void GetSetCellTest(int X, int Y)
+        public void GetSetCell(int X, int Y)
         {
             Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.WALL);
             Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.WALL,
@@ -119,7 +119,7 @@ namespace AtlasWarriorsGame.Tests
         /// </summary>
         [Test]
         [TestCaseSource("Dungeon1OutOfBoundsData")] 
-        public void GetOutOfBoundsCellTest(XY Coord)
+        public void GetOutOfBoundsCell(XY Coord)
         {
             Assert.AreEqual(Dungeon1.GetCell(Coord), DungeonCell.EMPTY);
         }
@@ -128,7 +128,7 @@ namespace AtlasWarriorsGame.Tests
         /// Test that walkable spaces return true
         /// </summary>
         [Test]
-        public void GetWalkableTests()
+        public void GetWalkable()
         {
             Assert.IsTrue(Dungeon4.Walkable(new XY(2, 3)), "Door not walkable");
             Assert.IsTrue(Dungeon4.Walkable(new XY(2, 4)), "Open door not walkable");
@@ -139,7 +139,7 @@ namespace AtlasWarriorsGame.Tests
         /// Test that unwalkable spaces return false
         /// </summary>
         [Test]
-        public void GetUnWalkableTests()
+        public void GetUnWalkable()
         {
             Assert.IsFalse(Dungeon4.Walkable(new XY(2, 1)), "Empty is walkable");
             Assert.IsFalse(Dungeon4.Walkable(new XY(2, 2)), "Wall is walkable");
@@ -150,7 +150,7 @@ namespace AtlasWarriorsGame.Tests
         /// </summary>
         [Test]
         [TestCaseSource("Dungeon1OutOfBoundsData")] 
-        public void OutOfBoundsWalkableTest(XY Coord)
+        public void OutOfBoundsWalkable(XY Coord)
         {
             Assert.IsFalse(Dungeon1.Walkable(Coord));
         }

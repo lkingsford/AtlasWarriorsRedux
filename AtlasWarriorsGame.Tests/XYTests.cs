@@ -64,12 +64,12 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="result">Desired result</param>
         [Test]
         [TestCaseSource("ContainsValues")]
-        public void ContainsTest(XY coord,
-                                 int left,
-                                 int top,
-                                 int right,
-                                 int bottom,
-                                 bool result)
+        public void Contains(XY coord,
+                             int left,
+                             int top,
+                             int right,
+                             int bottom,
+                             bool result)
         {
             Assert.AreEqual(coord.ContainedBy(left, top, right, bottom), result);
         }
@@ -94,11 +94,11 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="bottom">MaxY bound</param>
         [Test]
         [TestCaseSource("ContainsInvalidValues")]
-        public void ContainsArgumentExceptionTest(XY coord,
-                                                  int left,
-                                                  int top,
-                                                  int right,
-                                                  int bottom)
+        public void ContainsArgumentException(XY coord,
+                                              int left,
+                                              int top,
+                                              int right,
+                                              int bottom)
         {
             Assert.Throws(typeof(ArgumentException), delegate { coord.ContainedBy(left, top, right, bottom); });
         }
@@ -110,7 +110,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="TestXYString">Correct string of XY</param>
         [Test]
         [TestCaseSource("ValidPoints")]
-        public void ToStringTest(int X, int Y, string ToStringResult)
+        public void ToString(int X, int Y, string ToStringResult)
         {
             Assert.AreEqual(new XY(X, Y).ToString(), ToStringResult);
         }
@@ -137,7 +137,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="Result">Correct result</param>
         [Test]
         [TestCaseSource("SubValues")]
-        public void SubTest(XY Op1, XY Op2, XY Result)
+        public void Sub(XY Op1, XY Op2, XY Result)
         {
            // IsTrue, because AreEqual wasn't using custom ==
            Assert.IsTrue((Op1 - Op2) == Result); 
@@ -165,7 +165,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="Result">Correct result</param>
         [Test]
         [TestCaseSource("AddValues")]
-        public void AddTest(XY Op1, XY Op2, XY Result)
+        public void Add(XY Op1, XY Op2, XY Result)
         {
            // IsTrue, because AreEqual wasn't using custom ==
            Assert.IsTrue((Op1 + Op2) == Result); 
@@ -188,7 +188,7 @@ namespace AtlasWarriorsGame.Tests
         /// <param name="Op1"></param>
         [Test]
         [TestCaseSource("EqualsValues")]
-        public void EqualsTest(XY Op1)
+        public void Equals(XY Op1)
         {
             Assert.AreEqual(Op1, Op1);
         }
@@ -198,7 +198,7 @@ namespace AtlasWarriorsGame.Tests
         /// are different. This is all percieved coordinates for Atlas Warriors + more.
         /// </summary>
         [Test]
-        public void HashTest()
+        public void Hash()
         {
             var used = new HashSet<int>(); 
             for (int ix = 0; ix < 150; ++ix)
