@@ -158,5 +158,48 @@ namespace AtlasWarriorsGame.Tests
             a.MaxHealth = 10;
             Assert.AreEqual(deadResult, a.Dead);
         }
+
+
+        /// <summary>
+        /// Data for Attack tests
+        /// Start health, attack, damage, defence, attack roll, result
+        /// </summary>
+        static object[] AttackValues =
+        {
+            new object[] {10, 10, 2, 8, 1, 8 }, // Hit
+            new object[] {10, 5, 5, 8, 1, 5 }, // Hit, due to bigger roll
+            new object[] {10, 2, 5, 3, 1, 5 }, // Hit, attack == defence
+            new object[] {10, 9, 5, 2, 2, 5 }, // Miss, attack < defence
+        };
+
+        /// <summary>
+        /// Test the attack
+        /// </summary>
+        /// <param name="currentHealth">Start health</param>
+        /// <param name="atk">Attack stat</param>
+        /// <param name="dmg">Damage to cause</param>
+        /// <param name="def">Def stat</param>
+        /// <param name="roll">Random roll stat</param>
+        /// <param name="result">End health</param>
+        [Test]
+        [TestCaseSource("AttackValues")]
+        public void Attack(int currentHealth, int atk, int dmg, int def, int roll, int result)
+        {
+            var a = new Actor();
+            a.BaseAtk = atk;
+            a.BaseDmg = dmg;
+
+            var b = new Actor();
+            b.BaseDef = def;
+            b.SetHealth(currentHealth);
+
+            // Seed roll
+            AtlasWarriorsGame.GlobalRandom.Inject(roll);
+
+            // Attack
+            a.Attack(b);
+
+            Assert.AreEqual(result, b.CurrentHealth);
+        }
     }
 }
