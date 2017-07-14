@@ -78,7 +78,7 @@ namespace AtlasWarriorsGame
         virtual protected void Attack(Actor opponent)
         {
             // Do attack roll
-            int roll = 1 + GlobalRandom.R.Next(20);
+            int roll = 1 + GlobalRandom.Next(20);
 
             // Check if attack
             if ((roll + Atk) >= opponent.Def)

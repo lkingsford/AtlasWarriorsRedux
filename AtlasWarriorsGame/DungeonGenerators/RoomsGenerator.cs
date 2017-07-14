@@ -30,8 +30,8 @@ namespace AtlasWarriorsGame.DungeonGenerators
             Feature nextFeature;
             var possibleDoors = new List<XY>();
             // Create starting door
-            possibleDoors.Add(new XY(R.Next(Dungeon.Width - 4) + 2,
-                R.Next(Dungeon.Height - 4) + 2));
+            possibleDoors.Add(new XY(Next(Dungeon.Width - 4) + 2,
+                Next(Dungeon.Height - 4) + 2));
             var successfulDoors = new List<XY>();
 
             int failures = 0;
@@ -43,11 +43,11 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 Dungeon.AnyEmpty() )
             {
                 // Get random feature, in random rotation
-                nextFeature = possibleFeatures[R.Next(possibleFeatures.Count)]
-                    .Rotate((Feature.Rotation)R.Next(4));
+                nextFeature = possibleFeatures[Next(possibleFeatures.Count)]
+                    .Rotate((Feature.Rotation)Next(4));
 
                 // Choose a door to build on
-                var baseDoor = possibleDoors[R.Next(possibleDoors.Count)];
+                var baseDoor = possibleDoors[Next(possibleDoors.Count)];
 
                 // List to put potentials in - doors on the opposite extremity in the feature
                 // to the free side of the base door
@@ -55,7 +55,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
 
                 // Randomise order of featureDoors to make any possible
                 possibleFeatureDoors = nextFeature.PossibleDoors.OrderBy((i) => 
-                    R.NextDouble()).ToList();
+                    Next()).ToList();
 
                 // Whether the feature was successfully placed
                 bool placed = false;
