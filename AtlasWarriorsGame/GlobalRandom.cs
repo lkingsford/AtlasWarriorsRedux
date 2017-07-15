@@ -51,7 +51,7 @@ namespace AtlasWarriorsGame
         public static int Next(int max)
         {
             // Using Next  so we can use a seeded value if there
-            return R.Next() % max;
+            return Next() % max;
         }
 
         /// <summary>

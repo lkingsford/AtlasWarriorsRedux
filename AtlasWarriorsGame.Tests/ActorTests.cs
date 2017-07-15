@@ -167,9 +167,10 @@ namespace AtlasWarriorsGame.Tests
         static object[] AttackValues =
         {
             new object[] {10, 10, 2, 8, 1, 8 }, // Hit
-            new object[] {10, 5, 5, 8, 1, 5 }, // Hit, due to bigger roll
-            new object[] {10, 2, 5, 3, 1, 5 }, // Hit, attack == defence
-            new object[] {10, 9, 5, 2, 2, 5 }, // Miss, attack < defence
+            new object[] {8, 5, 5, 8, 1, 8 },   // Miss, due to insufficient roll
+            new object[] {8, 5, 5, 8, 5, 3 },   // Hit, due to big enough roll
+            new object[] {10, 2, 5, 3, 1, 5 },  // Hit, attack == defence
+            new object[] {10, 9, 5, 2, 2, 5 },  // Miss, attack < defence
         };
 
         /// <summary>
