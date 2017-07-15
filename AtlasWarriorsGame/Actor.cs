@@ -153,7 +153,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Default atk before skills and inv
         /// </summary>
-        public int BaseAtk = 10;
+        public int BaseAtk = 0;
 
         /// <summary>
         /// Default def before skills and inv
