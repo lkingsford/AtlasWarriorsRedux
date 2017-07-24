@@ -68,5 +68,31 @@ namespace AtlasWarriorsGame
                 new Monster(d, monsterPoint); 
             }
         }
+
+        /// <summary>
+        /// Messages in the game to display
+        /// Underlying variable
+        /// </summary>
+        private List<Message.Message> MessagesData = new List<Message.Message>();
+
+        /// <summary>
+        /// Add message to message list
+        /// </summary>
+        /// <param name="message">Message to add</param>
+        public void AddMessage(Message.Message message)
+        {
+            MessagesData.Add(message);
+        }
+
+        /// <summary>
+        /// Messages, that can be read
+        /// </summary>
+        public IReadOnlyCollection<Message.Message> Message
+        {
+            get
+            {
+                return MessagesData.AsReadOnly();
+            }
+        }
     }
 }
