@@ -46,6 +46,7 @@
     <Compile Include="Unit\DungeonTests.Fov.cs" />
     <Compile Include="Unit\GlobalRandom.cs" />
     <Compile Include="TestUtils.cs" />
+    <Compile Include="Unit\PassageTests.cs" />
     <Compile Include="Unit\XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

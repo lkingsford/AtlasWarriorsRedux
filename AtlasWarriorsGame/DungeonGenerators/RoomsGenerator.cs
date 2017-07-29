@@ -20,7 +20,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <param name="width">Width of dungeon to create</param>
         /// <param name="height">Height of dungeon to create</param>
         /// <returns>Generated Dungeon</returns>
-        public static Dungeon Generate(int width, int height)
+        public static Dungeon Generate(int width, int height, List<Passage> passages = null)
         {
             var dungeon = new Dungeon(width, height);
 
@@ -28,7 +28,6 @@ namespace AtlasWarriorsGame.DungeonGenerators
             dungeon.StartLocation = new XY(dungeon.Width / 2, dungeon.Height / 2);
 
             // Until filled, place rooms!
-
             var possibleFeatures = GenerateFeatureLibrary();
             Feature nextFeature;
             var possibleDoors = new List<XY>();
