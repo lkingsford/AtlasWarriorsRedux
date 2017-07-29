@@ -22,8 +22,7 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void Basic()
         {
-            var D = new Dungeon(5, 4, 
-                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
+            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
 
             for (int ix = 0; ix < 5; ++ix)
             {
@@ -56,8 +55,7 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void SpawnArea()
         {
-            var D = new Dungeon(5, 4,
-                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
+            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
 
             for (int ix = 1; ix < 5; ++ix)
             {

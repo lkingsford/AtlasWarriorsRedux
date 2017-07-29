@@ -20,12 +20,10 @@ namespace AtlasWarriorsGame
         /// Generator to use to build the dungeon.
         /// Defaults to DefaultGenerator
         /// </param>
-        public Dungeon(int Width, int Height, Func<Dungeon, bool> Generator = null)
+        public Dungeon(int Width, int Height)
         {
             TileMap = new DungeonCell[Width, Height];
             VisibilityMap = new CellVisibility[Width, Height];
-            // Invoke generator, unless it's null which use default
-            (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
         }
 
         /// <summary>

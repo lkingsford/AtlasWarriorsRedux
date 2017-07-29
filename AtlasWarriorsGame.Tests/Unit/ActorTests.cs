@@ -17,8 +17,8 @@ namespace AtlasWarriorsGame.Tests
         [SetUp]
         public void SetUp()
         {
-            OpenDungeon = new AtlasWarriorsGame.Dungeon(10,10);
-            ClosedDungeon = new AtlasWarriorsGame.Dungeon(3,3);
+            OpenDungeon = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(10, 10);
+            ClosedDungeon = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(3, 3);
         }
 
         /// <summary>

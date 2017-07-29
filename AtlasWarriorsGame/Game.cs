@@ -16,18 +16,22 @@ namespace AtlasWarriorsGame
         /// </summary>
         public Game()
         {
-            _dungeon = new Dungeon(40, 20, DungeonGenerators.RoomsGenerator.Generate);
-            Player = new Player(_dungeon);
-            Populate(_dungeon);
+            Dungeon = DungeonGenerators.RoomsGenerator.Generate(40, 20);
+            Player = new Player(Dungeon);
+            Populate(Dungeon);
             // Create empty messages list - prevent crash on first turn
             MessagesData.Add(new List<Message.Message>());
         }
 
         /// <summary>
-        /// TEMPORARY - Will be replaced by complete store of dungeons
-        /// The dungeon
+        /// Current dungeon
         /// </summary>
-        Dungeon _dungeon;
+        Dungeon Dungeon;
+
+        /// <summary>
+        /// All dungeons in the current game, by ID
+        /// </summary>
+        Dictionary<String, Dungeon> DungeonStore = new Dictionary<string, Dungeon>();
 
         /// <summary>
         /// Main player of the game
@@ -41,7 +45,7 @@ namespace AtlasWarriorsGame
         {
             get
             {
-                return _dungeon;
+                return Dungeon;
             }
         }
 

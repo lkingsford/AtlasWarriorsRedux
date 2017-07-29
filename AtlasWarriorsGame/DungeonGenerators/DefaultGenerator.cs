@@ -14,39 +14,41 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// Generate a dungeon with just a box of walls and a floor
         /// </summary>
         /// <param name="Dungeon"></param>
-        /// <returns>True on success</returns>
-        public static bool Generate(Dungeon Dungeon)
+        /// <returns>Generated dungeon</returns>
+        public static Dungeon Generate(int width, int height)
         {
+            var dungeon = new Dungeon(width, height);
+
             // Fill the floor
-            for (int ix = 0; ix < Dungeon.Width; ++ix)
+            for (int ix = 0; ix < dungeon.Width; ++ix)
             {
-                for (int iy = 0; iy < Dungeon.Height; ++iy)
+                for (int iy = 0; iy < dungeon.Height; ++iy)
                 {
-                    Dungeon.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+                    dungeon.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
 
                     // Create new spawn area for each cell
-                    Dungeon.SpawnAreas.Add(new SpawnArea(new XY(ix, iy)));
+                    dungeon.SpawnAreas.Add(new SpawnArea(new XY(ix, iy)));
                 }
             } 
 
             // Wall the top and bottom edges
-            for (int ix = 0; ix < Dungeon.Width; ++ix)
+            for (int ix = 0; ix < dungeon.Width; ++ix)
             {
-                Dungeon.SetCell(new XY(ix, 0), DungeonCell.WALL);
-                Dungeon.SetCell(new XY(ix, Dungeon.Height - 1), DungeonCell.WALL);
+                dungeon.SetCell(new XY(ix, 0), DungeonCell.WALL);
+                dungeon.SetCell(new XY(ix, dungeon.Height - 1), DungeonCell.WALL);
             }
 
             // Wall the left and right edges
-            for (int iy = 0; iy < Dungeon.Height; ++iy)
+            for (int iy = 0; iy < dungeon.Height; ++iy)
             {
-                Dungeon.SetCell(new XY(0, iy), DungeonCell.WALL);
-                Dungeon.SetCell(new XY(Dungeon.Width - 1, iy), DungeonCell.WALL);
+                dungeon.SetCell(new XY(0, iy), DungeonCell.WALL);
+                dungeon.SetCell(new XY(dungeon.Width - 1, iy), DungeonCell.WALL);
             }
 
             // Set start to middle of room
-            Dungeon.StartLocation = new XY(Dungeon.Width / 2, Dungeon.Height / 2);
+            dungeon.StartLocation = new XY(dungeon.Width / 2, dungeon.Height / 2);
 
-            return true;
+            return dungeon;
         }
     }
 }
