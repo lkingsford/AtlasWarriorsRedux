@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AtlasWarriorsGame
@@ -47,7 +48,8 @@ namespace AtlasWarriorsGame
         /// </summary>
         public void DoTurn()
         {
-            MessagesData.AddRange(CurrentDungeon.DoTurn());
+            var turnMessages = CurrentDungeon.DoTurn();
+            MessagesData.Add(turnMessages);
         }
 
         /// <summary>
@@ -68,17 +70,30 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Messages in the game to display
         /// Underlying variable
+        /// Separated by turns
         /// </summary>
-        private List<Message.Message> MessagesData = new List<Message.Message>();
+        private List<List<Message.Message>> MessagesData = new List<List<Message.Message>>();
 
         /// <summary>
         /// Messages, that can be read
         /// </summary>
-        public IReadOnlyCollection<Message.Message> Message
+        public IReadOnlyCollection<Message.Message> Messages
         {
             get
             {
-                return MessagesData.AsReadOnly();
+                // Flatten messages to return
+                return MessagesData.SelectMany(x=>x).ToList().AsReadOnly();
+            }
+        }
+
+        /// <summary>
+        /// Get last turns messages only
+        /// </summary>
+        public IReadOnlyCollection<Message.Message> LastTurnMessages
+        {
+            get
+            {
+                return MessagesData.Last().AsReadOnly();
             }
         }
     }

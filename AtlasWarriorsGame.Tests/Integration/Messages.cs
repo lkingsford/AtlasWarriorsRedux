@@ -29,10 +29,10 @@ namespace AtlasWarriorsGame.Tests
             game.Player.Attack(defender);
             game.DoTurn();
 
-            Assert.GreaterOrEqual(game.Message.Count, 1, "No message forwarded");
+            Assert.GreaterOrEqual(game.LastTurnMessages.Count, 1, "No message forwarded");
 
             Assert.AreEqual(1,
-                game.Message.Where(i => i.GetType() == typeof(Message.Attack)).Count(),
+                game.LastTurnMessages.Where(i => i.GetType() == typeof(Message.Attack)).Count(),
                 "No, or multiple attack messages found");
         }
     }
