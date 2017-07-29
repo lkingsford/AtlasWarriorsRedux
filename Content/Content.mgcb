@@ -20,3 +20,10 @@
 /processorParam:TextureFormat=Compressed
 /build:GameMapState/MapFont.spritefont
 
+#begin GameMapState/LogFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:GameMapState/LogFont.spritefont
+
