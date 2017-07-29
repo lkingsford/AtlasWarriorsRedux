@@ -36,6 +36,11 @@ namespace AndroidGameApp
         private SpriteFont LogFont;
 
         /// <summary>
+        /// Font to display statistics in
+        /// </summary>
+        private SpriteFont StatFont;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
         /// <param name="game">Game object that is being played</param>
@@ -258,6 +263,8 @@ namespace AndroidGameApp
                     new Vector2(0.0f, 0.0f), logScale, SpriteEffects.None, 1.0f);
                 currentLineY += messageDimensions.Y;
             }
+
+            // Draw stats
 
             AppSpriteBatch.End();
         }

@@ -34,6 +34,11 @@ namespace GLGameApp
         private SpriteFont LogFont;
 
         /// <summary>
+        /// Font to display stats in
+        /// </summary>
+        private SpriteFont StatFont;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
         /// <param name="Game">Game object that is being played</param>
@@ -43,6 +48,7 @@ namespace GLGameApp
 
             MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
             LogFont = AppContentManager.Load<SpriteFont>("GameMapState/LogFont");
+            StatFont = AppContentManager.Load<SpriteFont>("GameMapState/StatFont");
         }
 
         /// <summary>
@@ -132,6 +138,7 @@ namespace GLGameApp
             AppSpriteBatch.Begin();
             AppSpriteBatch.Draw(MapTexture, new Vector2(0.0f, 0.0f), Color.White);
             DrawLog(new Vector2(800.0f, 10.0f));
+            DrawStats(new Vector2(800.0f, 100.0f));
             AppSpriteBatch.End();
         }
 
@@ -150,6 +157,16 @@ namespace GLGameApp
                 AppSpriteBatch.DrawString(LogFont, message.ToString(), coord, Color.White);
                 currentLineY += messageDimensions.Y;
             }
+        }
+
+        /// <summary>
+        /// Draw the stats to the screen
+        /// </summary>
+        /// <param name="drawLocation"></param>
+        public void DrawStats(Vector2 drawLocation)
+        {
+            string statText = $"{G.Player.CurrentHealth}/{G.Player.MaxHealth}";
+            AppSpriteBatch.DrawString(StatFont, statText, drawLocation, Color.Red);
         }
     }
 }
