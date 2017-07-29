@@ -73,6 +73,7 @@ namespace ScreenReaderApp
                 {
                     skipDraw = false;
                 }
+                Console.Write($"\nHP {G.Player.CurrentHealth} ({G.Player.MaxHealth})");
                 Console.Write("\n>");
                 var input = Console.ReadKey();
                 switch (input.Key)
