@@ -1,6 +1,7 @@
 ﻿using AtlasWarriorsGame;
 using MgUiCommon;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
@@ -29,6 +30,11 @@ namespace AndroidGameApp
         private MgUiCommon.MapViewElement MapView;
 
         /// <summary>
+        /// Font to display log in
+        /// </summary>
+        private SpriteFont LogFont;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
         /// <param name="Game">Game object that is being played</param>
@@ -36,6 +42,7 @@ namespace AndroidGameApp
         {
             this.G = Game;
 
+            LogFont = AppContentManager.Load<SpriteFont>("GameMapState/LogFont");
             MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
         }
 
@@ -222,8 +229,23 @@ namespace AndroidGameApp
                         new Vector2(ScreenWidth, iy * regionHeight), Color.Gray);
                 }
             }
+
+            // Draw log on bottom of screen
+            float currentLineY = ScreenHeight;
+            foreach (var message in G.LastTurnMessages)
+            {
+                currentLineY -= LogFont.MeasureString(message.ToString()).Y;
+            }
+
+            foreach (var message in G.LastTurnMessages)
+            {
+                var coord = new Vector2(0, currentLineY);
+                var messageDimensions = LogFont.MeasureString(message.ToString());
+                AppSpriteBatch.DrawString(LogFont, message.ToString(), coord, Color.White);
+                currentLineY += messageDimensions.Y;
+            }
+
             AppSpriteBatch.End();
         }
-
     }
 }
