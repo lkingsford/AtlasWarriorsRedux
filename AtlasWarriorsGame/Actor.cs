@@ -211,5 +211,13 @@ namespace AtlasWarriorsGame
             }
         }
 
+        /// <summary>
+        /// Send message to dungeon/game
+        /// </summary>
+        /// <param name="message">Message to send</param>
+        virtual protected void SendMessage(Message.Message message)
+        {
+            Dungeon?.AddMessage(message);
+        }
     }
 }

@@ -47,11 +47,7 @@ namespace AtlasWarriorsGame
         /// </summary>
         public void DoTurn()
         {
-            foreach (var Actor in CurrentDungeon.Actors)
-            {
-                Actor.DoTurn();
-            }
-            CurrentDungeon.Clean();
+            MessagesData.AddRange(CurrentDungeon.DoTurn());
         }
 
         /// <summary>
@@ -74,15 +70,6 @@ namespace AtlasWarriorsGame
         /// Underlying variable
         /// </summary>
         private List<Message.Message> MessagesData = new List<Message.Message>();
-
-        /// <summary>
-        /// Add message to message list
-        /// </summary>
-        /// <param name="message">Message to add</param>
-        public void AddMessage(Message.Message message)
-        {
-            MessagesData.Add(message);
-        }
 
         /// <summary>
         /// Messages, that can be read

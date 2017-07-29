@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AtlasWarriorsGame.Message;
 
 namespace AtlasWarriorsGame
 {
     /// <summary>
     /// Play-field area - a specific dungeon level
     /// </summary>
-    public class Dungeon
+    public class Dungeon : IReceiver
     {
         /// <summary>
         /// Create instance of dungeon with given size
@@ -36,6 +37,23 @@ namespace AtlasWarriorsGame
             FLOOR,
             WALL,
             DOOR
+        }
+
+        /// <summary>
+        /// Do a full turn on this level
+        /// </summary>
+        /// <returns>Messages created in the turn</returns>
+        public List<Message.Message> DoTurn()
+        {
+            // Messages to return
+            foreach (var Actor in Actors)
+            {
+                Actor.DoTurn();
+            }
+            Clean();
+            var messages = new List<Message.Message>(MessageQueue);
+            MessageQueue.Clear();
+            return messages;
         }
 
         /// <summary>
@@ -206,6 +224,20 @@ namespace AtlasWarriorsGame
                 VisibleFill(Coord + new XY(-1, 1), false); ;
             }
         }
+
+        /// <summary>
+        /// Add message to queue, that will be sent at end of turn
+        /// </summary>
+        /// <param name="message"></param>
+        public void AddMessage(Message.Message message)
+        {
+            MessageQueue.Add(message);
+        }
+
+        /// <summary>
+        /// Messages created during turn
+        /// </summary>
+        protected List<Message.Message> MessageQueue = new List<Message.Message>();
 
         /// <summary>
         /// Width of the map
