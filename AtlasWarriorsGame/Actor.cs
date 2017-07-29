@@ -38,7 +38,6 @@ namespace AtlasWarriorsGame
         /// </summary>
         public virtual void DoTurn()
         {
-
         }
 
         /// <summary>
@@ -81,10 +80,14 @@ namespace AtlasWarriorsGame
             int roll = 1 + GlobalRandom.Next(20);
 
             // Check if attack
-            if ((roll + Atk) >= opponent.Def)
+            bool hit = ((roll + Atk) >= opponent.Def);
+            if (hit)
             {
                 opponent.Injure(Dmg);
             }
+
+            // Do the UI passthrough
+            SendMessage(new Message.Attack(this, opponent, hit, Dmg, roll + Atk, opponent.Def));
         }
 
         /// <summary>
