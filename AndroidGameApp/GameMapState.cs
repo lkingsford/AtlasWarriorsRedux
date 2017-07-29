@@ -268,7 +268,8 @@ namespace AndroidGameApp
             // Draw stats
             string statText = $"HP {G.Player.CurrentHealth} ({G.Player.MaxHealth})";
             AppSpriteBatch.DrawString(StatFont, statText,
-                new Vector2(10.0f, (float)MapTexture.Height * scale), Color.Red);
+                new Vector2(10.0f, (float)MapTexture.Height * scale), Color.Red, 0.0f,
+                new Vector2(0.0f, 0.0f), logScale, SpriteEffects.None, 0);
 
             AppSpriteBatch.End();
         }
