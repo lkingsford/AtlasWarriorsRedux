@@ -55,7 +55,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("MoveDirections")]
         public void OpenMove(XY DxDy)
         {
-            var actor = new Actor(OpenDungeon);
+            var actor = new AtlasWarriorsGame.Actor(OpenDungeon);
             var startLocation = actor.Location;
             actor.Move(DxDy);
             Assert.AreEqual(startLocation.X + DxDy.X, actor.Location.X, "X movement incorrect");
@@ -70,7 +70,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("MoveDirections")]
         public void BlockedMove(XY DxDy)
         {
-            var actor = new Actor(ClosedDungeon);
+            var actor = new AtlasWarriorsGame.Actor(ClosedDungeon);
             var startLocation = actor.Location;
             actor.Move(DxDy);
             Assert.AreEqual(startLocation.X, actor.Location.X, "X failed to block");
@@ -100,7 +100,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("HealValues")]
         public void Heal(int current, int maxHealth, int healAmount, int result)
         {
-            var a = new Actor();
+            var a = new AtlasWarriorsGame.Actor();
             a.SetHealth(current);
             a.MaxHealth = maxHealth;
             Assert.AreEqual(result, a.Heal(healAmount), "Healed to incorrect value");
@@ -127,7 +127,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("InjureValues")]
         public void Injure(int current, int damage, int after)
         {
-            var a = new Actor();
+            var a = new AtlasWarriorsGame.Actor();
             a.SetHealth(current);
             a.MaxHealth = current;
             a.Injure(damage);
@@ -153,7 +153,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("DeadValues")]
         public void Dead(int current, bool deadResult)
         {
-            var a = new Actor();
+            var a = new AtlasWarriorsGame.Actor();
             a.SetHealth(current);
             a.MaxHealth = 10;
             Assert.AreEqual(deadResult, a.Dead);
@@ -186,11 +186,11 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("AttackValues")]
         public void Attack(int currentHealth, int atk, int dmg, int def, int roll, int result)
         {
-            var a = new Actor();
+            var a = new AtlasWarriorsGame.Actor();
             a.BaseAtk = atk;
             a.BaseDmg = dmg;
 
-            var b = new Actor();
+            var b = new AtlasWarriorsGame.Actor();
             b.BaseDef = def;
             b.SetHealth(currentHealth);
 

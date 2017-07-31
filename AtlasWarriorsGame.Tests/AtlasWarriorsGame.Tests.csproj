@@ -40,12 +40,13 @@
     <Compile Include="DungeonGenerators\RoomsGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
-    <Compile Include="DungeonTests.cs" />
-    <Compile Include="ActorTests.cs" />
-    <Compile Include="DungeonTests.Fov.cs" />
-    <Compile Include="GlobalRandom.cs" />
+    <Compile Include="Integration\Messages.cs" />
+    <Compile Include="Unit\DungeonTests.cs" />
+    <Compile Include="Unit\ActorTests.cs" />
+    <Compile Include="Unit\DungeonTests.Fov.cs" />
+    <Compile Include="Unit\GlobalRandom.cs" />
     <Compile Include="TestUtils.cs" />
-    <Compile Include="XYTests.cs" />
+    <Compile Include="Unit\XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +55,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\AtlasWarriorsGame\AtlasWarriorsGame.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

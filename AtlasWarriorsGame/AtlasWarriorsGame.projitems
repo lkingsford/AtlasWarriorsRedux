@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IReceiver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Message\Attack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Message\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Monster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dungeon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\DefaultGenerator.cs" />
