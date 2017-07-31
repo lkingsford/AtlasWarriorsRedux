@@ -19,6 +19,8 @@ namespace AtlasWarriorsGame
             _dungeon = new Dungeon(40, 20, DungeonGenerators.RoomsGenerator.Generate);
             Player = new Player(_dungeon);
             Populate(_dungeon);
+            // Create empty messages list - prevent crash on first turn
+            MessagesData.Add(new List<Message.Message>());
         }
 
         /// <summary>

@@ -29,6 +29,11 @@ namespace GLGameApp
         private MgUiCommon.MapViewElement MapView;
 
         /// <summary>
+        /// Font to display log in
+        /// </summary>
+        private SpriteFont LogFont;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
         /// <param name="Game">Game object that is being played</param>
@@ -37,6 +42,7 @@ namespace GLGameApp
             this.G = Game;
 
             MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
+            LogFont = AppContentManager.Load<SpriteFont>("GameMapState/LogFont");
         }
 
         /// <summary>
@@ -125,8 +131,25 @@ namespace GLGameApp
             var MapTexture = MapView.DrawMap(GameTime, AppSpriteBatch);
             AppSpriteBatch.Begin();
             AppSpriteBatch.Draw(MapTexture, new Vector2(0.0f, 0.0f), Color.White);
+            DrawLog(new Vector2(800.0f, 10.0f));
             AppSpriteBatch.End();
         }
 
+        /// <summary>
+        /// Draw the last turns log to the screen
+        /// </summary>
+        /// <remarks>Sprite batch must be open</remarks>
+        public void DrawLog(Vector2 drawLocation)
+        {
+            float currentLineY = 0.0f;
+
+            foreach (var message in G.LastTurnMessages)
+            {
+                var coord = new Vector2(0, currentLineY) + drawLocation;
+                var messageDimensions = LogFont.MeasureString(message.ToString());
+                AppSpriteBatch.DrawString(LogFont, message.ToString(), coord, Color.White);
+                currentLineY += messageDimensions.Y;
+            }
+        }
     }
 }

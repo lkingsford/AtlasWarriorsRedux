@@ -70,7 +70,8 @@ namespace AtlasWarriorsGame.Message
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Attacker.SpriteId} attacked {Defender.SpriteId} and {(Hit ? "hit" : "missed")} ({AtkTotal} vs {DefTotal}) {Damage} damage";
+            // Big line... but less ugly than splitting it
+            return $"{Attacker.SpriteId} attacked {Defender.SpriteId} and {(Hit ? "hit" : "missed")} ({AtkTotal} vs {DefTotal}) " + (Hit ? $"{Damage} damage" : "");
         }
     }
 }
