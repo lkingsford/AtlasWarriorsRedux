@@ -38,7 +38,6 @@ namespace AtlasWarriorsGame
         /// </summary>
         public virtual void DoTurn()
         {
-
         }
 
         /// <summary>
@@ -81,10 +80,14 @@ namespace AtlasWarriorsGame
             int roll = 1 + GlobalRandom.Next(20);
 
             // Check if attack
-            if ((roll + Atk) >= opponent.Def)
+            bool hit = ((roll + Atk) >= opponent.Def);
+            if (hit)
             {
                 opponent.Injure(Dmg);
             }
+
+            // Do the UI passthrough
+            SendMessage(new Message.Attack(this, opponent, hit, Dmg, roll + Atk, opponent.Def));
         }
 
         /// <summary>
@@ -153,7 +156,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Default atk before skills and inv
         /// </summary>
-        public int BaseAtk = 10;
+        public int BaseAtk = 0;
 
         /// <summary>
         /// Default def before skills and inv
@@ -211,5 +214,13 @@ namespace AtlasWarriorsGame
             }
         }
 
+        /// <summary>
+        /// Send message to dungeon/game
+        /// </summary>
+        /// <param name="message">Message to send</param>
+        virtual protected void SendMessage(Message.Message message)
+        {
+            Dungeon?.AddMessage(message);
+        }
     }
 }

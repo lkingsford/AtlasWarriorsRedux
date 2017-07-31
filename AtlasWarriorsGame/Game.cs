@@ -47,11 +47,7 @@ namespace AtlasWarriorsGame
         /// </summary>
         public void DoTurn()
         {
-            foreach (var Actor in CurrentDungeon.Actors)
-            {
-                Actor.DoTurn();
-            }
-            CurrentDungeon.Clean();
+            MessagesData.AddRange(CurrentDungeon.DoTurn());
         }
 
         /// <summary>
@@ -66,6 +62,23 @@ namespace AtlasWarriorsGame
                 var monsterPoint = a.Area.RandomItem();
                 // Not sure if this is silly, but add the monster to the point. It adds itself.
                 new Monster(d, monsterPoint); 
+            }
+        }
+
+        /// <summary>
+        /// Messages in the game to display
+        /// Underlying variable
+        /// </summary>
+        private List<Message.Message> MessagesData = new List<Message.Message>();
+
+        /// <summary>
+        /// Messages, that can be read
+        /// </summary>
+        public IReadOnlyCollection<Message.Message> Message
+        {
+            get
+            {
+                return MessagesData.AsReadOnly();
             }
         }
     }
