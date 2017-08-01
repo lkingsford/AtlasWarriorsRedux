@@ -51,6 +51,7 @@ namespace AndroidGameApp
 
             LogFont = AppContentManager.Load<SpriteFont>("GameMapState/LogFont");
             MapView = new MgUiCommon.MapViewElement(game, AppGraphicsDevice, AppContentManager);
+            StatFont = AppContentManager.Load<SpriteFont>("GameMapState/StatFont");
 
             Dpi = metrics.Xdpi;
         }
@@ -265,6 +266,9 @@ namespace AndroidGameApp
             }
 
             // Draw stats
+            string statText = $"HP {G.Player.CurrentHealth} ({G.Player.MaxHealth})";
+            AppSpriteBatch.DrawString(StatFont, statText,
+                new Vector2(10.0f, (float)MapTexture.Height * scale), Color.Red);
 
             AppSpriteBatch.End();
         }

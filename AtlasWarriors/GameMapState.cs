@@ -165,7 +165,7 @@ namespace GLGameApp
         /// <param name="drawLocation"></param>
         public void DrawStats(Vector2 drawLocation)
         {
-            string statText = $"{G.Player.CurrentHealth}/{G.Player.MaxHealth}";
+            string statText = $"HP {G.Player.CurrentHealth} ({G.Player.MaxHealth})";
             AppSpriteBatch.DrawString(StatFont, statText, drawLocation, Color.Red);
         }
     }
