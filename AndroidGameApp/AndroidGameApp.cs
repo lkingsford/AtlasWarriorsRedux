@@ -1,3 +1,4 @@
+using Android.Util;
 using MgUiCommon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +23,11 @@ namespace AndroidGameApp
         List<State> States = new List<State>();
 
         /// <summary>
+        /// Metrics of the display
+        /// </summary>
+        private DisplayMetrics Metrics;
+
+        /// <summary>
         /// Current state
         /// </summary>
         State CurrentState
@@ -34,12 +40,14 @@ namespace AndroidGameApp
         }
 
         /// <summary>
-        /// Default constructor
+        /// Constructor
         /// </summary>
-        public AndroidGameApp()
+        /// <param name="metrics">Screen metrics</param>
+        public AndroidGameApp(DisplayMetrics metrics)
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.Metrics = metrics;
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace AndroidGameApp
             graphics.ApplyChanges();
 
             // Create a new game, and make the UI on top of the stack
-            States.Add(new GameMapState(new AtlasWarriorsGame.Game()));
+            States.Add(new GameMapState(new AtlasWarriorsGame.Game(), Metrics));
         }
 
         /// <summary>

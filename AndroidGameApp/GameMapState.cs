@@ -1,6 +1,8 @@
-﻿using AtlasWarriorsGame;
+﻿using Android.Util;
+using AtlasWarriorsGame;
 using MgUiCommon;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Extended;
@@ -29,15 +31,27 @@ namespace AndroidGameApp
         private MgUiCommon.MapViewElement MapView;
 
         /// <summary>
+        /// Font to display log in
+        /// </summary>
+        private SpriteFont LogFont;
+
+        /// <summary>
         /// Create a game interface from a given game
         /// </summary>
-        /// <param name="Game">Game object that is being played</param>
-        public GameMapState(AtlasWarriorsGame.Game Game)
+        /// <param name="game">Game object that is being played</param>
+        /// <param name="metrics">Display metrics of mobile</param>
+        public GameMapState(AtlasWarriorsGame.Game game, DisplayMetrics metrics)
         {
-            this.G = Game;
+            this.G = game;
 
-            MapView = new MgUiCommon.MapViewElement(Game, AppGraphicsDevice, AppContentManager);
+            LogFont = AppContentManager.Load<SpriteFont>("GameMapState/LogFont");
+            MapView = new MgUiCommon.MapViewElement(game, AppGraphicsDevice, AppContentManager);
+
+            Dpi = metrics.Xdpi;
         }
+
+        // DPI of screen
+        private float Dpi = 0;
 
         /// <summary>
         /// State as of the previous Update
@@ -194,6 +208,12 @@ namespace AndroidGameApp
             // Scale, in case high DPI
             float scale = (float)ScreenWidth / (float)MapTexture.Width;
 
+            // Scale for log
+            // Should stay a consistent size... it's twice the DPI of my real life screen, which
+            // means that 14pt is about half the physical size on the phone as it is on my screen
+            // which feels about right to me, I guess
+            float logScale = Dpi / 220;
+
             AppSpriteBatch.Begin();
 
             // Draw map texture to screen
@@ -222,8 +242,24 @@ namespace AndroidGameApp
                         new Vector2(ScreenWidth, iy * regionHeight), Color.Gray);
                 }
             }
+
+            // Draw log on bottom of screen
+            float currentLineY = ScreenHeight;
+            foreach (var message in G.LastTurnMessages)
+            {
+                currentLineY -= logScale * LogFont.MeasureString(message.ToString()).Y;
+            }
+
+            foreach (var message in G.LastTurnMessages)
+            {
+                var coord = new Vector2(0, currentLineY);
+                var messageDimensions = LogFont.MeasureString(message.ToString());
+                AppSpriteBatch.DrawString(LogFont, message.ToString(), coord, Color.White, 0.0f, 
+                    new Vector2(0.0f, 0.0f), logScale, SpriteEffects.None, 1.0f);
+                currentLineY += messageDimensions.Y;
+            }
+
             AppSpriteBatch.End();
         }
-
     }
 }

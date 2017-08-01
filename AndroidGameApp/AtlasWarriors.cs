@@ -18,7 +18,8 @@ namespace AndroidGameApp
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            var g = new AndroidGameApp();
+            var metrics = Resources.DisplayMetrics;
+            var g = new AndroidGameApp(metrics);
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
         }
