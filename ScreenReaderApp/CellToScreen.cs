@@ -17,13 +17,13 @@ namespace ScreenReaderApp
         {
             switch (Cell)
             {
-                case DungeonCell.EMPTY:
+                case DungeonCell.Empty:
                     return ' ';
-                case DungeonCell.FLOOR:
+                case DungeonCell.Floor:
                     return '.';
-                case DungeonCell.DOOR:
+                case DungeonCell.Door:
                     return '+';
-                case DungeonCell.WALL:
+                case DungeonCell.Wall:
                     return '#';
                 default:
                     return 'X';

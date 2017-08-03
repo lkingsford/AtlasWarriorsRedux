@@ -31,10 +31,10 @@ namespace AtlasWarriorsGame
         /// </summary>
         public enum DungeonCell 
         {
-            EMPTY,
-            FLOOR,
-            WALL,
-            DOOR
+            Empty,
+            Floor,
+            Wall,
+            Door
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace AtlasWarriorsGame
         {
             switch (GetCell(Coord))
             {
-                case DungeonCell.FLOOR:
-                case DungeonCell.DOOR:
+                case DungeonCell.Floor:
+                case DungeonCell.Door:
                     return true;
                 default:
                     return false;
@@ -113,7 +113,7 @@ namespace AtlasWarriorsGame
             {
                 for (var iy = 0; iy < Height; ++iy)
                 {
-                    if (TileMap[ix, iy] == DungeonCell.EMPTY)
+                    if (TileMap[ix, iy] == DungeonCell.Empty)
                     {
                         return true;
                     }
@@ -159,7 +159,7 @@ namespace AtlasWarriorsGame
                 return TileMap[Coord.X, Coord.Y];
             }
             // Otherwise, return empty
-            return DungeonCell.EMPTY;
+            return DungeonCell.Empty;
         }
 
         /// <summary>
@@ -202,14 +202,14 @@ namespace AtlasWarriorsGame
             var cell = GetCell(Coord);
             bool alreadyVisible = VisibilityMap[Coord.X, Coord.Y] == CellVisibility.VISIBLE;
             // EMPTY might be out of bounds. Should never be where player is.
-            if (cell != DungeonCell.EMPTY)
+            if (cell != DungeonCell.Empty)
             {
                 VisibilityMap[Coord.X, Coord.Y] = CellVisibility.VISIBLE;
             }
             bool blocksSight =
-                (cell == DungeonCell.WALL) || 
-                (cell == DungeonCell.DOOR) ||
-                (cell == DungeonCell.EMPTY);
+                (cell == DungeonCell.Wall) || 
+                (cell == DungeonCell.Door) ||
+                (cell == DungeonCell.Empty);
             if (Force || (!alreadyVisible && !blocksSight))
             {
                 VisibleFill(Coord + new XY(-1, 0), false);

@@ -24,7 +24,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             {
                 for (int iy = 0; iy < dungeon.Height; ++iy)
                 {
-                    dungeon.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+                    dungeon.SetCell(new XY(ix, iy), DungeonCell.Floor);
 
                     // Create new spawn area for each cell
                     dungeon.SpawnAreas.Add(new SpawnArea(new XY(ix, iy)));
@@ -34,15 +34,15 @@ namespace AtlasWarriorsGame.DungeonGenerators
             // Wall the top and bottom edges
             for (int ix = 0; ix < dungeon.Width; ++ix)
             {
-                dungeon.SetCell(new XY(ix, 0), DungeonCell.WALL);
-                dungeon.SetCell(new XY(ix, dungeon.Height - 1), DungeonCell.WALL);
+                dungeon.SetCell(new XY(ix, 0), DungeonCell.Wall);
+                dungeon.SetCell(new XY(ix, dungeon.Height - 1), DungeonCell.Wall);
             }
 
             // Wall the left and right edges
             for (int iy = 0; iy < dungeon.Height; ++iy)
             {
-                dungeon.SetCell(new XY(0, iy), DungeonCell.WALL);
-                dungeon.SetCell(new XY(dungeon.Width - 1, iy), DungeonCell.WALL);
+                dungeon.SetCell(new XY(0, iy), DungeonCell.Wall);
+                dungeon.SetCell(new XY(dungeon.Width - 1, iy), DungeonCell.Wall);
             }
 
             // Set start to middle of room

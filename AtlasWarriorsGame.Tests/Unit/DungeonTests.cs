@@ -25,11 +25,11 @@ namespace AtlasWarriorsGame.Tests
             Dungeon2 = new AtlasWarriorsGame.Dungeon(20, 10);
             Dungeon3 = new AtlasWarriorsGame.Dungeon(10, 20);
             Dungeon4 = new AtlasWarriorsGame.Dungeon(10, 10);
-            Dungeon4.SetCell(new XY(2,1), DungeonCell.EMPTY);
-            Dungeon4.SetCell(new XY(2,2), DungeonCell.WALL);
-            Dungeon4.SetCell(new XY(2,3), DungeonCell.DOOR);
-            Dungeon4.SetCell(new XY(2,4), DungeonCell.DOOR);
-            Dungeon4.SetCell(new XY(2,5), DungeonCell.FLOOR);
+            Dungeon4.SetCell(new XY(2,1), DungeonCell.Empty);
+            Dungeon4.SetCell(new XY(2,2), DungeonCell.Wall);
+            Dungeon4.SetCell(new XY(2,3), DungeonCell.Door);
+            Dungeon4.SetCell(new XY(2,4), DungeonCell.Door);
+            Dungeon4.SetCell(new XY(2,5), DungeonCell.Floor);
         }
 
         /// 10x10 Dungeon, empty
@@ -103,14 +103,14 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("GetSetValidPoints")]
         public void GetSetCell(int X, int Y)
         {
-            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.WALL);
-            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.WALL,
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.Wall);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.Wall,
                 "Dungeon cell not correctly read or set");
-            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.EMPTY);
-            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.EMPTY,
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.Empty);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.Empty,
                 "Dungeon cell not correctly read or set");
-            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.FLOOR);
-            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.FLOOR,
+            Dungeon1.SetCell(new XY(X, Y), Dungeon.DungeonCell.Floor);
+            Assert.AreEqual(Dungeon1.GetCell(new XY(X, Y)), Dungeon.DungeonCell.Floor,
                 "Dungeon cell not correctly read or set");
         }
 
@@ -121,7 +121,7 @@ namespace AtlasWarriorsGame.Tests
         [TestCaseSource("Dungeon1OutOfBoundsData")] 
         public void GetOutOfBoundsCell(XY Coord)
         {
-            Assert.AreEqual(Dungeon1.GetCell(Coord), DungeonCell.EMPTY);
+            Assert.AreEqual(Dungeon1.GetCell(Coord), DungeonCell.Empty);
         }
 
         /// <summary>

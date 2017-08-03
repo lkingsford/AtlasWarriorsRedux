@@ -32,16 +32,16 @@ namespace AtlasWarriorsGame.Tests
                     switch (MapToSet[iy][ix])
                     {
                         case ' ':
-                            d.SetCell(new XY(ix, iy), DungeonCell.EMPTY);
+                            d.SetCell(new XY(ix, iy), DungeonCell.Empty);
                             break;
                         case '+':
-                            d.SetCell(new XY(ix, iy), DungeonCell.DOOR);
+                            d.SetCell(new XY(ix, iy), DungeonCell.Door);
                             break;
                         case '#':
-                            d.SetCell(new XY(ix, iy), DungeonCell.WALL);
+                            d.SetCell(new XY(ix, iy), DungeonCell.Wall);
                             break;
                         case '.':
-                            d.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+                            d.SetCell(new XY(ix, iy), DungeonCell.Floor);
                             break;
                     }
                 }
@@ -70,17 +70,17 @@ namespace AtlasWarriorsGame.Tests
                     switch (MapToSet[iy][ix])
                     {
                         case ' ':
-                            f.SetCell(new XY(ix, iy), DungeonCell.EMPTY);
+                            f.SetCell(new XY(ix, iy), DungeonCell.Empty);
                             break;
                         case '+':
-                            f.SetCell(new XY(ix, iy), DungeonCell.DOOR);
+                            f.SetCell(new XY(ix, iy), DungeonCell.Door);
                             f.AddPossibleDoor(new XY(ix, iy));
                             break;
                         case '#':
-                            f.SetCell(new XY(ix, iy), DungeonCell.WALL);
+                            f.SetCell(new XY(ix, iy), DungeonCell.Wall);
                             break;
                         case '.':
-                            f.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+                            f.SetCell(new XY(ix, iy), DungeonCell.Floor);
                             break;
                     }
                 }
