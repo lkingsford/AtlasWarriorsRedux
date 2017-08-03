@@ -34,7 +34,9 @@ namespace AtlasWarriorsGame
             Empty,
             Floor,
             Wall,
-            Door
+            Door,
+            StairUp,
+            StairDown
         }
 
         /// <summary>
@@ -263,6 +265,11 @@ namespace AtlasWarriorsGame
         /// Places where enemies can be spawned
         /// </summary>
         public List<SpawnArea> SpawnAreas = new List<SpawnArea>();
+
+        /// <summary>
+        /// Locations of passages on and off level
+        /// </summary>
+        public List<Passage> Passages = new List<Passage>();
 
         /// <summary>
         /// Where the player starts on this dungeon

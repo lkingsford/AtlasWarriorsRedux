@@ -46,7 +46,21 @@ namespace MgUiCommon
                         DrawChar = '#',
                         BackColor = visible ? Color.Black : Color.Black,
                         ForeColor = visible ? Color.LightGray : Color.DimGray
-                    }; 
+                    };
+                case DungeonCell.StairUp:
+                    return new ConsoleCell()
+                    {
+                        DrawChar = '<',
+                        BackColor = visible ? Color.Black : Color.Black,
+                        ForeColor = visible ? Color.Green : Color.DarkGreen
+                    };
+                case DungeonCell.StairDown:
+                    return new ConsoleCell()
+                    {
+                        DrawChar = '>',
+                        BackColor = visible ? Color.Black : Color.Black,
+                        ForeColor = visible ? Color.Red : Color.DarkRed
+                    };
                 default:
                     return new ConsoleCell()
                     {

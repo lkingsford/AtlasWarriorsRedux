@@ -7,24 +7,38 @@ namespace AtlasWarriorsGame
     /// <summary>
     /// A passage between two dungeons
     /// </summary>
-    class Passage
+    public class Passage
     {
         /// <summary>
         /// Create passage with given values
         /// </summary>
         /// <param name="PassageType">Type of passage</param>
         /// <param name="Destination">DungeonID of passage</param>
-        public Passage(PassageTypeEnum PassageType, String Destination)
+        /// <param name="Location">Location on map of passage</param>
+        public Passage(PassageTypeEnum PassageType, String Destination, XY Location = null)
         {
             this.PassageType = PassageType;
             this.Destination = Destination;
+            this.Location = Location;
         }
 
         /// <summary>
         /// Possible types that passage can form - mostly important for UI
         /// </summary>
         /// <remarks>Better suggestion of naming?</remarks>
-        public enum PassageTypeEnum { OneWay, StairsUp, StairsDown };
+        public enum PassageTypeEnum {
+            /// <summary>
+            /// One direction only - used as a destination
+            /// </summary>
+            OneWay,
+            /// <summary>
+            /// Stairs going up
+            /// </summary>
+            StairsUp,
+            /// <summary>
+            /// Stairs going down
+            /// </summary>
+            StairsDown };
 
         /// <summary>
         /// Type of passage
@@ -38,6 +52,7 @@ namespace AtlasWarriorsGame
 
         /// <summary>
         /// Where on the map it is placed
+        /// Null if not placed yet
         /// </summary>
         public XY Location;
     }

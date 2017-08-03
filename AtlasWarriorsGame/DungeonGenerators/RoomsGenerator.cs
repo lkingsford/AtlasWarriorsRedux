@@ -117,6 +117,33 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 dungeon.SetCell(door, DungeonCell.Door);
             }
 
+            // Add passages to spawn areas...
+            // They're guaranteed to be separated at least into different rooms
+            foreach (var passage in passages ?? new List<Passage>())
+            {
+                var area = dungeon.SpawnAreas.RandomItem();
+                var startPosition = area.Area.RandomItem();
+
+                // Remove spawn area from list - don't want surrounded soon as down, and don't want
+                // multiple passages in same area
+                dungeon.SpawnAreas.Remove(area);
+
+                // Add passage to dungeon
+                dungeon.Passages.Add(new Passage(passage.PassageType, passage.Destination,
+                    startPosition));
+
+                // Set tile to appropriate for passage type
+                switch(passage.PassageType)
+                {
+                    case Passage.PassageTypeEnum.StairsUp:
+                        dungeon.SetCell(startPosition, DungeonCell.StairUp);
+                        break;
+                    case Passage.PassageTypeEnum.StairsDown:
+                        dungeon.SetCell(startPosition, DungeonCell.StairDown);
+                        break;
+                }
+            }
+
             return dungeon;
         }
 

@@ -25,6 +25,10 @@ namespace ScreenReaderApp
                     return '+';
                 case DungeonCell.Wall:
                     return '#';
+                case DungeonCell.StairUp:
+                    return '<';
+                case DungeonCell.StairDown:
+                    return '>';
                 default:
                     return 'X';
             }
