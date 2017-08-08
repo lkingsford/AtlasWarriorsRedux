@@ -479,10 +479,10 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             // Confirm that in passages list
             Assert.IsTrue(dungeon.Passages.Any(
                 i => (i.PassageType == Passage.PassageTypeEnum.StairsDown) &&
-                     (i.Destination == "DOWN")), "Down passage not added to passages");
+                     (i.DestinationID == "DOWN")), "Down passage not added to passages");
             Assert.IsTrue(dungeon.Passages.Any(
                 i => (i.PassageType == Passage.PassageTypeEnum.StairsUp) &&
-                     (i.Destination == "UP")), "Up passage not added to passages");
+                     (i.DestinationID == "UP")), "Up passage not added to passages");
 
             // Confirm that dungeon tiles set to stairs down/up
             Assert.AreEqual(Dungeon.DungeonCell.StairDown, dungeon.GetCell(dungeon.Passages.First(

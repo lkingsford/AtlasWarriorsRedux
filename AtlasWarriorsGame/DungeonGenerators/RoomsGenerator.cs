@@ -129,7 +129,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 dungeon.SpawnAreas.Remove(area);
 
                 // Add passage to dungeon
-                dungeon.Passages.Add(new Passage(passage.PassageType, passage.Destination,
+                dungeon.Passages.Add(new Passage(passage.PassageType, passage.DestinationID,
                     startPosition));
 
                 // Set tile to appropriate for passage type

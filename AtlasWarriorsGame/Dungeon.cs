@@ -46,7 +46,8 @@ namespace AtlasWarriorsGame
         public List<Message.Message> DoTurn()
         {
             // Messages to return
-            foreach (var Actor in Actors)
+            // Cloning actors - as will change if change level
+            foreach (var Actor in new List<Actor>(Actors))
             {
                 Actor.DoTurn();
             }
@@ -62,6 +63,30 @@ namespace AtlasWarriorsGame
         public void Clean()
         {
             Actors.RemoveAll(i => i.Dead);
+        }
+
+        /// <summary>
+        /// Perform any required actions from standing on a tile
+        /// </summary>
+        /// <param name="occupant">Actor standing on the tile</param>
+        public void Trigger(Actor occupant)
+        {
+            // Action from type of tile
+            switch (GetCell(occupant.Location))
+            {
+                case DungeonCell.StairDown:
+                case DungeonCell.StairUp:
+                    // Get passage
+                    var passage = Passages.FirstOrDefault(i => i.Location == occupant.Location);
+                    if (passage != null && passage.PassageType != Passage.PassageTypeEnum.OneWay)
+                    {
+                        occupant.MoveLevel(passage);
+                    }
+                    break;
+                default:
+                    // Do nothing
+                    break;
+            }
         }
 
         /// <summary>
@@ -89,6 +114,8 @@ namespace AtlasWarriorsGame
             {
                 case DungeonCell.Floor:
                 case DungeonCell.Door:
+                case DungeonCell.StairDown:
+                case DungeonCell.StairUp:
                     return true;
                 default:
                     return false;

@@ -16,10 +16,10 @@ namespace AtlasWarriorsGame.Tests.Unit
         [Test]
         public void CreateReadPassage()
         {
-            var passage = new Passage(Passage.PassageTypeEnum.StairsDown, "DUNGEON_1",
+            var passage = new Passage(Passage.PassageTypeEnum.StairsDown, "PASSAGE",
                 new XY(12, 10));
             Assert.AreEqual(Passage.PassageTypeEnum.StairsDown, passage.PassageType);
-            Assert.AreEqual("DUNGEON_1", passage.Destination);
+            Assert.AreSame("PASSAGE", passage.DestinationID);
             Assert.AreEqual(new XY(12, 10), passage.Location);
         }
 
@@ -29,9 +29,9 @@ namespace AtlasWarriorsGame.Tests.Unit
         [Test]
         public void CreateReadPassageNoLocation()
         {
-            var passage = new Passage(Passage.PassageTypeEnum.StairsDown, "DUNGEON_1");
+            var passage = new Passage(Passage.PassageTypeEnum.StairsDown, "PASSAGE");
             Assert.AreEqual(Passage.PassageTypeEnum.StairsDown, passage.PassageType);
-            Assert.AreEqual("DUNGEON_1", passage.Destination);
+            Assert.AreEqual("PASSAGE", passage.DestinationID);
             Assert.AreEqual(null, passage.Location);
         }
     }

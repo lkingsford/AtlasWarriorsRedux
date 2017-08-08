@@ -13,12 +13,12 @@ namespace AtlasWarriorsGame
         /// Create passage with given values
         /// </summary>
         /// <param name="PassageType">Type of passage</param>
-        /// <param name="Destination">DungeonID of passage</param>
+        /// <param name="DestinationID">Dungeon passage goes to</param>
         /// <param name="Location">Location on map of passage</param>
-        public Passage(PassageTypeEnum PassageType, String Destination, XY Location = null)
+        public Passage(PassageTypeEnum PassageType, String DestinationID, XY Location = null)
         {
             this.PassageType = PassageType;
-            this.Destination = Destination;
+            this.DestinationID = DestinationID;
             this.Location = Location;
         }
 
@@ -48,7 +48,12 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Where it goes - name of dungeon in Game
         /// </summary>
-        public readonly string Destination;
+        public readonly String DestinationID;
+
+        /// <summary>
+        /// ... and where it goes - the actual dungeon, as set by Game
+        /// </summary>
+        public Dungeon Destination = null;
 
         /// <summary>
         /// Where on the map it is placed
