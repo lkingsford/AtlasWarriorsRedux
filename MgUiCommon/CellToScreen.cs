@@ -19,34 +19,48 @@ namespace MgUiCommon
         {
             switch (cell)
             {
-                case DungeonCell.EMPTY:
+                case DungeonCell.Empty:
                     return new ConsoleCell()
                     {
                         DrawChar = ' ',
                         BackColor = Color.Black,
                         ForeColor = Color.Black
                     }; 
-                case DungeonCell.FLOOR:
+                case DungeonCell.Floor:
                     return new ConsoleCell()
                     {
                         DrawChar = '.',
                         BackColor = visible ? Color.Black : Color.Black,
                         ForeColor = visible ? Color.LightGray : Color.DimGray
                     }; 
-                case DungeonCell.DOOR:
+                case DungeonCell.Door:
                     return new ConsoleCell()
                     {
                         DrawChar = '+',
                         BackColor = visible ? Color.Black : Color.Black,
                         ForeColor = visible ? Color.BlueViolet : Color.DimGray
                     }; ;
-                case DungeonCell.WALL:
+                case DungeonCell.Wall:
                     return new ConsoleCell()
                     {
                         DrawChar = '#',
                         BackColor = visible ? Color.Black : Color.Black,
                         ForeColor = visible ? Color.LightGray : Color.DimGray
-                    }; 
+                    };
+                case DungeonCell.StairUp:
+                    return new ConsoleCell()
+                    {
+                        DrawChar = '<',
+                        BackColor = visible ? Color.Black : Color.Black,
+                        ForeColor = visible ? Color.Green : Color.DarkGreen
+                    };
+                case DungeonCell.StairDown:
+                    return new ConsoleCell()
+                    {
+                        DrawChar = '>',
+                        BackColor = visible ? Color.Black : Color.Black,
+                        ForeColor = visible ? Color.Red : Color.DarkRed
+                    };
                 default:
                     return new ConsoleCell()
                     {

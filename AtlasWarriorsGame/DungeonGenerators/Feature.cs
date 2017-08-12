@@ -72,7 +72,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 {
                     for (int iy = 0; iy < Height; ++iy)
                     {
-                        if (GetCell(new XY(ix, iy)) == DungeonCell.FLOOR)
+                        if (GetCell(new XY(ix, iy)) == DungeonCell.Floor)
                         {
                             spawnArea.Area.Add(new XY(ix, iy));
                         }
@@ -219,7 +219,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
                 {
                     for (int iy = 0; iy < Height; ++iy)
                     {
-                        if (GetCell(new XY(ix, iy)) == DungeonCell.FLOOR)
+                        if (GetCell(new XY(ix, iy)) == DungeonCell.Floor)
                         {
                             ++result;
                         }

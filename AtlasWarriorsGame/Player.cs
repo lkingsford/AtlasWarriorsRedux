@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AtlasWarriorsGame
@@ -16,6 +17,11 @@ namespace AtlasWarriorsGame
         /// <param name="Dungeon"></param>
         public Player(Dungeon Dungeon) : base(Dungeon)
         {
+            // If there's a START - that's where we're starting
+            var startLocation = Dungeon.Passages.
+                FirstOrDefault(i => i.DestinationID == "START")?.Location;
+            Location = startLocation ?? Location;
+
             // Initialise FOV
             Dungeon.PcMoved(Location);
         }

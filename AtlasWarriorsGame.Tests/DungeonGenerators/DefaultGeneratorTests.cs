@@ -22,28 +22,27 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void Basic()
         {
-            var D = new Dungeon(5, 4, 
-                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
+            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
 
             for (int ix = 0; ix < 5; ++ix)
             {
-                Assert.AreEqual(D.GetCell(new XY(ix, 0)), DungeonCell.WALL,
+                Assert.AreEqual(D.GetCell(new XY(ix, 0)), DungeonCell.Wall,
                     "Top wall not match");
-                Assert.AreEqual(D.GetCell(new XY(ix, 3)), DungeonCell.WALL,
+                Assert.AreEqual(D.GetCell(new XY(ix, 3)), DungeonCell.Wall,
                     "Bottom wall not match");
             }
             for (int iy = 0; iy < 4; ++iy)
             {
-                Assert.AreEqual(D.GetCell(new XY(0, iy)), Dungeon.DungeonCell.WALL,
+                Assert.AreEqual(D.GetCell(new XY(0, iy)), Dungeon.DungeonCell.Wall,
                     "Left wall not match");
-                Assert.AreEqual(D.GetCell(new XY(4, iy)), Dungeon.DungeonCell.WALL,
+                Assert.AreEqual(D.GetCell(new XY(4, iy)), Dungeon.DungeonCell.Wall,
                     "Right wall not match");
             }
             for (int ix = 1; ix < 4; ++ix)
             {
                 for (int iy = 1; iy < 3; ++iy)
                 {
-                    Assert.AreEqual(D.GetCell(new XY(ix, iy)), DungeonCell.FLOOR,
+                    Assert.AreEqual(D.GetCell(new XY(ix, iy)), DungeonCell.Floor,
                         "Floor not correct");
                 }
             }
@@ -56,8 +55,7 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void SpawnArea()
         {
-            var D = new Dungeon(5, 4,
-                AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate);
+            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
 
             for (int ix = 1; ix < 5; ++ix)
             {

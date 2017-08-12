@@ -464,5 +464,31 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
                     $"Part of spawn area new found at {ix}, {iy}");
             }
         }
+
+        /// <summary>
+        /// Test that the Rooms Generator creates passages/stair up/down tiles
+        /// </summary>
+        [Test]
+        public void GeneratorCreatesPassages()
+        {
+            var passages = new List<Passage>();
+            passages.Add(new Passage(Passage.PassageTypeEnum.StairsDown, "DOWN"));
+            passages.Add(new Passage(Passage.PassageTypeEnum.StairsUp, "UP"));
+            var dungeon = RoomsGenerator.Generate(40, 20, passages);
+
+            // Confirm that in passages list
+            Assert.IsTrue(dungeon.Passages.Any(
+                i => (i.PassageType == Passage.PassageTypeEnum.StairsDown) &&
+                     (i.DestinationID == "DOWN")), "Down passage not added to passages");
+            Assert.IsTrue(dungeon.Passages.Any(
+                i => (i.PassageType == Passage.PassageTypeEnum.StairsUp) &&
+                     (i.DestinationID == "UP")), "Up passage not added to passages");
+
+            // Confirm that dungeon tiles set to stairs down/up
+            Assert.AreEqual(Dungeon.DungeonCell.StairDown, dungeon.GetCell(dungeon.Passages.First(
+                i => i.PassageType == Passage.PassageTypeEnum.StairsDown).Location));
+            Assert.AreEqual(Dungeon.DungeonCell.StairUp, dungeon.GetCell(dungeon.Passages.First(
+                i => i.PassageType == Passage.PassageTypeEnum.StairsUp).Location));
+        }
     }
 }

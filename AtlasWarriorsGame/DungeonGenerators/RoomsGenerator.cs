@@ -17,21 +17,23 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <summary>
         /// Generate a 'normal' dungeon
         /// </summary>
-        /// <param name="Dungeon"></param>
-        /// <returns>True on success</returns>
-        public static bool Generate(Dungeon Dungeon)
+        /// <param name="width">Width of dungeon to create</param>
+        /// <param name="height">Height of dungeon to create</param>
+        /// <returns>Generated Dungeon</returns>
+        public static Dungeon Generate(int width, int height, List<Passage> passages = null)
         {
+            var dungeon = new Dungeon(width, height);
+
             // Set start to middle of room
-            Dungeon.StartLocation = new XY(Dungeon.Width / 2, Dungeon.Height / 2);
+            dungeon.StartLocation = new XY(dungeon.Width / 2, dungeon.Height / 2);
 
             // Until filled, place rooms!
-
             var possibleFeatures = GenerateFeatureLibrary();
             Feature nextFeature;
             var possibleDoors = new List<XY>();
             // Create starting door
-            possibleDoors.Add(new XY(Next(Dungeon.Width - 4) + 2,
-                Next(Dungeon.Height - 4) + 2));
+            possibleDoors.Add(new XY(Next(dungeon.Width - 4) + 2,
+                Next(dungeon.Height - 4) + 2));
             var successfulDoors = new List<XY>();
 
             int failures = 0;
@@ -40,7 +42,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             while (
                 (failures < MAX_FAILURES) &&
                 (possibleDoors.Count > 0) &&
-                Dungeon.AnyEmpty() )
+                dungeon.AnyEmpty() )
             {
                 // Get random feature, in random rotation
                 nextFeature = possibleFeatures[Next(possibleFeatures.Count)]
@@ -68,10 +70,10 @@ namespace AtlasWarriorsGame.DungeonGenerators
                     var translate = baseDoor - featureDoor;
 
                     // If feature fits...
-                    if (FeatureFits(translate, Dungeon, nextFeature))
+                    if (FeatureFits(translate, dungeon, nextFeature))
                     {
                         // Add the feature
-                        AddFeature(translate, Dungeon, nextFeature);
+                        AddFeature(translate, dungeon, nextFeature);
 
                         // And add its doors to the possible door list
                         possibleDoors.AddRange(nextFeature.PossibleDoors.Select(
@@ -83,15 +85,15 @@ namespace AtlasWarriorsGame.DungeonGenerators
                             return
                                 // If in boundaries...
                                 (door.X > 1) &&
-                                (door.X < (Dungeon.Width - 1)) &&
+                                (door.X < (dungeon.Width - 1)) &&
                                 (door.Y > 1) &&
-                                (door.Y < (Dungeon.Height - 1)) &&
+                                (door.Y < (dungeon.Height - 1)) &&
                                 // And at least one part there is free
                                 (
-                                    Dungeon.GetCell(new XY(door.X - 1, door.Y)) == DungeonCell.EMPTY ||
-                                    Dungeon.GetCell(new XY(door.X + 1, door.Y)) == DungeonCell.EMPTY ||
-                                    Dungeon.GetCell(new XY(door.X, door.Y - 1)) == DungeonCell.EMPTY ||
-                                    Dungeon.GetCell(new XY(door.X, door.Y + 1)) == DungeonCell.EMPTY
+                                    dungeon.GetCell(new XY(door.X - 1, door.Y)) == DungeonCell.Empty ||
+                                    dungeon.GetCell(new XY(door.X + 1, door.Y)) == DungeonCell.Empty ||
+                                    dungeon.GetCell(new XY(door.X, door.Y - 1)) == DungeonCell.Empty ||
+                                    dungeon.GetCell(new XY(door.X, door.Y + 1)) == DungeonCell.Empty
                                 );
                         }).ToList();
 
@@ -112,10 +114,37 @@ namespace AtlasWarriorsGame.DungeonGenerators
             // Make doors doors
             foreach (var door in successfulDoors)
             {
-                Dungeon.SetCell(door, DungeonCell.DOOR);
+                dungeon.SetCell(door, DungeonCell.Door);
             }
 
-            return true;
+            // Add passages to spawn areas...
+            // They're guaranteed to be separated at least into different rooms
+            foreach (var passage in passages ?? new List<Passage>())
+            {
+                var area = dungeon.SpawnAreas.RandomItem();
+                var startPosition = area.Area.RandomItem();
+
+                // Remove spawn area from list - don't want surrounded soon as down, and don't want
+                // multiple passages in same area
+                dungeon.SpawnAreas.Remove(area);
+
+                // Add passage to dungeon
+                dungeon.Passages.Add(new Passage(passage.PassageType, passage.DestinationID,
+                    startPosition));
+
+                // Set tile to appropriate for passage type
+                switch(passage.PassageType)
+                {
+                    case Passage.PassageTypeEnum.StairsUp:
+                        dungeon.SetCell(startPosition, DungeonCell.StairUp);
+                        break;
+                    case Passage.PassageTypeEnum.StairsDown:
+                        dungeon.SetCell(startPosition, DungeonCell.StairDown);
+                        break;
+                }
+            }
+
+            return dungeon;
         }
 
         /// <summary>
@@ -133,7 +162,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
             {
                 for (int iy = 0; iy < Feature.Height; ++iy)
                 {
-                    if (Feature.GetCell(new XY(ix, iy)) != DungeonCell.EMPTY)
+                    if (Feature.GetCell(new XY(ix, iy)) != DungeonCell.Empty)
                     {
                         Dungeon.SetCell(new XY(ix, iy) + Translate, 
                             Feature.GetCell(new XY(ix, iy)));
@@ -178,8 +207,8 @@ namespace AtlasWarriorsGame.DungeonGenerators
                     }
 
                     // If both aren't empty, and if they are - they're not the same
-                    if ((featureCell != DungeonCell.EMPTY) && 
-                        (dungeonCell != DungeonCell.EMPTY) &&
+                    if ((featureCell != DungeonCell.Empty) && 
+                        (dungeonCell != DungeonCell.Empty) &&
                         (featureCell != dungeonCell))
                     {
                         return false;
@@ -231,20 +260,20 @@ namespace AtlasWarriorsGame.DungeonGenerators
             {
                 for (int iy = 1; iy < (Height - 1); ++iy)
                 {
-                    f.SetCell(new XY(ix, iy), DungeonCell.FLOOR);
+                    f.SetCell(new XY(ix, iy), DungeonCell.Floor);
                 }
             }
 
             // Fill walls in
             for (int ix = 0; ix < Width; ++ix)
             {
-                f.SetCell(new XY(ix, 0), DungeonCell.WALL); 
-                f.SetCell(new XY(ix, Height - 1), DungeonCell.WALL); 
+                f.SetCell(new XY(ix, 0), DungeonCell.Wall); 
+                f.SetCell(new XY(ix, Height - 1), DungeonCell.Wall); 
             }
             for (int iy = 0; iy < Height; ++iy)
             {
-                f.SetCell(new XY(0, iy), DungeonCell.WALL);
-                f.SetCell(new XY(Width - 1, iy), DungeonCell.WALL);
+                f.SetCell(new XY(0, iy), DungeonCell.Wall);
+                f.SetCell(new XY(Width - 1, iy), DungeonCell.Wall);
             }
 
             // Add possible doors

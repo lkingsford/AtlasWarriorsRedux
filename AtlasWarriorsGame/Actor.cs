@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AtlasWarriorsGame
@@ -68,6 +69,8 @@ namespace AtlasWarriorsGame
             {
                 Location = newLocation;
             }
+
+            Dungeon.Trigger(this);
         }
 
         /// <summary>
@@ -88,6 +91,41 @@ namespace AtlasWarriorsGame
 
             // Do the UI passthrough
             SendMessage(new Message.Attack(this, opponent, hit, Dmg, roll + Atk, opponent.Def));
+        }
+
+        /// <summary>
+        /// Move the actor to a different level, using a passage.
+        /// </summary>
+        /// <param name="passage">Passage to move with</param>
+        public void MoveLevel(Passage passage)
+        {
+            // Remove from dungeon
+            Dungeon.Actors.Remove(this);
+            // Store old dungeon
+            var LastDungeon = Dungeon;
+            // Set dungeon to next dungeon
+            Dungeon = passage.Destination;
+
+            // Get new location
+            // First priority is finding one with the same dungeon as this one
+            // Next priority is finding a Stairs Down for Up and vice versa
+            // Next priority is finding a OneWay
+            // Otherwise - we ain't moving XY wise :/
+            //
+            // ... it's my code and I'll abuse ternary operators if I want to
+            Location = 
+               (Dungeon.Passages.FirstOrDefault(i => Object.ReferenceEquals(this, i.Destination)) ??
+                ((passage.PassageType == Passage.PassageTypeEnum.StairsDown) ?
+                 Dungeon.Passages.FirstOrDefault(i => (i.PassageType == Passage.PassageTypeEnum.StairsUp)) :
+                 null) ??
+                ((passage.PassageType == Passage.PassageTypeEnum.StairsUp) ?
+                 Dungeon.Passages.FirstOrDefault(i => (i.PassageType == Passage.PassageTypeEnum.StairsDown)) :
+                 null) ??
+                Dungeon.Passages.FirstOrDefault(i => (i.PassageType == Passage.PassageTypeEnum.OneWay)))?.Location ??
+                Location;
+
+            // Add to next dungeon
+            Dungeon.Actors.Add(this);
         }
 
         /// <summary>

@@ -20,12 +20,10 @@ namespace AtlasWarriorsGame
         /// Generator to use to build the dungeon.
         /// Defaults to DefaultGenerator
         /// </param>
-        public Dungeon(int Width, int Height, Func<Dungeon, bool> Generator = null)
+        public Dungeon(int Width, int Height)
         {
             TileMap = new DungeonCell[Width, Height];
             VisibilityMap = new CellVisibility[Width, Height];
-            // Invoke generator, unless it's null which use default
-            (Generator ?? DungeonGenerators.DefaultGenerator.Generate).Invoke(this);
         }
 
         /// <summary>
@@ -33,10 +31,12 @@ namespace AtlasWarriorsGame
         /// </summary>
         public enum DungeonCell 
         {
-            EMPTY,
-            FLOOR,
-            WALL,
-            DOOR
+            Empty,
+            Floor,
+            Wall,
+            Door,
+            StairUp,
+            StairDown
         }
 
         /// <summary>
@@ -46,7 +46,8 @@ namespace AtlasWarriorsGame
         public List<Message.Message> DoTurn()
         {
             // Messages to return
-            foreach (var Actor in Actors)
+            // Cloning actors - as will change if change level
+            foreach (var Actor in new List<Actor>(Actors))
             {
                 Actor.DoTurn();
             }
@@ -62,6 +63,30 @@ namespace AtlasWarriorsGame
         public void Clean()
         {
             Actors.RemoveAll(i => i.Dead);
+        }
+
+        /// <summary>
+        /// Perform any required actions from standing on a tile
+        /// </summary>
+        /// <param name="occupant">Actor standing on the tile</param>
+        public void Trigger(Actor occupant)
+        {
+            // Action from type of tile
+            switch (GetCell(occupant.Location))
+            {
+                case DungeonCell.StairDown:
+                case DungeonCell.StairUp:
+                    // Get passage
+                    var passage = Passages.FirstOrDefault(i => i.Location == occupant.Location);
+                    if (passage != null && passage.PassageType != Passage.PassageTypeEnum.OneWay)
+                    {
+                        occupant.MoveLevel(passage);
+                    }
+                    break;
+                default:
+                    // Do nothing
+                    break;
+            }
         }
 
         /// <summary>
@@ -87,8 +112,10 @@ namespace AtlasWarriorsGame
         {
             switch (GetCell(Coord))
             {
-                case DungeonCell.FLOOR:
-                case DungeonCell.DOOR:
+                case DungeonCell.Floor:
+                case DungeonCell.Door:
+                case DungeonCell.StairDown:
+                case DungeonCell.StairUp:
                     return true;
                 default:
                     return false;
@@ -115,7 +142,7 @@ namespace AtlasWarriorsGame
             {
                 for (var iy = 0; iy < Height; ++iy)
                 {
-                    if (TileMap[ix, iy] == DungeonCell.EMPTY)
+                    if (TileMap[ix, iy] == DungeonCell.Empty)
                     {
                         return true;
                     }
@@ -161,7 +188,7 @@ namespace AtlasWarriorsGame
                 return TileMap[Coord.X, Coord.Y];
             }
             // Otherwise, return empty
-            return DungeonCell.EMPTY;
+            return DungeonCell.Empty;
         }
 
         /// <summary>
@@ -204,14 +231,14 @@ namespace AtlasWarriorsGame
             var cell = GetCell(Coord);
             bool alreadyVisible = VisibilityMap[Coord.X, Coord.Y] == CellVisibility.VISIBLE;
             // EMPTY might be out of bounds. Should never be where player is.
-            if (cell != DungeonCell.EMPTY)
+            if (cell != DungeonCell.Empty)
             {
                 VisibilityMap[Coord.X, Coord.Y] = CellVisibility.VISIBLE;
             }
             bool blocksSight =
-                (cell == DungeonCell.WALL) || 
-                (cell == DungeonCell.DOOR) ||
-                (cell == DungeonCell.EMPTY);
+                (cell == DungeonCell.Wall) || 
+                (cell == DungeonCell.Door) ||
+                (cell == DungeonCell.Empty);
             if (Force || (!alreadyVisible && !blocksSight))
             {
                 VisibleFill(Coord + new XY(-1, 0), false);
@@ -265,6 +292,11 @@ namespace AtlasWarriorsGame
         /// Places where enemies can be spawned
         /// </summary>
         public List<SpawnArea> SpawnAreas = new List<SpawnArea>();
+
+        /// <summary>
+        /// Locations of passages on and off level
+        /// </summary>
+        public List<Passage> Passages = new List<Passage>();
 
         /// <summary>
         /// Where the player starts on this dungeon
