@@ -155,4 +155,90 @@ namespace AtlasWarriorsGame.Tests
             Assert.IsFalse(Dungeon1.Walkable(Coord));
         }
     }
+
+    /// <summary>
+    /// Tests for moving between levels
+    /// </summary>
+    [TestFixture]
+    public class DungeonStairsTests
+    {
+        /// <summary>
+        /// Initialise dungeons for test
+        /// </summary>
+        [SetUp]
+        public void SetUp()
+        {
+            Dungeon1 = new Dungeon(10, 10);
+            Dungeon2 = new Dungeon(10, 10);
+            Dungeon3 = new Dungeon(10, 10);
+
+            Dungeon1.Passages.Add(
+                new Passage(Passage.PassageTypeEnum.OneWay, "START", new XY(1, 2)));
+            Dungeon1.Passages.Add(
+                new Passage(Passage.PassageTypeEnum.StairsDown, Dungeon2, new XY(1, 3)));
+            Dungeon1.SetCell(new XY(1, 3), DungeonCell.StairDown);
+            Dungeon2.Passages.Add(
+                new Passage(Passage.PassageTypeEnum.StairsUp, Dungeon1, new XY(1, 6)));
+            Dungeon2.SetCell(new XY(1, 6), DungeonCell.StairUp);
+            Dungeon2.Passages.Add(
+                new Passage(Passage.PassageTypeEnum.StairsUp, Dungeon3, new XY(3, 5)));
+            Dungeon2.SetCell(new XY(3, 5), DungeonCell.StairUp);
+            Dungeon3.Passages.Add(
+                new Passage(Passage.PassageTypeEnum.OneWay, Dungeon2, new XY(6, 7)));
+        }
+
+        Dungeon Dungeon1;
+        Dungeon Dungeon2;
+        Dungeon Dungeon3;
+
+        /// <summary>
+        /// Test that trigger for stairs down works, and that character moves to location of
+        /// the correct stairs up, for this dungeon, on the correct level
+        /// </summary>
+        [Test]
+        public void StairsDownToLinkedStairsUp()
+        {
+            Actor actor = new Actor(Dungeon1, new XY(1, 2));
+            actor.Move(new XY(0, 1));
+            Assert.AreEqual(Dungeon2, actor.Dungeon, "Actor did not go to correct dungeon");
+            Assert.AreEqual(new XY(1, 6), actor.Location, "Actor did not go to linking stairs up");
+        }
+
+        /// <summary>
+        /// Test that trigger for stairs up works, and that character moves to location of
+        /// stairs down, for this dungeon, on the correct level
+        /// </summary>
+        [Test]
+        public void StairsUpToLinkedStairsDown()
+        {
+            Actor actor = new Actor(Dungeon2, new XY(1, 5));
+            actor.Move(new XY(0, 1));
+            Assert.AreEqual(Dungeon1, actor.Dungeon, "Actor did not go to correct dungeon");
+            Assert.AreEqual(new XY(1, 3), actor.Location, "Actor did not go to stairs up");
+        }
+
+        /// <summary>
+        /// Test that trigger for stairs up works, and that character moves to location of
+        /// the one way passage where no stairs down
+        /// </summary>
+        [Test]
+        public void StairsUpToLinkedOneWay()
+        {
+            Actor actor = new Actor(Dungeon2, new XY(3, 4));
+            actor.Move(new XY(0, 1));
+            Assert.AreEqual(Dungeon3, actor.Dungeon, "Actor did not go to correct dungeon");
+            Assert.AreEqual(new XY(6, 7), actor.Location, "Actor did not go to one way");
+        }
+
+        /// <summary>
+        /// Test that moving on One Way doesn't move the actor to the linking level
+        /// </summary>
+        [Test]
+        public void OneWayDoesNotChangeLevel()
+        {
+            Actor actor = new Actor(Dungeon3, new XY(6, 6));
+            actor.Move(new XY(0, 1));
+            Assert.AreEqual(Dungeon3, actor.Dungeon, "Actor changed dungeon");
+        }
+    }
 }

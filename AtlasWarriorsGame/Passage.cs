@@ -23,6 +23,19 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// Create passage with given values, with a dungeon instead of ID
+        /// </summary>
+        /// <param name="passageType">Type of passage</param>
+        /// <param name="destination">Dungeon passage goes to</param>
+        /// <param name="location">Location on map of passage</param>
+        public Passage(PassageTypeEnum passageType, Dungeon destination, XY location = null)
+        {
+            this.PassageType = passageType;
+            this.Destination = destination;
+            this.Location = location;
+        }
+
+        /// <summary>
         /// Possible types that passage can form - mostly important for UI
         /// </summary>
         /// <remarks>Better suggestion of naming?</remarks>

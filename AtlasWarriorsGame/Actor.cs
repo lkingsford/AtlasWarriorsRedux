@@ -27,11 +27,14 @@ namespace AtlasWarriorsGame
         /// Create Actor on given level
         /// </summary>
         /// <param name="Dungeon">Dungeon where actor is</param>
-        public Actor(Dungeon Dungeon)
+        /// <param name="location">
+        /// Location actor starts in dungeon. If null, Dungeon.StartLocation.
+        /// </param>
+        public Actor(Dungeon Dungeon, XY location = null)
         {
             this.Dungeon = Dungeon;
             Dungeon.Actors.Add(this);
-            this.Location = Dungeon.StartLocation;
+            Location = location ?? Dungeon.StartLocation;
         }
 
         /// <summary>
