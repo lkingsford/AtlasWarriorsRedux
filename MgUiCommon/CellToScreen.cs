@@ -95,10 +95,68 @@ namespace MgUiCommon
                         BackColor = Color.Black,
                         ForeColor = Color.Green
                     };
+                case "ASSASSIN":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'A',
+                        BackColor = Color.Black,
+                        ForeColor = Color.DarkGray
+                    };
+                case "BANDIT":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'B',
+                        BackColor = Color.Black,
+                        ForeColor = Color.Brown
+                    };
+                case "CRITTER":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'c',
+                        BackColor = Color.Black,
+                        ForeColor = Color.MintCream
+                    };
+                case "DRAKE":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'd',
+                        BackColor = Color.Black,
+                        ForeColor = Color.MediumVioletRed
+                    };
+                case "GOLIATH":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'G',
+                        BackColor = Color.Black,
+                        ForeColor = Color.Silver
+                    };
+                case "HEALER":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'h',
+                        BackColor = Color.Black,
+                        ForeColor = Color.CornflowerBlue
+                    };
+                case "ORC":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'o',
+                        BackColor = Color.Green,
+                        ForeColor = Color.DarkGray
+                    };
+                case "ZOMBIE":
+                    return new ConsoleCell()
+                    {
+                        DrawChar = 'z',
+                        BackColor = Color.Black,
+                        ForeColor = Color.GreenYellow
+                    };
                 default:
                     return new ConsoleCell()
                     {
-                        DrawChar = '?',
+                        // Default to first character of SpriteId, or ? if none
+                        DrawChar = actor.SpriteId.Length > 0 ?
+                            actor.SpriteId.ToCharArray()[0] : '?',
                         BackColor = Color.Black,
                         ForeColor = Color.DarkGray
                     }; ; ;
