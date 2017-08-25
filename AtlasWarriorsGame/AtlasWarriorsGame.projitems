@@ -19,10 +19,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\Feature.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\RoomsGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonsterFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonsterFactoryPrototype.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Passage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SpawnArea.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XY.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)data\monsters.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
