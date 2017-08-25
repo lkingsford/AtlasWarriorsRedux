@@ -19,14 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\Feature.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\RoomsGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Assassin.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Bandit.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Critter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Drake.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Goliath.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Healer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Orc.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Monsters\Zombie.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Passage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalRandom.cs" />

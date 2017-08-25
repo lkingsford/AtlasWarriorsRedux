@@ -49,8 +49,7 @@ namespace ScreenReaderApp
                 case "MONSTER":
                     return 'M';
                 default:
-                    // Default to first character of SpriteId, or ? if none
-                    return Actor.SpriteId.Length > 0 ? Actor.SpriteId.ToCharArray()[0] : '?';
+                    return '?';
             }
         }
     }
