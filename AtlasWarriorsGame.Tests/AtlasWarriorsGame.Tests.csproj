@@ -40,6 +40,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MonstersJson.cs" />
     <Compile Include="DungeonGenerators\RoomsGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
