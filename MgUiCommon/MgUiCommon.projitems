@@ -14,4 +14,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapViewElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Data\sprites_mgui.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
