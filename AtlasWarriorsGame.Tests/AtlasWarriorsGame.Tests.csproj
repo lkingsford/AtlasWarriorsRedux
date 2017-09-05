@@ -44,6 +44,7 @@
     <Compile Include="DungeonGenerators\DefaultGeneratorTests.cs" />
     <Compile Include="DungeonGenerators\FeatureTests.cs" />
     <Compile Include="Integration\Messages.cs" />
+    <Compile Include="MonsterFactoryTests.cs" />
     <Compile Include="Unit\DungeonTests.cs" />
     <Compile Include="Unit\ActorTests.cs" />
     <Compile Include="Unit\DungeonTests.Fov.cs" />
