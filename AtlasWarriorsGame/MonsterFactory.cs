@@ -20,6 +20,13 @@ namespace AtlasWarriorsGame
         /// <param name="prototype">JObject containing monster details</param>
         public static void AddPrototype(string id, JObject prototype)
         {
+            // Need to test if Prototype is already there - as this is done in unit tests too,
+            // and the class is static
+            if (Prototypes.ContainsKey(id))
+            {
+                Prototypes.Remove(id);
+            }
+
             Prototypes.Add(id, prototype.ToObject<MonsterFactoryPrototype>());
         }
 
