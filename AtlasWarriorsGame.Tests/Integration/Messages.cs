@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace AtlasWarriorsGame.Tests
         {
             // Testing by making the Player do an ordinary attack, and checking the message was 
             // sent
-
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
             var game = new Game();
             var defender = new Actor(game.CurrentDungeon);
             // The attack would normally happen _in_ the turn rather than after - but the message
