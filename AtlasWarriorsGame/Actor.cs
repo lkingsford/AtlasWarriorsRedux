@@ -21,7 +21,7 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// ID for the sake of front end. Dunno if this is a good idea.
         /// </summary>
-        public virtual String SpriteId { get {return "ACTOR";}}
+        public virtual String SpriteId { set; get; }
 
         /// <summary>
         /// Create Actor on given level

@@ -1,0 +1,73 @@
+﻿{
+  "Assassin": {
+    "SpriteId": "ASSASSIN",
+    "Description": "Assassin",
+    "Health": 5,
+    "BaseAtk": 17,
+    "BaseDef": 6,
+    "BaseDmg": 15
+  },
+
+  "Bandit": {
+    "SpriteId": "BANDIT",
+    "Description": "Bandit",
+    "Health": 10,
+    "BaseAtk": 9,
+    "BaseDef": 6,
+    "BaseDmg": 8
+  },
+
+  "Critter": {
+    "SpriteId": "CRITTER",
+    "Description": "Critter",
+    "Health": 5,
+    "BaseAtk": 9,
+    "BaseDmg": 3,
+    "BaseDef": 4
+  },
+
+  "Drake": {
+    "SpriteId": "DRAKE",
+    "Description": "Goliath",
+    "Health": 18,
+    "BaseAtk": 8,
+    "BaseDmg": 8,
+    "BaseDef": 12
+  },
+
+  "Goliath": {
+    "SpriteId": "GOLIATH",
+    "Description": "Goliath",
+    "Health": 16,
+    "BaseAtk": 8,
+    "BaseDmg": 10,
+    "BaseDef": 8
+  },
+  
+  "Healer": {
+    "SpriteId": "HEALER",
+    "Description": "Healer",
+    "Health": 6,
+    "BaseAtk": 3,
+    "BaseDmg": 5,
+    "BaseDef": 6
+  },
+
+  "Orc": {
+    "SpriteId": "ORC",
+    "Description": "Orc",
+    "Health": 12,
+    "BaseAtk": 9,
+    "BaseDmg": 4,
+    "BaseDef": 8
+  },
+
+  "Zombie": {
+    "SpriteId": "ZOMBIE",
+    "Description": "Zombie",
+    "Health": 6,
+    "BaseAtk": 4,
+    "BaseDmg": 4,
+    "BaseDef": 4
+  }
+}

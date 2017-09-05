@@ -6,6 +6,7 @@ using System.Text;
 using AtlasWarriorsGame;
 using Microsoft.Xna.Framework;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace MgUiCommon
 {
@@ -32,6 +33,14 @@ namespace MgUiCommon
             // f tends to be tallest - hence, if not monospace -  will still be OK
             TileHeight = MapFont.MeasureString("f").Y;
 
+            // Populate sprite list
+            using (var spriteFileReader = new System.IO.StreamReader("data/sprites_mgui.json"))
+            {
+                var spriteFileText = spriteFileReader.ReadToEnd();
+                Sprites = JsonConvert.DeserializeObject<Dictionary<String, ConsoleCell>>
+                    (spriteFileText);
+            }
+
             // Initialise last dungeon to initial dungeon
             LastTurnDungeon = Game.CurrentDungeon;
 
@@ -47,6 +56,11 @@ namespace MgUiCommon
             RenderTarget = new RenderTarget2D(Device, (int)(TileWidth * Game.CurrentDungeon.Width),
                 (int)(TileHeight * Game.CurrentDungeon.Height));
         }
+
+        /// <summary>
+        /// 'Sprites' (Currently, letters and colors) for actors and like that are drawn 
+        /// </summary>
+        private Dictionary<string, ConsoleCell> Sprites;
 
         /// <summary>
         /// The game which is being played
@@ -161,7 +175,7 @@ namespace MgUiCommon
             foreach (var actor in Game.CurrentDungeon.Actors)
             {
                 // Tile to draw
-                var drawCell = CellToScreen.GetActorCell(actor);
+                var drawCell = Sprites[actor.SpriteId];
 
                 // Only show character if visible
                 if (Game.CurrentDungeon.GetVisibility(actor.Location) == 

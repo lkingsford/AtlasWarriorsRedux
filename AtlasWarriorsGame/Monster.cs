@@ -19,10 +19,5 @@ namespace AtlasWarriorsGame
         {
             Location = location;
         }
-
-        /// <summary>
-        /// ID for the sake of front end. Still dunno if this is a good idea.
-        /// </summary>
-        public override String SpriteId { get { return "MONSTER"; } }
     }
 }

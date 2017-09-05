@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLGameApp", "AtlasWarriors\GLGameApp.csproj", "{76F18773-F8F7-4049-8724-A3F94A29425C}"
 EndProject
@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGameApp", "AndroidGa
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MgUiCommon", "MgUiCommon\MgUiCommon.shproj", "{9EBDEE64-6FC9-468B-B93E-468B324F9C58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgUiCommon.Tests", "MgUiCommon.Tests\MgUiCommon.Tests.csproj", "{98C66688-3008-4D80-8387-C9A764246527}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
@@ -32,6 +34,8 @@ Global
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
+		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{98c66688-3008-4d80-8387-c9a764246527}*SharedItemsImports = 4
+		MgUiCommon\MgUiCommon.projitems*{98c66688-3008-4d80-8387-c9a764246527}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{9ebdee64-6fc9-468b-b93e-468b324f9c58}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FB7FDB9-6298-4FCE-A816-4EA4092DFC56}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{98C66688-3008-4D80-8387-C9A764246527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C66688-3008-4D80-8387-C9A764246527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C66688-3008-4D80-8387-C9A764246527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C66688-3008-4D80-8387-C9A764246527}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

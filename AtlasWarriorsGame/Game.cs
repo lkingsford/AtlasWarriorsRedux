@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,18 @@ namespace AtlasWarriorsGame
         /// </summary>
         public Game()
         {
+            // Load the data from Monsters.Json into the Monster Factory
+            using (var monsterFileReader = new System.IO.StreamReader("data/monsters.json"))
+            {
+                var monsterFileText = monsterFileReader.ReadToEnd();
+                var deserializedMonsterPrototypes =
+                    JsonConvert.DeserializeObject<Dictionary<String, JObject>>(monsterFileText);
+                foreach (var prototype in deserializedMonsterPrototypes)
+                {
+                    MonsterFactory.AddPrototype(prototype.Key, prototype.Value);
+                }
+            }
+
             // Construct dungeons
             // Not doing this tidily and programmicably - 'cause it is going to change and we don't
             // want 10 identically boring levels
