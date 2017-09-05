@@ -70,39 +70,5 @@ namespace MgUiCommon
                     }; 
             }
         }
-
-        /// <summary>
-        /// Get cell to draw from actor
-        /// </summary>
-        /// <param name="Cell"></param>
-        /// <param name="Visible"></param>
-        /// <returns></returns>
-        public static ConsoleCell GetActorCell(Actor actor)
-        {
-            switch (actor.SpriteId)
-            {
-                case "PLAYER":
-                    return new ConsoleCell()
-                    {
-                        DrawChar = '@',
-                        BackColor = Color.DarkBlue,
-                        ForeColor = Color.LightGray
-                    };
-                case "MONSTER":
-                    return new ConsoleCell()
-                    {
-                        DrawChar = 'M',
-                        BackColor = Color.Black,
-                        ForeColor = Color.Green
-                    };
-                default:
-                    return new ConsoleCell()
-                    {
-                        DrawChar = '?',
-                        BackColor = Color.Black,
-                        ForeColor = Color.DarkGray
-                    }; ; ;
-            }
-        }
     }
 }
