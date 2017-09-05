@@ -28,7 +28,7 @@
 
   "Drake": {
     "SpriteId": "DRAKE",
-    "Description": "Goliath",
+    "Description": "Drake",
     "Health": 18,
     "BaseAtk": 8,
     "BaseDmg": 8,
