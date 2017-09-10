@@ -71,7 +71,12 @@ namespace AtlasWarriorsGame
                 }
             }
 
-            Player = new Player(DungeonStore["D01"]);
+            // Find the start passage - and what dungeon it's in
+            var start = DungeonStore.SelectMany(i => i.Value.Passages)
+                                    .First(i => i.DestinationID == "START");
+            var startDungeon = DungeonStore.First(i => i.Value.Passages.Contains(start)).Value;
+
+            Player = new Player(startDungeon);
 
             // Create empty messages list - prevent crash on first turn
             MessagesData.Add(new List<Message.Message>());
