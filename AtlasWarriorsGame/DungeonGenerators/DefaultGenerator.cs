@@ -20,8 +20,10 @@ namespace AtlasWarriorsGame.DungeonGenerators
             var dungeon = new Dungeon(width, height);
 
             // Fill the floor
+            for (int ix = 1; ix < (dungeon.Width - 1); ++ix)
             for (int ix = 0; ix < dungeon.Width; ++ix)
             {
+                for (int iy = 1; iy < (dungeon.Height - 1); ++iy)
                 for (int iy = 0; iy < dungeon.Height; ++iy)
                 {
                     dungeon.SetCell(new XY(ix, iy), DungeonCell.Floor);
