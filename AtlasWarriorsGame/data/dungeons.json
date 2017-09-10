@@ -1,0 +1,73 @@
+﻿{
+  "D01": {
+    "Width": 40,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "OneWay",
+        "DestinationID": "START"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D02"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator"
+  },
+  "D02": {
+    "Width": 40,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D01"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D03"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator"
+  },
+  "D03": {
+    "Width": 40,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D02"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D04"
+      }
+    ],
+    "DungeonGeneratorId": "DefaultGenerator"
+  },
+  "D04": {
+    "Width": 40,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D03"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D05"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator"
+  },
+  "D05": {
+    "Width": 40,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D04"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator"
+  }
+}

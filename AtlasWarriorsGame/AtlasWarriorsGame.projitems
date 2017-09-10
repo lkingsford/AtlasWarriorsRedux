@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DungeonPrototype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DungeonGenerators\IDungeonGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IReceiver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Message\Attack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Message\Message.cs" />
@@ -28,6 +30,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)XY.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)data\dungeons.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)data\monsters.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -9,7 +9,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
     /// <summary>
     /// Generator for level with multiple rooms, tightly packed
     /// </summary>
-    static partial class RoomsGenerator
+    public class RoomsGenerator : IDungeonGenerator
     {
         const int MAX_ROOM_SIZE = 10;
         const int MAX_FAILURES = 100;
@@ -20,7 +20,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
         /// <param name="width">Width of dungeon to create</param>
         /// <param name="height">Height of dungeon to create</param>
         /// <returns>Generated Dungeon</returns>
-        public static Dungeon Generate(int width, int height, List<Passage> passages = null)
+        public Dungeon Generate(int width, int height, List<Passage> passages = null)
         {
             var dungeon = new Dungeon(width, height);
 

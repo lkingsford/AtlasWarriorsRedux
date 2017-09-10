@@ -474,7 +474,7 @@ namespace AtlasWarriorsGame.Tests.DungeonGenerators
             var passages = new List<Passage>();
             passages.Add(new Passage(Passage.PassageTypeEnum.StairsDown, "DOWN"));
             passages.Add(new Passage(Passage.PassageTypeEnum.StairsUp, "UP"));
-            var dungeon = RoomsGenerator.Generate(40, 20, passages);
+            var dungeon = (new RoomsGenerator()).Generate(40, 20, passages);
 
             // Confirm that in passages list
             Assert.IsTrue(dungeon.Passages.Any(

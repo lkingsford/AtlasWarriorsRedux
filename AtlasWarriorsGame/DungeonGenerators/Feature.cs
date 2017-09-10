@@ -10,7 +10,7 @@ namespace AtlasWarriorsGame.DungeonGenerators
     /// A feature is a space, made up of DungeonCells, with possible door locations.
     /// Anything 'Nothing' may intersect in that part with another feature
     /// </summary>
-    class Feature
+    public class Feature
     {
         /// <summary>
         /// Generate a feature with given parameters
