@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,16 +12,24 @@ namespace AtlasWarriorsGame
     public class Passage
     {
         /// <summary>
+        /// Default constructor. Used by Json.net.
+        /// </summary>
+        public Passage()
+        {
+
+        }
+
+        /// <summary>
         /// Create passage with given values
         /// </summary>
-        /// <param name="PassageType">Type of passage</param>
-        /// <param name="DestinationID">Dungeon passage goes to</param>
-        /// <param name="Location">Location on map of passage</param>
-        public Passage(PassageTypeEnum PassageType, String DestinationID, XY Location = null)
+        /// <param name="passageType">Type of passage</param>
+        /// <param name="destinationID">Dungeon passage goes to</param>
+        /// <param name="location">Location on map of passage</param>
+        public Passage(PassageTypeEnum passageType, String destinationID, XY location = null)
         {
-            this.PassageType = PassageType;
-            this.DestinationID = DestinationID;
-            this.Location = Location;
+            this.PassageType = passageType;
+            this.DestinationID = destinationID;
+            this.Location = location;
         }
 
         /// <summary>
@@ -56,22 +66,27 @@ namespace AtlasWarriorsGame
         /// <summary>
         /// Type of passage
         /// </summary>
-        public readonly PassageTypeEnum PassageType;
+        [JsonProperty]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public PassageTypeEnum PassageType { get; private set; }
 
         /// <summary>
         /// Where it goes - name of dungeon in Game
         /// </summary>
-        public readonly String DestinationID;
+        [JsonProperty]
+        public String DestinationID { get; private set; }
 
         /// <summary>
         /// ... and where it goes - the actual dungeon, as set by Game
         /// </summary>
+        [JsonIgnore]
         public Dungeon Destination = null;
 
         /// <summary>
         /// Where on the map it is placed
         /// Null if not placed yet
         /// </summary>
+        [JsonIgnore]
         public XY Location;
     }
 }

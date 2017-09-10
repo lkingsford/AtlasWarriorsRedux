@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AtlasWarriorsGame
 {
@@ -31,36 +30,22 @@ namespace AtlasWarriorsGame
             }
 
             // Construct dungeons
-            // Not doing this tidily and programmicably - 'cause it is going to change and we don't
-            // want 10 identically boring levels
-            DungeonStore["D01"] = DungeonGenerators.RoomsGenerator.Generate(40, 20, new List<Passage>()
+            // We get the parameters for building them, then we build them
+            Dictionary<string, DungeonPrototype> dungeonsToDig;
+            using (var dungeonsFileReader = new System.IO.StreamReader("data/dungeons.json"))
             {
-                new Passage(Passage.PassageTypeEnum.OneWay, "START"),
-                new Passage(Passage.PassageTypeEnum.StairsDown, "D02")
-            });
-
-            DungeonStore["D02"] = DungeonGenerators.RoomsGenerator.Generate(40, 20, new List<Passage>()
+                var dungeonsFileText = dungeonsFileReader.ReadToEnd();
+                dungeonsToDig = JsonConvert.DeserializeObject<Dictionary<string, DungeonPrototype>>
+                    (dungeonsFileText);
+            }
+            foreach(var dungeonToDig in dungeonsToDig)
             {
-                new Passage(Passage.PassageTypeEnum.StairsUp, "D01"),
-                new Passage(Passage.PassageTypeEnum.StairsDown, "D03")
-            });
-
-            DungeonStore["D03"] = DungeonGenerators.RoomsGenerator.Generate(40, 20, new List<Passage>()
-            {
-                new Passage(Passage.PassageTypeEnum.StairsUp, "D02"),
-                new Passage(Passage.PassageTypeEnum.StairsDown, "D04")
-            });
-
-            DungeonStore["D04"] = DungeonGenerators.RoomsGenerator.Generate(40, 20, new List<Passage>()
-            {
-                new Passage(Passage.PassageTypeEnum.StairsUp, "D03"),
-                new Passage(Passage.PassageTypeEnum.StairsDown, "D05")
-            });
-
-            DungeonStore["D05"] = DungeonGenerators.RoomsGenerator.Generate(40, 20, new List<Passage>()
-            {
-                new Passage(Passage.PassageTypeEnum.StairsUp, "D05")
-            });
+                var dungeon = dungeonToDig.Value.Generator.Generate(
+                    width: dungeonToDig.Value.Width,
+                    height: dungeonToDig.Value.Height,
+                    passages: dungeonToDig.Value.Passages);
+                DungeonStore.Add(dungeonToDig.Key, dungeon);
+            }
 
             // Set the Dungeon for each passage
             foreach (var dungeon in DungeonStore)

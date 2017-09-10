@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AtlasWarriorsGame.DungeonGenerators;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
@@ -24,7 +25,7 @@ namespace AtlasWarriorsGame.Tests
         [SetUp]
         public void SetUp()
         {
-            OpenDungeon = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(10, 10);
+            OpenDungeon = (new DefaultGenerator()).Generate(10, 10);
         }
 
         /// <summary>

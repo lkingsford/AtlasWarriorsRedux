@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AtlasWarriorsGame.DungeonGenerators;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace AtlasWarriorsGame.Tests
         [SetUp]
         public void SetUp()
         {
-            OpenDungeon = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(10, 10);
-            ClosedDungeon = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(3, 3);
+            var generator = new DefaultGenerator();
+            OpenDungeon = generator.Generate(10, 10);
+            ClosedDungeon = generator.Generate(3, 3);
         }
 
         /// <summary>

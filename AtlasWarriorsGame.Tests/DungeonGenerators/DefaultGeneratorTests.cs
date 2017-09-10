@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AtlasWarriorsGame.DungeonGenerators;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void Basic()
         {
-            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
+            var D = (new DefaultGenerator()).Generate(5, 4);
 
             for (int ix = 0; ix < 5; ++ix)
             {
@@ -55,14 +56,14 @@ namespace AtlasWarriorsGame.Tests
         [Category("DungeonGenerators/DefaultGenerator")]
         public void SpawnArea()
         {
-            var D = AtlasWarriorsGame.DungeonGenerators.DefaultGenerator.Generate(5, 4);
+            var D = (new DefaultGenerator()).Generate(5, 4);
 
-            for (int ix = 1; ix < 5; ++ix)
+            for (int ix = 1; ix < 3; ++ix)
             {
-                for (int iy = 1; iy < 3; ++iy)
+                for (int iy = 1; iy < 2; ++iy)
                 {
                     Assert.IsTrue(D.SpawnAreas.Any(i => i.Area.Contains(new XY(ix, iy))),
-                        "Spawn area not found");
+                        $"Spawn area not found ({ix}, {iy})");
                 }
             }
         }
