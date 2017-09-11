@@ -7,7 +7,7 @@ namespace AtlasWarriorsGame
     /// <summary>
     /// Data that is stored from a JSON file to create a monster with
     /// </summary>
-    class MonsterFactoryPrototype
+    public class MonsterFactoryPrototype
     {
         public string SpriteId = "";
         public string Description = "";

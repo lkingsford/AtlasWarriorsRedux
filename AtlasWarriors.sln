@@ -25,6 +25,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MgUiCommon", "MgUiCommon\Mg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgUiCommon.Tests", "MgUiCommon.Tests\MgUiCommon.Tests.csproj", "{98C66688-3008-4D80-8387-C9A764246527}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenReaderApp.Tests", "ScreenReaderApp.Tests\ScreenReaderApp.Tests.csproj", "{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
@@ -65,6 +67,10 @@ Global
 		{98C66688-3008-4D80-8387-C9A764246527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C66688-3008-4D80-8387-C9A764246527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C66688-3008-4D80-8387-C9A764246527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

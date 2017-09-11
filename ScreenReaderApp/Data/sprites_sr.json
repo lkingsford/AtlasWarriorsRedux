@@ -1,0 +1,11 @@
+﻿{
+  "PLAYER": "@",
+  "ASSASSIN": "A",
+  "BANDIT": "b",
+  "CRITTER": "c",
+  "DRAKE": "d",
+  "GOLIATH": "G",
+  "HEALER": "h",
+  "ORC": "o",
+  "ZOMBIE": "Z"
+}
