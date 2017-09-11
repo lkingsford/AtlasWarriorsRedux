@@ -30,37 +30,34 @@ namespace ScreenReaderApp
             Tolk.TrySAPI(true);
             Tolk.Load();
 
-            //Console.WriteLine("Querying for the active screen reader driver...");
-            //string name = Tolk.DetectScreenReader();
-            //if (name != null) {
-            //  Console.WriteLine("The active screen reader driver is: {0}", name);
-            //}
-            //else {
-            //  Console.WriteLine("None of the supported screen readers is running");
-            //}
+            string introText =
+@"Atlas Warriors - Screen Reader Edition
+Lachlan Kingsford
 
-            //if (Tolk.HasSpeech()) {
-            //  Console.WriteLine("This screen reader driver supports speech");
-            //}
-            //if (Tolk.HasBraille()) {
-            //  Console.WriteLine("This screen reader driver supports braille");
-            //}
+Welcome to Atlas Warriors. This screen reader edition provides screen-reader specific functionality:
+F1: Screen mode - whole map
+F2: Screen mode - current room only
+F3: Screen mode - no refresh
+Space: Draw whole screen
 
-            //Console.WriteLine("Let's output some text...");
-            //if (!Tolk.Output("Hello, World!")) {
-            //  Console.WriteLine("Failed to output text");
-            //}
+Move with Vim keys, arrows or numeric keypad.
 
-            //Console.WriteLine("Finalizing Tolk...");
-            //Tolk.Unload();
+Push any key to continue";
 
-            //Console.WriteLine("Done!");
+            Console.WriteLine(introText);
+            Tolk.Output(introText);
+
+            Console.ReadKey();
+
             var G = new AtlasWarriorsGame.Game();
             bool quit = false;
             displayMode = DisplayMode.ROOM;
             bool skipDraw = false;
             while (!quit)
             {
+                // Interrupt reader at start of turn
+                Tolk.Output("", true);
+
                 // If not skipping draw, draw map. If so - reset skipDraw to draw map next time.
                 if (!skipDraw)
                 {
@@ -74,6 +71,7 @@ namespace ScreenReaderApp
                     skipDraw = false;
                 }
                 Console.Write($"\nHP {G.Player.CurrentHealth} ({G.Player.MaxHealth})");
+                Tolk.Output($"{G.Player.CurrentHealth} of {G.Player.MaxHealth}");
                 Console.Write("\n>");
                 var input = Console.ReadKey();
                 switch (input.Key)
@@ -186,9 +184,15 @@ namespace ScreenReaderApp
                     if (tileActors.Count() > 0) 
                     {
                         tileChar = CellToScreen.ActorToChar(tileActors.First());
+                        Tolk.Output(tileActors.First().SpriteId);
+                    }
+                    else
+                    {
+                        Tolk.Output(Dungeon.GetCell(new XY(ix, iy)).ToString());
                     }
                     Console.Write(tileChar);
                 }
+                Tolk.Output("Next Row");
             }
         }
     }
