@@ -1,4 +1,7 @@
 ﻿using AtlasWarriorsGame;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using static AtlasWarriorsGame.Dungeon;
 
 namespace ScreenReaderApp
@@ -41,16 +44,19 @@ namespace ScreenReaderApp
         /// <returns></returns>
         public static char ActorToChar(Actor Actor)
         {
-            switch (Actor.SpriteId)
+            // Initialise sprites, if it's null
+            if (Characters == null)
             {
-                case "PLAYER":
-                    return '@';
-                // Generic monster
-                case "MONSTER":
-                    return 'M';
-                default:
-                    return '?';
+                using (var spriteFileReader = new System.IO.StreamReader("data/sprites_sr.json"))
+                {
+                    var spriteFileText = spriteFileReader.ReadToEnd();
+                    Characters = JsonConvert.DeserializeObject<Dictionary<String, char>>
+                        (spriteFileText);
+                }
             }
+            return Characters[Actor.SpriteId];
         }
+
+        private static Dictionary<string, char> Characters = null;
     }
 }
