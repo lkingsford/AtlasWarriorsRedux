@@ -64,6 +64,19 @@ namespace AtlasWarriorsGame
                     height: dungeonToDig.Value.Height,
                     passages: dungeonToDig.Value.Passages);
                 DungeonStore.Add(dungeonToDig.Key, dungeon);
+
+                // Place enemies per the dungeon to dig
+                for(int i = 0; i < 20; ++i)
+                {
+                    var monster = dungeonToDig.Value.MonstersToBuild.RandomItem();
+                    var spawnArea = dungeon.SpawnAreas.RandomItem();
+                    if (spawnArea.Area.Count > 0)
+                    {
+                        var spawnLocation = spawnArea.Area.RandomItem();
+                        spawnArea.Area.Remove(spawnLocation);
+                        MonsterFactory.CreateMonster(this, dungeon, monster, spawnLocation);
+                    }
+                }
             }
 
             // Set the Dungeon for each passage

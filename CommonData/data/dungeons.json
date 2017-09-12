@@ -12,7 +12,11 @@
         "DestinationID": "D02"
       }
     ],
-    "DungeonGeneratorId": "RoomsGenerator"
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Critter",
+      "Bandit"
+    ]
   },
   "D02": {
     "Width": 40,
@@ -27,7 +31,12 @@
         "DestinationID": "D03"
       }
     ],
-    "DungeonGeneratorId": "RoomsGenerator"
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Bandit",
+      "Critter",
+      "Orc"
+    ]
   },
   "D03": {
     "Width": 40,
@@ -42,7 +51,14 @@
         "DestinationID": "D04"
       }
     ],
-    "DungeonGeneratorId": "DefaultGenerator"
+    "DungeonGeneratorId": "DefaultGenerator",
+    "MonstersToBuild": [
+      "Bandit",
+      "Critter",
+      "Orc",
+      "Goliath",
+      "Assassin"
+    ]
   },
   "D04": {
     "Width": 40,
@@ -57,7 +73,16 @@
         "DestinationID": "D05"
       }
     ],
-    "DungeonGeneratorId": "RoomsGenerator"
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Bandit",
+      "Critter",
+      "Orc",
+      "Goliath",
+      "Assassin",
+      "Healer",
+      "Drake"
+    ]
   },
   "D05": {
     "Width": 40,
@@ -66,8 +91,57 @@
       {
         "PassageType": "StairsUp",
         "DestinationID": "D04"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D06"
       }
     ],
-    "DungeonGeneratorId": "RoomsGenerator"
-  }
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Bandit",
+      "Critter",
+      "Orc",
+      "Goliath",
+      "Assassin",
+      "Healer",
+      "Drake"
+    ]
+  },
+  "D06": {
+    "Width": 20,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D05"
+      },
+      {
+        "PassageType": "StairsDown",
+        "DestinationID": "D07"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Zombie",
+      "Critter"
+    ]
+  },
+  "D07": {
+    "Width": 30,
+    "Height": 20,
+    "Passages": [
+      {
+        "PassageType": "StairsUp",
+        "DestinationID": "D06"
+      }
+    ],
+    "DungeonGeneratorId": "RoomsGenerator",
+    "MonstersToBuild": [
+      "Drake",
+      "Orc",
+      "Assassin",
+      "Healer"
+    ]
+  },
 }
