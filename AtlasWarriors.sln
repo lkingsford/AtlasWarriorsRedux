@@ -27,15 +27,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgUiCommon.Tests", "MgUiCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenReaderApp.Tests", "ScreenReaderApp.Tests\ScreenReaderApp.Tests.csproj", "{3B674570-4959-4F8A-8D8D-1BE5B83F5DE0}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CommonData", "CommonData\CommonData.shproj", "{65E8F2B5-E8AE-4FB3-AAB3-AD554BFFB4DC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
+		CommonData\CommonData.projitems*{065d1455-77fe-4863-a034-e13124004778}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{1d57a419-d529-4578-9672-662b4537bb1a}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{2fb7fdb9-6298-4fce-a816-4ea4092dfc56}*SharedItemsImports = 4
+		CommonData\CommonData.projitems*{65e8f2b5-e8ae-4fb3-aab3-ad554bffb4dc}*SharedItemsImports = 13
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
+		CommonData\CommonData.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{76f18773-f8f7-4049-8724-a3f94a29425c}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
+		CommonData\CommonData.projitems*{8edf4429-251a-416d-bb68-93f227191bcf}*SharedItemsImports = 4
 		AtlasWarriorsGame\AtlasWarriorsGame.projitems*{98c66688-3008-4d80-8387-c9a764246527}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{98c66688-3008-4d80-8387-c9a764246527}*SharedItemsImports = 4
 		MgUiCommon\MgUiCommon.projitems*{9ebdee64-6fc9-468b-b93e-468b324f9c58}*SharedItemsImports = 13

@@ -1,3 +1,4 @@
+using Android.Content.Res;
 using Android.Util;
 using MgUiCommon;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,11 @@ namespace AndroidGameApp
         private DisplayMetrics Metrics;
 
         /// <summary>
+        /// Asset stream function to pass to Game
+        /// </summary>
+        private AtlasWarriorsGame.TGetAssetStream GetAssetStream;
+
+        /// <summary>
         /// Current state
         /// </summary>
         State CurrentState
@@ -43,11 +49,13 @@ namespace AndroidGameApp
         /// Constructor
         /// </summary>
         /// <param name="metrics">Screen metrics</param>
-        public AndroidGameApp(DisplayMetrics metrics)
+        public AndroidGameApp(DisplayMetrics metrics,
+                              AtlasWarriorsGame.TGetAssetStream getAssetStreamFunction)
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.Metrics = metrics;
+            this.GetAssetStream = getAssetStreamFunction;
         }
 
         /// <summary>
@@ -74,7 +82,7 @@ namespace AndroidGameApp
             graphics.ApplyChanges();
 
             // Create a new game, and make the UI on top of the stack
-            States.Add(new GameMapState(new AtlasWarriorsGame.Game(), Metrics));
+            States.Add(new GameMapState(new AtlasWarriorsGame.Game(GetAssetStream), Metrics));
         }
 
         /// <summary>

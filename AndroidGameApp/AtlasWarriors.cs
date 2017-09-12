@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using System.IO;
 
 namespace AndroidGameApp
 {
@@ -19,9 +20,19 @@ namespace AndroidGameApp
         {
             base.OnCreate(bundle);
             var metrics = Resources.DisplayMetrics;
-            var g = new AndroidGameApp(metrics);
+            var g = new AndroidGameApp(metrics, GetAssetStream);
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
+        }
+
+        /// <summary>
+        /// Get asset stream from Assets
+        /// </summary>
+        /// <param name="filename">Filename to open</param>
+        /// <returns>Stream containing asset</returns>
+        protected Stream GetAssetStream(string filename)
+        {
+            return Assets.Open(filename);
         }
     }
 }
