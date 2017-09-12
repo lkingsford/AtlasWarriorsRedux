@@ -24,6 +24,9 @@ namespace AtlasWarriorsGame
 
             // Initialise FOV
             Dungeon.PcMoved(Location);
+
+            // Set team to 'player' team
+            Team = 0;
         }
 
         public override string SpriteId
