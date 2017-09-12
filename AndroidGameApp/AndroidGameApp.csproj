@@ -79,10 +79,16 @@
     <MonoGameContentReference Include="..\Content\Content.mgcb">
       <Link>Content\Content.mgcb</Link>
     </MonoGameContentReference>
+    <AndroidAsset Include="..\CommonData\data\dungeons.json">
+      <Link>Assets\dungeons.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\CommonData\data\monsters.json">
+      <Link>Assets\monsters.json</Link>
+    </AndroidAsset>
     <None Include="app.config" />
+    <AndroidAsset Include="Assets\sprites_mgui.json" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />

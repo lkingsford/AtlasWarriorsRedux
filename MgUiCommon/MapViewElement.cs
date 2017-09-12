@@ -34,7 +34,8 @@ namespace MgUiCommon
             TileHeight = MapFont.MeasureString("f").Y;
 
             // Populate sprite list
-            using (var spriteFileReader = new System.IO.StreamReader("data/sprites_mgui.json"))
+            using (var spriteFileReader =
+                new System.IO.StreamReader(Game.GetAssetStream("sprites_mgui.json")))
             {
                 var spriteFileText = spriteFileReader.ReadToEnd();
                 Sprites = JsonConvert.DeserializeObject<Dictionary<String, ConsoleCell>>

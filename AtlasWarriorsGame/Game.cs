@@ -2,10 +2,18 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AtlasWarriorsGame
 {
+    /// <summary>
+    /// Type of asset stream reader
+    /// </summary>
+    /// <param name="filename">Filename to open</param>
+    /// <returns>Open stream</returns>
+    public delegate Stream TGetAssetStream(string filename);
+
     /// <summary>
     /// Main game class
     /// Initialise again for each new game
@@ -13,12 +21,23 @@ namespace AtlasWarriorsGame
     public class Game
     {
         /// <summary>
+        /// Get an asset stream
+        /// Default Asset Stream Getter is off filesystem in "data" folder
+        /// </summary>
+        public TGetAssetStream GetAssetStream = (string filename) =>
+            { return File.Open($"data/{filename}", FileMode.Open); };
+
+        /// <summary>
         /// Default constructor
         /// </summary>
-        public Game()
+        /// <param name="getAssetStream">Asset stream getter - if not default (filesystem)</param>
+        public Game(TGetAssetStream getAssetStream = null)
         {
+            // Set GetAssetStream if changed from default
+            GetAssetStream = getAssetStream ?? GetAssetStream;
+
             // Load the data from Monsters.Json into the Monster Factory
-            using (var monsterFileReader = new System.IO.StreamReader("data/monsters.json"))
+            using (var monsterFileReader = new StreamReader(GetAssetStream("monsters.json")))
             {
                 var monsterFileText = monsterFileReader.ReadToEnd();
                 var deserializedMonsterPrototypes =
@@ -32,7 +51,7 @@ namespace AtlasWarriorsGame
             // Construct dungeons
             // We get the parameters for building them, then we build them
             Dictionary<string, DungeonPrototype> dungeonsToDig;
-            using (var dungeonsFileReader = new System.IO.StreamReader("data/dungeons.json"))
+            using (var dungeonsFileReader = new StreamReader(GetAssetStream("dungeons.json")))
             {
                 var dungeonsFileText = dungeonsFileReader.ReadToEnd();
                 dungeonsToDig = JsonConvert.DeserializeObject<Dictionary<string, DungeonPrototype>>

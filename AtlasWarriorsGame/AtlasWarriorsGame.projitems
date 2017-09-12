@@ -29,12 +29,4 @@
     <Compile Include="$(MSBuildThisFileDirectory)SpawnArea.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XY.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)data\dungeons.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)data\monsters.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

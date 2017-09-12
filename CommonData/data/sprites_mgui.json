@@ -1,0 +1,137 @@
+﻿{
+  "PLAYER": {
+    "DrawChar": "@",
+    "BackColor": {
+      "B": 96,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 196,
+      "G": 196,
+      "R": 196,
+      "A": 255
+    }
+  },
+  "ASSASSIN": {
+    "DrawChar": "A",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 64,
+      "G": 32,
+      "R": 0,
+      "A": 255
+    }
+  },
+  "BANDIT": {
+    "DrawChar": "b",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 150,
+      "G": 150,
+      "R": 150,
+      "A": 255
+    }
+  },
+  "CRITTER": {
+    "DrawChar": "c",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 100,
+      "G": 100,
+      "R": 130,
+      "A": 255
+    }
+  },
+  "DRAKE": {
+    "DrawChar": "d",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 40,
+      "G": 100,
+      "R": 20,
+      "A": 255
+    }
+  },
+  "GOLIATH": {
+    "DrawChar": "G",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 0,
+      "G": 180,
+      "R": 180,
+      "A": 255
+    }
+  },
+  "HEALER": {
+    "DrawChar": "h",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 250,
+      "G": 230,
+      "R": 0,
+      "A": 255
+    }
+  },
+  "ORC": {
+    "DrawChar": "o",
+    "BackColor": {
+      "B": 0,
+      "G": 0,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 6,
+      "G": 109,
+      "R": 20,
+      "A": 255
+    }
+  },
+  "ZOMBIE": {
+    "DrawChar": "Z",
+    "BackColor": {
+      "B": 0,
+      "G": 32,
+      "R": 0,
+      "A": 255
+    },
+    "ForeColor": {
+      "B": 32,
+      "G": 96,
+      "R": 128,
+      "A": 255
+    }
+  }
+}
