@@ -47,5 +47,10 @@ namespace AtlasWarriorsGame
         /// List of passages to place
         /// </summary>
         public List<Passage> Passages = new List<Passage>();
+
+        /// <summary>
+        /// List of monsters to put in this dungeon
+        /// </summary>
+        public List<String> MonstersToBuild = new List<String>();
     }
 }
