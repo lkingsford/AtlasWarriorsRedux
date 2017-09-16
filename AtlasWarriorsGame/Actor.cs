@@ -45,6 +45,12 @@ namespace AtlasWarriorsGame
         }
 
         /// <summary>
+        /// What team the actor is on. Initially - that's 1 (monsters) or 0 (player).
+        /// Turn order by team number - for now
+        /// </summary>
+        public int Team = 1;
+
+        /// <summary>
         /// Dungeon which actor is in
         /// </summary>
         public Dungeon Dungeon { get; protected set; }

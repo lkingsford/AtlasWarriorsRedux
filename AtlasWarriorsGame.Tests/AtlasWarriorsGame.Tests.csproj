@@ -53,6 +53,7 @@
     <Compile Include="Unit\GlobalRandom.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="Unit\PassageTests.cs" />
+    <Compile Include="Unit\PathfinderTests.cs" />
     <Compile Include="Unit\PlayerTests.cs" />
     <Compile Include="Unit\XYTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

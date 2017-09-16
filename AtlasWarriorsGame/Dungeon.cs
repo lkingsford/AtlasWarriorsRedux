@@ -47,7 +47,8 @@ namespace AtlasWarriorsGame
         {
             // Messages to return
             // Cloning actors - as will change if change level
-            foreach (var Actor in new List<Actor>(Actors))
+            // Order by team - to ensure player moves first
+            foreach (var Actor in new List<Actor>(Actors).OrderBy(i=>i.Team))
             {
                 Actor.DoTurn();
             }
