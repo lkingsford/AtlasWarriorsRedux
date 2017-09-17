@@ -78,6 +78,11 @@ namespace GLGameApp
             {
                 G.DoTurn();
             }
+
+            if (G.GameOver)
+            {
+                StateStack.Add(new AtlasWarriors.LoseState(G));
+            }
         }
 
         /// <summary>

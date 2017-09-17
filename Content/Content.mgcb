@@ -34,3 +34,17 @@
 /processorParam:TextureFormat=Compressed
 /build:GameMapState/StatFont.spritefont
 
+#begin LoseState/LoseText.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:LoseState/LoseText.spritefont
+
+#begin LoseState/LoseTitle.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:LoseState/LoseTitle.spritefont
+

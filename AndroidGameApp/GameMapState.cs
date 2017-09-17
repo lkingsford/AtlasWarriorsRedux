@@ -98,6 +98,11 @@ namespace AndroidGameApp
             {
                 G.DoTurn();
             }
+
+            if (G.GameOver)
+            {
+                StateStack.Add(new LoseState(G));
+            }
         }
 
         /// <summary>

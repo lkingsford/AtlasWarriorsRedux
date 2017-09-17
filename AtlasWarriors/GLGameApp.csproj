@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="GameMapState.cs" />
     <Compile Include="GLGameApp.cs" />
+    <Compile Include="LoseState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

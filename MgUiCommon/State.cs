@@ -30,6 +30,11 @@ namespace MgUiCommon
         static public GraphicsDevice AppGraphicsDevice;
 
         /// <summary>
+        /// Application wide stack of states
+        /// </summary>
+        static public List<State> StateStack;
+
+        /// <summary>
         /// Width of the screen, per Monogame.Game
         /// </summary>
         static public int ScreenWidth;

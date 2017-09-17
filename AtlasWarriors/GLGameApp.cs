@@ -61,6 +61,9 @@ namespace GLGameApp
             State.ScreenWidth = GraphicsDevice.DisplayMode.Width;
             State.ScreenHeight = GraphicsDevice.DisplayMode.Height;
 
+            // Allow states to manipulate states
+            State.StateStack = States;
+
             // Create a new game, and make the UI on top of the stack
             States.Add(new GameMapState(new AtlasWarriorsGame.Game()));
         }

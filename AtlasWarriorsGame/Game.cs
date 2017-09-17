@@ -127,6 +127,22 @@ namespace AtlasWarriorsGame
         {
             var turnMessages = CurrentDungeon.DoTurn();
             MessagesData.Add(turnMessages);
+
+            if (Player.Dead)
+            {
+                GameOver = true;
+                EndGameText = new List<string>()
+                {
+                    "Would you like your corpse identified?",
+                    "Congratulations!",
+                    "Your journey end here. In many pieces",
+                    "Rest in many pieces",
+                    "Death was too good for you!",
+                    "Y. A. S. D",
+                    "How sad. I'm sorry. I really am. <beat> I'm not."
+                }.RandomItem();
+                EndGameTitle = "You have died";
+            }
         }
 
         /// <summary>
@@ -183,6 +199,33 @@ namespace AtlasWarriorsGame
         public Dungeon GetDungeon(string dungeonId)
         {
             return DungeonStore[dungeonId];
+        }
+
+        /// <summary>
+        /// If the game is finished - for one reason or another
+        /// </summary>
+        public bool GameOver
+        {
+            get;
+            private set;
+        } = false;
+
+        /// <summary>
+        /// Title to show on win/loss screen
+        /// </summary>
+        public string EndGameTitle
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Text to show on win/loss screen
+        /// </summary>
+        public string EndGameText
+        {
+            get;
+            private set;
         }
     }
 }
