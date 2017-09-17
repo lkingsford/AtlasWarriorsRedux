@@ -135,6 +135,18 @@ Push any key to continue";
                         break;
                 }
                 G.DoTurn();
+
+                if (G.GameOver)
+                {
+                    Console.WriteLine(G.EndGameTitle);
+                    Tolk.Output(G.EndGameTitle, true);
+                    Console.WriteLine(G.EndGameText);
+                    Tolk.Output(G.EndGameText, false);
+                    Console.WriteLine("(Press any key to quit)");
+                    Tolk.Output("Press any key to quit");
+                    Console.ReadKey();
+                    quit = true;
+                }
             }
         }
 

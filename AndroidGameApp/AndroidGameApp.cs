@@ -81,6 +81,8 @@ namespace AndroidGameApp
             graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
             graphics.ApplyChanges();
 
+            MgUiCommon.State.StateStack = States;
+
             // Create a new game, and make the UI on top of the stack
             States.Add(new GameMapState(new AtlasWarriorsGame.Game(GetAssetStream), Metrics));
         }
